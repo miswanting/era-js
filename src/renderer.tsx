@@ -54,27 +54,12 @@ function send(bag: any) {
 }
 
 function parseBag(bag: any) {
-    if (bag.type == 'syn') {
-        let ack: any = {
-            type: 'ack',
-            from: 'r',
-            to: 'b',
-            value: bag
-        }
-        send(ack)
-        let syn: any = {
-            type: 'syn',
-            from: 'r',
-            to: 'b',
-        }
-        send(syn)
-    } else if (bag.type == 'ack') {
-        console.log('[DONE]与 BACK 握手完成！')
-        console.log('[DEBG]开始加载游戏数据！')
+    if (bag.type == 'connected') {
+        console.log('[DEBG]后端已连接！')
         app.isConnected = true
         update()
-    } else if (bag.type == 'LOAD_DONE') {
-        console.log('[DONE]游戏数据加载完成！')
+    } else if (bag.type == 'loaded') {
+        console.log('[DONE]后端数据加载完成！')
         app.isLoaded = true
         update()
     } else if (bag.type == 'title') {

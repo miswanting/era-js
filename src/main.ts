@@ -36,14 +36,16 @@ function createWindow() {
         console.log('[DEBG]检测到窗口关闭');
     })
     // 加载 REACT DEVELOPER TOOLS
-    installExtension(REACT_DEVELOPER_TOOLS)
-        .then((name) => console.log(`[DEBG]添加插件：${name}`))
-        .catch((err) => console.log('[DEBG]添加插件错误：', err))
+    // installExtension(REACT_DEVELOPER_TOOLS)
+    //     .then((name) => console.log(`[DEBG]添加插件：${name}`))
+    //     .catch((err) => console.log('[DEBG]添加插件错误：', err))
 }
 function startServer() {
     let server = Net.createServer((connection) => {
         conn = connection
         console.log('[FINE]检测到连接请求！')
+        var bag = { 'type': 'connected', 'from': 'm', 'to': 'r' }
+        sendToRenderer(bag)
         conn.on('end', () => {
             console.log('[DEBG]连接断开！')
         })

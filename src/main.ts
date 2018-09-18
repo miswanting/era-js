@@ -95,23 +95,6 @@ function recvFromBack(bag: any) {
         sendToRenderer(bag)
         return
     }
-    if (bag.type == 'syn') {
-        let ack: any = {
-            type: 'ack',
-            from: 'm',
-            to: 'b',
-            value: bag
-        }
-        sendToBack(ack)
-        let syn: any = {
-            type: 'syn',
-            from: 'm',
-            to: 'b',
-        }
-        sendToBack(syn)
-    } else if (bag.type == 'ack') {
-        console.log('[DONE]与 BACK 握手完成！')
-    }
 }
 function recvFromRenderer(bag: any) {
     if (bag.to == 'b') {

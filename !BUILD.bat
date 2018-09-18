@@ -2,5 +2,6 @@
 title Main
 chcp 65001
 cls
-npm run run
+call ./node_modules/.bin/webpack
+call ./node_modules/.bin/electron .
 pause

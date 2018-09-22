@@ -55,6 +55,10 @@ function startServer() {
                 recvFromBack(bags[i])
             }
         })
+        conn.on('error', (err) => {
+            console.log(err);
+
+        })
     })
     server.on('error', (err) => {
         throw err

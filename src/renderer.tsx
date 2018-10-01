@@ -115,6 +115,9 @@ function parseBag(bag: any) {
         update()
     } else if (bag.type == 'page') {
         app.pages.push({ type: 'page', children: [] })
+        for (let i = 0; i < app.pages.length - 50; i++) {
+            app.pages.splice(0, 1)
+        }
         update()
     } else if (bag.type == 'mode') {
         app.mode = bag.value

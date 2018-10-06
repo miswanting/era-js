@@ -25,7 +25,7 @@ document.getElementById('root').addEventListener("mouseup", (e) => {
 })
 
 /**
- * 接受信息
+ * 自m接受信息
  */
 ipcRenderer.on('bag', (event: any, data: string) => {
     let piece = data.toString().split('}{')
@@ -45,7 +45,7 @@ ipcRenderer.on('bag', (event: any, data: string) => {
 })
 
 /**
- * 发射信息
+ * 发射信息至m
  * @param bag 
  */
 function send(bag: any) {
@@ -53,6 +53,10 @@ function send(bag: any) {
     ipcRenderer.send('bag', JSON.stringify(bag))
 }
 
+/**
+ * 解析接收到的Bag
+ * @param bag 
+ */
 function parseBag(bag: any) {
     if (bag.type == 'connected') {
         console.log('[DEBG]后端已连接！')
@@ -64,66 +68,74 @@ function parseBag(bag: any) {
         update()
     } else if (bag.type == 'title') {
         document.title = bag.value
-    } else if (bag.type == 't') {
-        if (app.pages.length == 0) {
+    } else if (bag.type == 't') { // 文本
+        if (app.pages.length == 0) { // 确保生成t之前存在Page
             app.pages.push({ type: 'page', children: [] })
         }
-        let iPage = app.pages.length - 1
-        if (bag.value == '') {
+        let iPage = app.pages.length - 1 // 最后一个Page的index
+        if (bag.value == '') { // 最后一个t的值为空：空行
             app.pages[iPage].children.push({ type: 'line', children: [] })
         } else {
-            if (app.pages[iPage].children.length == 0) {
+            if (app.pages[iPage].children.length == 0) { // 确保生成t之前存在Line
                 app.pages[iPage].children.push({ type: 'line', children: [] })
             }
-            let iLine = app.pages[iPage].children.length - 1
+            // 在最后page的line中加t
+            let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
             app.pages[iPage].children[iLine].children.push(bag)
         }
         update()
-    } else if (bag.type == 'b') {
-        if (app.pages.length == 0) {
+    } else if (bag.type == 'b') { // 按钮
+        if (app.pages.length == 0) { // 确保生成b之前存在Page
             app.pages.push({ type: 'page', children: [] })
         }
-        let iPage = app.pages.length - 1
-        if (app.pages[iPage].children.length == 0) {
+        let iPage = app.pages.length - 1 // 最后一个Page的index
+        if (app.pages[iPage].children.length == 0) { // 确保生成b之前存在Line
             app.pages[iPage].children.push({ type: 'line', children: [] })
         }
-        let iLine = app.pages[iPage].children.length - 1
-        bag.value.func = send
+        // 在最后page的line中加b
+        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+        bag.value.func = send // 向虚拟树中装载发射函数
         app.pages[iPage].children[iLine].children.push(bag)
         update()
-    } else if (bag.type == 'h') {
-        if (app.pages.length == 0) {
+    } else if (bag.type == 'h') { // 标题
+        if (app.pages.length == 0) { // 确保生成h之前存在Page
             app.pages.push({ type: 'page', children: [] })
         }
-        let iPage = app.pages.length - 1
-        if (app.pages[iPage].children.length == 0) {
+        let iPage = app.pages.length - 1 // 最后一个Page的index
+        if (app.pages[iPage].children.length == 0) { // 确保生成h之前存在Line
             app.pages[iPage].children.push({ type: 'line', children: [] })
         }
-        let iLine = app.pages[iPage].children.length - 1
+        // 在最后page的line中加h
+        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
         app.pages[iPage].children[iLine].children.push(bag)
         update()
-    } else if (bag.type == 'progress') {
-        if (app.pages.length == 0) {
+    } else if (bag.type == 'progress') { // 进度条
+        if (app.pages.length == 0) { // 确保生成progress之前存在Page
             app.pages.push({ type: 'page', children: [] })
         }
-        let iPage = app.pages.length - 1
-        if (app.pages[iPage].children.length == 0) {
+        let iPage = app.pages.length - 1 // 最后一个Page的index
+        if (app.pages[iPage].children.length == 0) { // 确保生成progress之前存在Line
             app.pages[iPage].children.push({ type: 'line', children: [] })
         }
-        let iLine = app.pages[iPage].children.length - 1
+        // 在最后page的line中加progress
+        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
         app.pages[iPage].children[iLine].children.push(bag)
         update()
     } else if (bag.type == 'page') {
         app.pages.push({ type: 'page', children: [] })
-        for (let i = 0; i < app.pages.length - 50; i++) {
+        for (let i = 0; i < app.pages.length - 50; i++) { // 超出50页就删除老的
             app.pages.splice(0, 1)
         }
         update()
-    } else if (bag.type == 'mode') {
+    } else if (bag.type == 'mode') { // 改变显示模式
         app.mode = bag.value
         update()
-    } else if (bag.type == 'clear') {
-        app.pages = []
+    } else if (bag.type == 'clear') { // 清除所有内容
+        if (bag.value['last']) {
+            app.pages.pop()
+        } else {
+            app.pages = []
+        }
         update()
     }
 }

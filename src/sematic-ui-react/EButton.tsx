@@ -15,7 +15,7 @@ export default class EButton extends React.Component<{ data: any }, { data: any 
             type: 'BUTTON_CLICK',
             from: 'r',
             to: 'b',
-            value: this.state.data.hash
+            hash: this.state.data.hash
         }
         this.state.data.func(bag)
     }

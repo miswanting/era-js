@@ -8,6 +8,11 @@ import { Progress } from "semantic-ui-react";
  */
 export default class EProgress extends React.Component<{ data: any }, {}> {
     render() {
-        return <Progress size='small' value={this.props.data.now} total={this.props.data.max} indicating style={{ width: this.props.data.length }} />
+        return <Progress
+            size='small'
+            value={this.props.data.now}
+            total={this.props.data.max}
+            indicating
+            style={{ width: this.props.data.length }} />
     }
 }

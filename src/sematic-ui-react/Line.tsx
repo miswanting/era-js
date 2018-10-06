@@ -3,6 +3,7 @@ import Text from "./Text";
 import EButton from "./EButton";
 import EHeader from "./EHeader";
 import EProgress from "./EProgress";
+import ERate from "./ERate";
 
 /**
  * 行
@@ -21,6 +22,8 @@ export default class Line extends React.Component<{ data: any, mode: any }, {}> 
                 return <EHeader key={index} data={item.value} />
             } else if (item.type == 'progress') {
                 return <EProgress key={index} data={item.value} />
+            } else if (item.type == 'rate') {
+                return <ERate key={index} data={item.value} />
             }
         })
         return <p>{items}</p>

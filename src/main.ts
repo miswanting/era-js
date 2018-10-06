@@ -36,9 +36,9 @@ function createWindow() {
         console.log('[DEBG]检测到窗口关闭');
     })
     // 加载 REACT DEVELOPER TOOLS
-    // installExtension(REACT_DEVELOPER_TOOLS)
-    //     .then((name) => console.log(`[DEBG]添加插件：${name}`))
-    //     .catch((err) => console.log('[DEBG]添加插件错误：', err))
+    installExtension(REACT_DEVELOPER_TOOLS)
+        .then((name) => console.log(`[DEBG]添加插件：${name}`))
+        .catch((err) => console.log('[DEBG]添加插件错误：', err))
 }
 function startServer() {
     let server = Net.createServer((connection) => {

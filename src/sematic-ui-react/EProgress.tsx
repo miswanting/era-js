@@ -13,9 +13,12 @@ export default class EProgress extends React.Component<{ data: any }, {}> {
             total={this.props.data.max}
             size='small'
             indicating
+            className={''}
             style={{
                 display: 'inline-grid',
-                width: this.props.data.length
+                width: this.props.data.length,
+                margin: 0 + 'px',
+                minWidth: 0 + 'px'
             }}
         />
     }

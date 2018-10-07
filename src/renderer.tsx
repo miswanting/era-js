@@ -134,6 +134,19 @@ function parseBag(bag: any) {
         bag.value.func = send // 向虚拟树中装载发射函数
         app.pages[iPage].children[iLine].children.push(bag)
         update()
+    } else if (bag.type == 'radio') { // 单项选择
+        if (app.pages.length == 0) { // 确保生成rate之前存在Page
+            app.pages.push({ type: 'page', children: [] })
+        }
+        let iPage = app.pages.length - 1 // 最后一个Page的index
+        if (app.pages[iPage].children.length == 0) { // 确保生成rate之前存在Line
+            app.pages[iPage].children.push({ type: 'line', children: [] })
+        }
+        // 在最后page的line中加b
+        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+        bag.value.func = send // 向虚拟树中装载发射函数
+        app.pages[iPage].children[iLine].children.push(bag)
+        update()
     } else if (bag.type == 'page') { // 页面
         app.pages.push({ type: 'page', children: [] })
         for (let i = 0; i < app.pages.length - 50; i++) { // 超出50页就删除老的

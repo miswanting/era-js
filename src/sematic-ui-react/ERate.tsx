@@ -13,7 +13,6 @@ export default class ERate extends React.Component<{ data: any }, { data: any }>
     }
     handleClick = (e: any, data: any) => {
         console.log(data);
-
         let bag = {
             type: 'RATE_CLICK',
             from: 'r',

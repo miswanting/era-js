@@ -17,6 +17,6 @@ export default class PageList extends React.Component<{ data: any }, {}> {
                 return <Page key={index} data={page} isDisabled={true} />
             }
         })
-        return <>{pages}</>
+        return <div style={{ overflowY: 'auto' }}>{pages}</div>
     }
 }

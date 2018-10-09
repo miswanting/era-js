@@ -25,6 +25,7 @@ export default class EButton extends React.Component<{ data: any }, { data: any 
             onClick={this.handleClick}
             size='tiny'
             compact
+            disabled={this.state.data.disabled}
         />
     }
 }

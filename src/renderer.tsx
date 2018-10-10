@@ -28,7 +28,9 @@ document.getElementById('root').addEventListener("mouseup", (e) => {
  * 自m接受信息
  */
 ipcRenderer.on('bag', (event: any, data: string) => {
-    let piece = data.toString().split('}{')
+    var raw = data.toString()
+    // 由main打包并发送的bag不需要解除叠包
+    var piece = raw.split('}{')
     for (let i = 0; i < piece.length; i++) {
         if (i != piece.length - 1) {
             piece[i] += '}'
@@ -38,10 +40,14 @@ ipcRenderer.on('bag', (event: any, data: string) => {
         }
     }
     for (let i = 0; i < piece.length; i++) {
-        console.log('[DEBG]接收：', piece[i]);
+        // console.log('[DEBG]接收：', piece[i]); // 生产环境下请注释掉
         let bag: any = JSON.parse(piece[i])
         parseBag(bag)
     }
+    // 由main打包并发送的bag不需要解除叠包
+    // console.log('[DEBG]接收：', raw); // 生产环境下请注释掉
+    // var bag: any = JSON.parse(raw)
+    // parseBag(bag)
 })
 
 /**
@@ -49,7 +55,7 @@ ipcRenderer.on('bag', (event: any, data: string) => {
  * @param bag 
  */
 function send(bag: any) {
-    console.log('[DEBG]发送：', JSON.stringify(bag));
+    console.log('[DEBG]发送：', JSON.stringify(bag)); // 生产环境下请注释掉
     ipcRenderer.send('bag', JSON.stringify(bag))
 }
 

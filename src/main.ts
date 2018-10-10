@@ -50,10 +50,28 @@ function startServer() {
             console.log('[DEBG]连接断开！')
         })
         conn.on('data', (data) => {
+            // 分离、解析后转发
             let bags = data2bag(data)
             for (let i = 0; i < bags.length; i++) {
                 recvFromBack(bags[i])
             }
+            // 不分离直接转发（有BUG）
+            // console.log('[DEBG]发送至前端：', data.toString())
+            // win.webContents.send('bag', data.toString())
+            // 分离后直接转发
+            // let piece = data.toString().split('}{')
+            // for (let i = 0; i < piece.length; i++) {
+            //     if (i != piece.length - 1) {
+            //         piece[i] += '}'
+            //     }
+            //     if (i != 0) {
+            //         piece[i] = '{' + piece[i]
+            //     }
+            // }
+            // for (let i = 0; i < piece.length; i++) {
+            //     console.log('[DEBG]发送至前端：', piece[i]) // 生产环境下请注释掉
+            //     win.webContents.send('bag', piece[i])
+            // }
         })
         conn.on('error', (err) => {
             console.log(err);
@@ -77,7 +95,7 @@ function startServer() {
             }
         }
         for (let i = 0; i < piece.length; i++) {
-            console.log('[DEBG]自前端接收：', piece[i]);
+            console.log('[DEBG]自前端接收：', piece[i]); // 生产环境下请注释掉
             let bag = JSON.parse(piece[i])
             recvFromRenderer(bag)
         }
@@ -87,24 +105,24 @@ function checkTimeOut() {
 
 }
 function sendToBack(bag: any) {
-    console.log('[DEBG]发送至后端：', bag)
+    console.log('[DEBG]发送至后端：', bag) // 生产环境下请注释掉
     conn.write(JSON.stringify(bag))
 }
 function sendToRenderer(bag: any) {
-    console.log('[DEBG]发送至前端：', bag)
+    console.log('[DEBG]发送至前端：', bag) // 生产环境下请注释掉
     win.webContents.send('bag', JSON.stringify(bag))
 }
 function recvFromBack(bag: any) {
-    console.log('[DEBG]自后端接收：', bag)
+    console.log('[DEBG]自后端接收：', bag) // 生产环境下请注释掉
     if (bag.to == 'r') {
-        console.log('[DEBG]转发(B=>R)：', bag)
+        console.log('[DEBG]转发(B=>R)：', bag) // 生产环境下请注释掉
         sendToRenderer(bag)
         return
     }
 }
 function recvFromRenderer(bag: any) {
     if (bag.to == 'b') {
-        console.log('[DEBG]转发(B<=R)：', bag)
+        console.log('[DEBG]转发(B<=R)：', bag) // 生产环境下请注释掉
         sendToBack(bag)
         return
     }

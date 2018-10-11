@@ -1,6 +1,6 @@
 import * as React from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Progress } from "semantic-ui-react";
+import { Progress, } from "semantic-ui-react";
 
 /**
  * 标题
@@ -8,18 +8,35 @@ import { Progress } from "semantic-ui-react";
  */
 export default class EProgress extends React.Component<{ data: any }, {}> {
     render() {
-        return <Progress
-            value={this.props.data.now}
-            total={this.props.data.max}
-            size='small'
-            indicating
-            className={''}
+        // return <Progress
+        //     value={this.props.data.now}
+        //     total={this.props.data.max}
+        //     size='small'
+        //     indicating
+        //     className={''}
+        //     style={{
+        //         display: 'inline-grid',
+        //         width: this.props.data.length,
+        //         margin: 0 + 'px',
+        //         minWidth: 0 + 'px'
+        //     }}
+        // />
+        var percent = this.props.data.now / this.props.data.max * 100
+        return <div
+            className='ui active indicating small progress'
+            data-percent={percent}
             style={{
                 display: 'inline-grid',
                 width: this.props.data.length,
-                margin: 0 + 'px',
-                minWidth: 0 + 'px'
+                margin: 0 + 'px'
             }}
-        />
+        >
+            <div
+                className='bar'
+                style={{
+                    width: percent + '%',
+                    minWidth: 0 + 'px'
+                }} />
+        </div>
     }
 }

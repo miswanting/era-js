@@ -25,7 +25,6 @@ export default class PageList extends React.Component<{ data: any }, {}> {
         </div>
     }
     componentDidUpdate() {
-        var scroll_div = document.getElementById('pagelist');
-        scroll_div.scrollTop = scroll_div.scrollHeight;
+        document.documentElement.scrollTop = document.documentElement.scrollHeight;
     }
 }

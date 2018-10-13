@@ -196,6 +196,6 @@ function update() {
         <App data={app} />,
         document.getElementById('root')
     )
-    // var scroll_div = document.getElementById('pagelist');
-    // scroll_div.scrollTop = scroll_div.scrollHeight;
+    var scroll_div = document.getElementById('pagelist');
+    scroll_div.scrollTop = scroll_div.scrollHeight;
 }

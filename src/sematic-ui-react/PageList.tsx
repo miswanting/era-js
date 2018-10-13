@@ -13,15 +13,19 @@ export default class PageList extends React.Component<{ data: any }, {}> {
     render() {
         let pages = this.props.data.pages.map((page: any, index: number) => {
             if (index == this.props.data.pages.length - 1) {
-                return <GridRow style={{ paddingTop: 0 + 'px' }}>
-                    <Page key={index} data={page} isDisabled={false} />
-                </GridRow>
+                return <Page key={index} data={page} isDisabled={false} />
             } else {
-                return <GridRow style={{ paddingTop: 0 + 'px' }}>
-                    <Page key={index} data={page} isDisabled={true} />
-                </GridRow>
+                return <Page key={index} data={page} isDisabled={true} />
             }
         })
-        return <Grid style={{ height: 100 + '%', width: 100 + '%', margin: 0 + 'px' }}>{pages}</Grid>
+        return <div id={'pagelist'} className={'ui bottom aligned row padded grid'} style={{ height: 100 + '%', display: 'grid' }}>
+            <div className={'column'}>
+                {pages}
+            </div>
+        </div>
+    }
+    componentDidUpdate() {
+        var scroll_div = document.getElementById('pagelist');
+        scroll_div.scrollTop = scroll_div.scrollHeight;
     }
 }

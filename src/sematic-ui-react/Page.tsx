@@ -14,11 +14,10 @@ export default class Page extends React.Component<{ data: any, isDisabled: boole
         return <Segment
             disabled={this.props.isDisabled}
             style={{
-                width: 100 + '%',
-                marginLeft: 14 + 'px',
-                marginRight: 14 + 'px'
+                width: 100 + '%'
             }}
-            compact>
+        // compact
+        >
             {lines}
         </Segment>
     }

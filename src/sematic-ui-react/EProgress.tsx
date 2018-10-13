@@ -8,19 +8,6 @@ import { Progress, } from "semantic-ui-react";
  */
 export default class EProgress extends React.Component<{ data: any }, {}> {
     render() {
-        // return <Progress
-        //     value={this.props.data.now}
-        //     total={this.props.data.max}
-        //     size='small'
-        //     indicating
-        //     className={''}
-        //     style={{
-        //         display: 'inline-grid',
-        //         width: this.props.data.length,
-        //         margin: 0 + 'px',
-        //         minWidth: 0 + 'px'
-        //     }}
-        // />
         var percent = this.props.data.now / this.props.data.max * 100
         return <div
             className='ui active indicating small progress'

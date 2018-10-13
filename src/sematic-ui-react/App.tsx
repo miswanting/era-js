@@ -2,7 +2,7 @@ import * as React from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import Xcover from './Xcover'
 import PageList from './PageList'
-import { Grid, GridRow } from 'semantic-ui-react'
+import { Grid, GridRow, GridColumn } from 'semantic-ui-react'
 /**
  * 窗口
  */

@@ -19,10 +19,11 @@ export default class App extends React.Component<{ data: any }, {}> {
         //         <PageList data={this.props.data} />
         //     </div>
         // </div>
-        return <Grid>
-            <GridRow>
+        return <Grid style={{ height: 100 + '%', margin: 0 + 'px' }}>
+            <GridRow verticalAlign={'bottom'}>
                 <PageList data={this.props.data} />
             </GridRow>
         </Grid>
+
     }
 }

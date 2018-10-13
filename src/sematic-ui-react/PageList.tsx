@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Page from "./Page";
-import { GridColumn } from 'semantic-ui-react'
+import { Grid, GridRow } from 'semantic-ui-react'
 /**
  * 页面列表（较长）
  */
@@ -13,15 +13,15 @@ export default class PageList extends React.Component<{ data: any }, {}> {
     render() {
         let pages = this.props.data.pages.map((page: any, index: number) => {
             if (index == this.props.data.pages.length - 1) {
-                return <GridColumn>
+                return <GridRow style={{ paddingTop: 0 + 'px' }}>
                     <Page key={index} data={page} isDisabled={false} />
-                </GridColumn>
+                </GridRow>
             } else {
-                return <GridColumn>
+                return <GridRow style={{ paddingTop: 0 + 'px' }}>
                     <Page key={index} data={page} isDisabled={true} />
-                </GridColumn>
+                </GridRow>
             }
         })
-        return <>{pages}</>
+        return <Grid style={{ height: 100 + '%', width: 100 + '%', margin: 0 + 'px' }}>{pages}</Grid>
     }
 }

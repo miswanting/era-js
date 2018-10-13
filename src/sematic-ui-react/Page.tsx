@@ -11,6 +11,15 @@ export default class Page extends React.Component<{ data: any, isDisabled: boole
         let lines = this.props.data.children.map((line: any, index: number) => {
             return <Line key={index} data={line} mode={this.props.data.mode} />
         })
-        return <Segment disabled={this.props.isDisabled}>{lines}</Segment>
+        return <Segment
+            disabled={this.props.isDisabled}
+            style={{
+                width: 100 + '%',
+                marginLeft: 14 + 'px',
+                marginRight: 14 + 'px'
+            }}
+            compact>
+            {lines}
+        </Segment>
     }
 }

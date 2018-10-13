@@ -15,7 +15,8 @@ export default class EProgress extends React.Component<{ data: any }, {}> {
             style={{
                 display: 'inline-grid',
                 width: this.props.data.length,
-                margin: 0 + 'px'
+                margin: 0 + 'px',
+                top: 2 + 'px'
             }}
         >
             <div

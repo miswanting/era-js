@@ -5,6 +5,7 @@ import EHeader from "./EHeader";
 import EProgress from "./EProgress";
 import ERate from "./ERate";
 import ERadio from "./ERadio";
+import EInput from "./EInput";
 import EDivider from "./EDivider";
 
 /**
@@ -28,6 +29,8 @@ export default class Line extends React.Component<{ data: any, mode: any }, {}> 
                 return <ERate key={index} data={item.value} />
             } else if (item.type == 'radio') {
                 return <ERadio key={index} data={item.value} />
+            } else if (item.type == 'input') {
+                return <EInput key={index} data={item.value} />
             } else if (item.type == 'divider') {
                 return <EDivider key={index} data={item.value} />
             }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Button } from "semantic-ui-react";
+import { Button, Popup } from "semantic-ui-react";
 
 /**
  * 行
@@ -16,12 +16,31 @@ export default class EButton extends React.Component<{ data: any }, {}> {
         this.props.data.func(bag)
     }
     render() {
-        return <Button
-            content={this.props.data.text}
-            onClick={this.handleClick}
-            size='tiny'
-            compact
-            disabled={this.props.data.disabled}
-        />
+        if (this.props.data.popup == '') {
+            return <Button
+                content={this.props.data.text}
+                onClick={this.handleClick}
+                size='tiny'
+                color={this.props.data.color}
+                compact
+                disabled={this.props.data.disabled}
+            />
+        } else {
+            return <Popup trigger={
+                <Button
+                    content={this.props.data.text}
+                    onClick={this.handleClick}
+                    size='tiny'
+                    color={this.props.data.color}
+                    compact
+                    disabled={this.props.data.disabled}
+                />
+            }
+                content={this.props.data.popup}
+                position='top center'
+                size='tiny'
+            />
+        }
+
     }
 }

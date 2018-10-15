@@ -37,7 +37,8 @@
     "babel-preset-react": "latest",
     "bootstrap": "latest",
     "css-loader": "latest",
-    "electron": "latest",
+    "electron": "3.0.4",
+    "electron-builder": "latest",
     "electron-devtools-installer": "latest",
     "electron-packager": "latest",
     "file-loader": "latest",
@@ -53,5 +54,11 @@
     "typescript": "latest",
     "webpack": "latest",
     "webpack-cli": "latest"
+  },
+  "build": {
+    "appId": "your.id",
+    "mac": {
+      "category": "your.app.category.type"
+    }
   }
 }

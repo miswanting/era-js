@@ -1,6 +1,8 @@
 import * as Net from "net"
 import { app, Menu, ipcMain, BrowserWindow } from 'electron'
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer'
+import * as fs from 'fs'
+import * as child_process from 'child_process'
 let win: BrowserWindow = null
 let conn: Net.Socket = null
 // 启动前端
@@ -34,11 +36,18 @@ function createWindow() {
     win.on('closed', () => {
         win = null
         console.log('[DEBG]检测到窗口关闭');
+        app.quit()
     })
     // 加载 REACT DEVELOPER TOOLS
     installExtension(REACT_DEVELOPER_TOOLS)
         .then((name) => console.log(`[DEBG]添加插件：${name}`))
         .catch((err) => console.log('[DEBG]添加插件错误：', err))
+    setTimeout(startScript, 3000)
+}
+function startScript() {
+    if (fs.existsSync('Game.exe')) {
+        child_process.execFile('Game.exe')
+    }
 }
 function startServer() {
     let server = Net.createServer((connection) => {
@@ -75,7 +84,7 @@ function startServer() {
         })
         conn.on('error', (err) => {
             console.log(err);
-
+            app.quit()
         })
     })
     server.on('error', (err) => {
@@ -106,7 +115,9 @@ function checkTimeOut() {
 }
 function sendToBack(bag: any) {
     console.log('[DEBG]发送至后端：', bag) // 生产环境下请注释掉
-    conn.write(JSON.stringify(bag))
+    if (!conn == null) {
+        conn.write(JSON.stringify(bag))
+    }
 }
 function sendToRenderer(bag: any) {
     console.log('[DEBG]发送至前端：', bag) // 生产环境下请注释掉

@@ -26,8 +26,9 @@ export default class ERate extends React.Component<{ data: any }, { data: any }>
         return <Rating
             rating={this.state.data.now}
             maxRating={this.state.data.max}
-            // disabled
+            disabled={this.state.data.disabled}
             onRate={this.handleClick}
+            size={'tiny'}
         />
     }
 }

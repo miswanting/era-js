@@ -32,7 +32,7 @@ function startElectron() {
 function createWindow() {
     win = new BrowserWindow({ width: 1024, height: 768 })
     win.loadFile('src/index.html')
-    // win.webContents.openDevTools() // 生产环境下请注释掉
+    win.webContents.openDevTools() // 生产环境下请注释掉
     Menu.setApplicationMenu(null)
     win.on('closed', () => {
         win = null
@@ -40,9 +40,9 @@ function createWindow() {
         app.quit()
     })
     // 加载 REACT DEVELOPER TOOLS（生产环境下请注释掉）
-    // installExtension(REACT_DEVELOPER_TOOLS)
-    //     .then((name) => console.log(`[DEBG]添加插件：${name}`))
-    //     .catch((err) => console.log('[DEBG]添加插件错误：', err))
+    installExtension(REACT_DEVELOPER_TOOLS)
+        .then((name) => console.log(`[DEBG]添加插件：${name}`))
+        .catch((err) => console.log('[DEBG]添加插件错误：', err))
     setTimeout(startScript, 3000)
 }
 function startScript() {

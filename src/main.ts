@@ -5,6 +5,7 @@ import * as fs from 'fs'
 import * as child_process from 'child_process'
 let win: BrowserWindow = null
 let conn: Net.Socket = null
+var connected = false
 // 启动前端
 startElectron()
 // 启动脚本
@@ -31,17 +32,17 @@ function startElectron() {
 function createWindow() {
     win = new BrowserWindow({ width: 1024, height: 768 })
     win.loadFile('src/index.html')
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools() // 生产环境下请注释掉
     Menu.setApplicationMenu(null)
     win.on('closed', () => {
         win = null
         console.log('[DEBG]检测到窗口关闭');
         app.quit()
     })
-    // 加载 REACT DEVELOPER TOOLS
-    installExtension(REACT_DEVELOPER_TOOLS)
-        .then((name) => console.log(`[DEBG]添加插件：${name}`))
-        .catch((err) => console.log('[DEBG]添加插件错误：', err))
+    // 加载 REACT DEVELOPER TOOLS（生产环境下请注释掉）
+    // installExtension(REACT_DEVELOPER_TOOLS)
+    //     .then((name) => console.log(`[DEBG]添加插件：${name}`))
+    //     .catch((err) => console.log('[DEBG]添加插件错误：', err))
     setTimeout(startScript, 3000)
 }
 function startScript() {
@@ -53,6 +54,7 @@ function startServer() {
     let server = Net.createServer((connection) => {
         conn = connection
         console.log('[FINE]检测到连接请求！')
+        connected = true
         var bag = { 'type': 'connected', 'from': 'm', 'to': 'r' }
         sendToRenderer(bag)
         conn.on('end', () => {
@@ -84,7 +86,7 @@ function startServer() {
         })
         conn.on('error', (err) => {
             console.log(err);
-            app.quit()
+            // app.quit()
         })
     })
     server.on('error', (err) => {
@@ -114,8 +116,8 @@ function checkTimeOut() {
 
 }
 function sendToBack(bag: any) {
-    console.log('[DEBG]发送至后端：', bag) // 生产环境下请注释掉
-    if (!conn == null) {
+    if (connected) { // BUG
+        console.log('[DEBG]发送至后端：', bag) // 生产环境下请注释掉
         conn.write(JSON.stringify(bag))
     }
 }

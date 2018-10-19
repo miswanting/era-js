@@ -14,7 +14,7 @@ export default class EProgress extends React.Component<{ data: any }, {}> {
             data-percent={percent}
             style={{
                 display: 'inline-grid',
-                width: this.props.data.length,
+                width: this.props.data.length + 'px',
                 margin: 0 + 'px',
                 top: 2 + 'px'
             }}

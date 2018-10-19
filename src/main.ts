@@ -32,7 +32,7 @@ function startElectron() {
 function createWindow() {
     win = new BrowserWindow({ width: 1024, height: 768 })
     win.loadFile('src/index.html')
-    // win.webContents.openDevTools() // 生产环境下请注释掉
+    win.webContents.openDevTools() // 生产环境下请注释掉
     Menu.setApplicationMenu(null)
     win.on('closed', () => {
         win = null

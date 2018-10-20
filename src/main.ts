@@ -40,9 +40,9 @@ function createWindow() {
         app.quit()
     })
     // 加载 REACT DEVELOPER TOOLS（生产环境下请注释掉）
-    // installExtension(REACT_DEVELOPER_TOOLS)
-    //     .then((name) => console.log(`[DEBG]添加插件：${name}`))
-    //     .catch((err) => console.log('[DEBG]添加插件错误：', err))
+    installExtension(REACT_DEVELOPER_TOOLS)
+        .then((name) => console.log(`[DEBG]添加插件：${name}`))
+        .catch((err) => console.log('[DEBG]添加插件错误：', err))
     setTimeout(startScript, 3000)
 }
 function startScript() {

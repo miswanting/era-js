@@ -26,6 +26,8 @@
   },
   "devDependencies": {
     "@types/bootstrap": "latest",
+    "@types/chart.js": "latest",
+    "@types/d3": "^5.0.1",
     "@types/electron-devtools-installer": "latest",
     "@types/jquery": "latest",
     "@types/react": "latest",
@@ -36,7 +38,9 @@
     "babel-preset-env": "latest",
     "babel-preset-react": "latest",
     "bootstrap": "latest",
+    "chart.js": "latest",
     "css-loader": "latest",
+    "d3": "^5.7.0",
     "electron": "3.0.4",
     "electron-builder": "latest",
     "electron-devtools-installer": "latest",

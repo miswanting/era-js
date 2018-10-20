@@ -7,6 +7,7 @@ import ERate from "./ERate";
 import ERadio from "./ERadio";
 import EInput from "./EInput";
 import EDivider from "./EDivider";
+import EChart from "./EChart";
 
 /**
  * 行
@@ -33,6 +34,8 @@ export default class Line extends React.Component<{ data: any, mode: any }, {}> 
                 return <EInput key={index} data={item.value} />
             } else if (item.type == 'divider') {
                 return <EDivider key={index} data={item.value} />
+            } else if (item.type == 'chart') {
+                return <EChart key={index} data={item.value} />
             }
         })
         return <p>{items}</p>

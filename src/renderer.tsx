@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { ipcRenderer } from "electron";
+import { remote, ipcRenderer } from "electron";
 // 前端选择
 // antd
 // import App from "./antd/App";
@@ -205,6 +205,9 @@ function parseBag(bag: any) {
             app.pages = []
         }
         update()
+    } else if (bag.type == 'exit') { // 清除所有内容
+        var window = remote.getCurrentWindow();
+        window.close();
     }
 }
 let tmp: any[] = []

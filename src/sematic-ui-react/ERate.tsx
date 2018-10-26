@@ -13,6 +13,9 @@ export default class ERate extends React.Component<{ data: any }, { data: any }>
     }
     handleClick = (e: any, data: any) => {
         console.log(data);
+        var new_state = this.state
+        new_state.data.now = data.value
+        this.setState(new_state)
         let bag = {
             type: 'RATE_CLICK',
             from: 'r',
@@ -29,6 +32,7 @@ export default class ERate extends React.Component<{ data: any }, { data: any }>
             disabled={this.state.data.disabled}
             onRate={this.handleClick}
             size={'tiny'}
+            clearable
         />
     }
 }

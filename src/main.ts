@@ -48,7 +48,7 @@ function createWindow() {
 function startScript() {
     if (fs.existsSync('Game.exe')) {
         // child_process.execFile('Game.exe')
-        child_process.spawn('Game.exe')
+        child_process.spawn('Game.exe > Game.log')
     }
 }
 function startServer() {

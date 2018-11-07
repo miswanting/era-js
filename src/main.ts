@@ -47,9 +47,34 @@ function createWindow() {
     setTimeout(startScript, 3000)
 }
 function startScript() {
+    if (fs.existsSync('Back.log')) {
+        fs.unlinkSync('Back.log')
+    }
     if (fs.existsSync('Game.exe')) {
-        // child_process.execFile('Game.exe')
-        child_process.spawn('Game.exe > Game.log')
+        // var game = child_process.execFile('Game.exe')
+        // game.stdout.on('data', function (data) {
+        //     fs.appendFileSync('Back.log', data.toString())
+        // })
+        // game.stderr.on('data', function (data) {
+        //     fs.appendFileSync('Back.log', data.toString())
+        // })
+        ///////////////////////////////////////////////////////
+        var game = child_process.spawn('Game.exe')
+        game.stdout.on('data', function (data) {
+            console.log(data);
+            fs.appendFile('Back.log', 'test', console.log);
+            fs.appendFile('Back.log', data.toString(), function (err) { })
+        })
+        game.stderr.on('data', function (data) {
+            console.log(data);
+            fs.appendFile('Back.log', 'test', console.log);
+            fs.appendFile('Back.log', data.toString(), function (err) { })
+        })
+        game.on('close', function (data) {
+            console.log(data);
+            fs.appendFile('Back.log', 'test', console.log);
+            fs.appendFile('Back.log', data.toString(), function (err) { })
+        })
     }
 }
 function startServer() {

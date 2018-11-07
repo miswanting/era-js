@@ -8,7 +8,14 @@ import { Header } from "semantic-ui-react";
  */
 export default class EHeader extends React.Component<{ data: any }, {}> {
     render() {
+        var header_style = { display: 'inline-grid' }
+        if (this.props.data.color != 'default') {
+            header_style['color'] = this.props.data.color
+        }
+        if (this.props.data.color != 'default') {
+            header_style['background'] = this.props.data.bcolor
+        }
         let rank = 'h' + this.props.data.rank.toString()
-        return <Header as={rank} content={this.props.data.text} style={{ display: 'inline-grid' }} />
+        return <Header as={rank} content={this.props.data.text} style={header_style} />
     }
 }

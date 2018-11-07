@@ -78,7 +78,7 @@ function parseBag(bag: any) {
             app.pages.push({ type: 'page', children: [] })
         }
         let iPage = app.pages.length - 1 // 最后一个Page的index
-        if (bag.value == '') { // 最后一个t的值为空：空行
+        if (bag.value.text == '') { // 最后一个t的值为空：空行
             app.pages[iPage].children.push({ type: 'line', children: [] })
         } else {
             if (app.pages[iPage].children.length == 0) { // 确保生成t之前存在Line
@@ -190,8 +190,8 @@ function parseBag(bag: any) {
         app.pages[iPage].children[iLine].children.push(bag)
         update()
     } else if (bag.type == 'page') { // 页面
-        app.pages.push({ type: 'page', children: [] })
-        for (let i = 0; i < app.pages.length - 20; i++) { // 超出50页就删除老的
+        app.pages.push({ type: 'page', data: bag.value, children: [] })
+        for (let i = 0; i < app.pages.length - 20; i++) { // 超出20页就删除老的
             app.pages.splice(0, 1)
         }
         update()

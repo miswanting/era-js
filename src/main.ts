@@ -58,23 +58,33 @@ function startScript() {
         // game.stderr.on('data', function (data) {
         //     fs.appendFileSync('Back.log', data.toString())
         // })
+        // var exec = require('child_process').execFile;
+        // var fun = function () {
+        //     console.log("fun() start");
+        //     exec('Game.exe', function (err, data) {
+        //         console.log(err)
+        //         console.log(data.toString());
+        //     });
+        // }
+        // fun();
+
         ///////////////////////////////////////////////////////
         var game = child_process.spawn('Game.exe')
-        game.stdout.on('data', function (data) {
-            console.log(data);
-            fs.appendFile('Back.log', 'test', console.log);
-            fs.appendFile('Back.log', data.toString(), function (err) { })
-        })
-        game.stderr.on('data', function (data) {
-            console.log(data);
-            fs.appendFile('Back.log', 'test', console.log);
-            fs.appendFile('Back.log', data.toString(), function (err) { })
-        })
-        game.on('close', function (data) {
-            console.log(data);
-            fs.appendFile('Back.log', 'test', console.log);
-            fs.appendFile('Back.log', data.toString(), function (err) { })
-        })
+        // game.stdout.on('data', function (data) {
+        //     console.log(data);
+        //     fs.appendFile('Back.log', 'test', console.log);
+        //     fs.appendFile('Back.log', data.toString(), function (err) { })
+        // })
+        // game.stderr.on('data', function (data) {
+        //     console.log(data);
+        //     fs.appendFile('Back.log', 'test', console.log);
+        //     fs.appendFile('Back.log', data.toString(), function (err) { })
+        // })
+        // game.on('close', function (data) {
+        //     console.log(data);
+        //     fs.appendFile('Back.log', 'test', console.log);
+        //     fs.appendFile('Back.log', data.toString(), function (err) { })
+        // })
     }
 }
 function startServer() {

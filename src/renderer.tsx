@@ -208,6 +208,22 @@ function parseBag(bag: any) {
     } else if (bag.type == 'exit') { // 清除所有内容
         var window = remote.getCurrentWindow();
         window.close();
+    } else if (bag.type == 'shake') { // 屏幕抖动
+        var window = remote.getCurrentWindow();
+        var basePosition: number[] = window.getPosition();
+        var time: number = 0
+        function shakeOnce() {
+            var dx = parseInt((Math.random() * 10).toString())
+            var dy = parseInt((Math.random() * 10).toString())
+            window.setPosition(basePosition[0] + dx, basePosition[1] + dy)
+            time += 1
+            if (time >= bag.value.duration) {
+                clearInterval(timer)
+                window.setPosition(basePosition[0], basePosition[1])
+            }
+        }
+        var timer: NodeJS.Timer = setInterval(shakeOnce, 1)
+
     }
 }
 let tmp: any[] = []

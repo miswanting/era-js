@@ -22,7 +22,16 @@ document.getElementById('root').addEventListener("mouseup", (e) => {
     }
     send(bag)
 })
-
+document.getElementById('root').addEventListener("keyup", (e) => {
+    console.log('[DEBG]键盘按下：', e.key);
+    app.isConsole = true
+    let bag = {
+        type: 'OPEN_CONSOLE',
+        from: 'r',
+        to: 'b'
+    }
+    send(bag)
+})
 /**
  * 自m接受信息
  */
@@ -230,6 +239,7 @@ let tmp: any[] = []
 let app = {
     isConnected: false,
     isLoaded: false,
+    isConsole: false,
     pages: tmp,
     mode: tmp
 }

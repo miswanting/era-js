@@ -22,7 +22,7 @@ export default class EInput extends React.Component<{ data: any }, { data: any }
     }
     render() {
         return <Input
-            content={this.state.data.text}
+            defaultValue={this.props.data.default}
             size='tiny'
             onChange={this.onChange}
         />

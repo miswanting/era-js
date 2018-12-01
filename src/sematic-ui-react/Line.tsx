@@ -8,6 +8,7 @@ import ERadio from "./ERadio";
 import EInput from "./EInput";
 import EDivider from "./EDivider";
 import EChart from "./EChart";
+import EDropdown from './EDropdown';
 
 /**
  * 行
@@ -36,6 +37,8 @@ export default class Line extends React.Component<{ data: any, mode: any }, {}> 
                 return <EDivider key={index} data={item.value} />
             } else if (item.type == 'chart') {
                 return <EChart key={index} data={item.value} />
+            } else if (item.type == 'dropdown') {
+                return <EDropdown key={index} data={item.value} />
             }
         })
         return <p>{items}</p>

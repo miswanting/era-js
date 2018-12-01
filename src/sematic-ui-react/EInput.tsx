@@ -16,7 +16,7 @@ export default class EInput extends React.Component<{ data: any }, { data: any }
             from: 'r',
             to: 'b',
             hash: this.state.data.hash,
-            value: data
+            value: data['value']
         }
         this.state.data.func(bag)
     }

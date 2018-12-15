@@ -22,15 +22,12 @@ document.getElementById('root').addEventListener("mouseup", (e) => {
     }
     send(bag)
 })
-document.getElementById('root').addEventListener("keyup", (e) => {
+window.addEventListener("keyup", (e) => {
     console.log('[DEBG]键盘按下：', e.key);
-    app.isConsole = true
-    let bag = {
-        type: 'OPEN_CONSOLE',
-        from: 'r',
-        to: 'b'
+    if (e.key == '`') {
+        app.isConsole = !app.isConsole
     }
-    send(bag)
+    update()
 })
 /**
  * 自m接受信息
@@ -245,7 +242,9 @@ function parseBag(bag: any) {
             }
         }
         var timer: NodeJS.Timer = setInterval(shakeOnce, 1)
-
+    } else if (bag.type == 'result') { // 控制台返回结果
+        app.result = bag.value
+        update()
     } else if (bag.type == 'load_text') { // 加载文本
         app.load_text = bag.value
         update()
@@ -256,6 +255,8 @@ let app = {
     isConnected: false,
     isLoaded: false,
     isConsole: false,
+    send_func: send,
+    result: '',
     load_text: '',
     pages: tmp,
     mode: tmp

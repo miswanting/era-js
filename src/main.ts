@@ -33,9 +33,9 @@ function createWindow() {
     win = new BrowserWindow({ width: 1024, height: 768 })
     win.loadFile('src/index.html')
     // win.webContents.openDevTools() // 生产环境下请注释掉
-    // var menu = Menu.buildFromTemplate(menu_bar)
-    // Menu.setApplicationMenu(menu)
-    Menu.setApplicationMenu(null)
+    var menu = Menu.buildFromTemplate(menu_bar)
+    Menu.setApplicationMenu(menu)
+    // Menu.setApplicationMenu(null)
     win.on('closed', () => {
         win = null
         console.log('[DEBG]检测到窗口关闭');

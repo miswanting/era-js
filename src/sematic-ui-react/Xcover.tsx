@@ -16,7 +16,7 @@ export default class Xcover extends React.Component<{ data: any }, {}> {
         if (this.props.data.isConnected) {
             loadingType = false
             status = 'Loading...'
-            commet = ''
+            commet = this.props.data.load_text
         }
         return <Modal basic open={true} size={'mini'}>
             <Modal.Content>

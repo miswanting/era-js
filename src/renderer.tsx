@@ -246,6 +246,9 @@ function parseBag(bag: any) {
         }
         var timer: NodeJS.Timer = setInterval(shakeOnce, 1)
 
+    } else if (bag.type == 'load_text') { // 加载文本
+        app.load_text = bag.value
+        update()
     }
 }
 let tmp: any[] = []
@@ -253,6 +256,7 @@ let app = {
     isConnected: false,
     isLoaded: false,
     isConsole: false,
+    load_text: '',
     pages: tmp,
     mode: tmp
 }

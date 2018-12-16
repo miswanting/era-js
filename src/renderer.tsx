@@ -250,12 +250,28 @@ function parseBag(bag: any) {
         update()
     }
 }
+function parse_cmd(cmd_text: string) {
+    let cmd = cmd_text.split(' ')
+    console.log(cmd_text, cmd, cmd[0]);
+    if (cmd[0] == 'help') {
+        app.result = 'test msg\n123'
+        update()
+    } else {
+        let bag = {
+            type: 'CMD',
+            value: cmd,
+            from: 'r',
+            to: 'b'
+        }
+        send(bag)
+    }
+}
 let tmp: any[] = []
 let app = {
     isConnected: false,
     isLoaded: false,
     isConsole: false,
-    send_func: send,
+    cmd_func: parse_cmd,
     result: '',
     load_text: '',
     pages: tmp,

@@ -16,13 +16,7 @@ export default class Console extends React.Component<{ data: any }, { cmd: strin
     }
     handleSubmit(e) {
         this.setState({ cmd: this.state.cmd })
-        let bag = {
-            type: 'CMD',
-            value: this.state.cmd,
-            from: 'r',
-            to: 'b'
-        }
-        this.props.data.send_func(bag)
+        this.props.data.cmd_func(this.state.cmd)
     }
     render() {
         const { cmd } = this.state

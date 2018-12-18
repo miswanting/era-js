@@ -209,13 +209,43 @@ const menu_bar: any = [
         submenu: [
             {
                 label: '头像编辑器',
-                enabled: false
+                id: 'avantar-editor',
+                type: 'checkbox',
+                click: function () {
+                    let bag: any = {
+                        type: 'avantar_editor',
+                        value: Menu.getApplicationMenu().getMenuItemById('code-editor').checked,
+                        from: 'm',
+                        to: 'b'
+                    }
+                    sendToRenderer(bag)
+                }
             }, {
                 label: '地图编辑器',
-                enabled: false
+                id: 'map-editor',
+                type: 'checkbox',
+                click: function () {
+                    let bag: any = {
+                        type: 'map_editor',
+                        value: Menu.getApplicationMenu().getMenuItemById('code-editor').checked,
+                        from: 'm',
+                        to: 'b'
+                    }
+                    sendToRenderer(bag)
+                }
             }, {
                 label: '图形化代码编辑器',
-                enabled: false
+                id: 'code-editor',
+                type: 'checkbox',
+                click: function () {
+                    let bag: any = {
+                        type: 'code_editor',
+                        value: Menu.getApplicationMenu().getMenuItemById('code-editor').checked,
+                        from: 'm',
+                        to: 'b'
+                    }
+                    sendToRenderer(bag)
+                }
             }
         ]
     }, {

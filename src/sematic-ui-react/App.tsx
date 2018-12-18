@@ -3,6 +3,7 @@ import 'semantic-ui-css/semantic.min.css'
 import Xcover from './Xcover'
 import Console from './Console'
 import PageList from './PageList'
+import Code from './Code';
 /**
  * 窗口
  */

@@ -29,6 +29,10 @@ window.addEventListener("keyup", (e) => {
     }
     update()
 })
+remote.Menu.getApplicationMenu().getMenuItemById('code-editor').click = function () {
+    alert('123321')
+}
+
 /**
  * 自m接受信息
  */
@@ -79,7 +83,9 @@ function parseBag(bag: any) {
         update()
     } else if (bag.type == 'title') {
         document.title = bag.value
-    } else if (bag.type == 't') { // 文本
+    } else if (['connected'].indexOf(bag.type) > -1) { }
+    else if (bag.type == 't') { // 文本
+        // page
         if (app.pages.length == 0) { // 确保生成t之前存在Page
             app.pages.push({ type: 'page', children: [] })
         }
@@ -248,6 +254,18 @@ function parseBag(bag: any) {
     } else if (bag.type == 'load_text') { // 加载文本
         app.load_text = bag.value
         update()
+    } else if (bag.type == 'avantar_editor') { // 加载文本
+        app.avantar_editor = bag.value
+        update()
+        alert('avantar_editor')
+    } else if (bag.type == 'map_editor') { // 加载文本
+        app.map_editor = bag.value
+        update()
+        alert('map_editor')
+    } else if (bag.type == 'code_editor') { // 加载文本
+        app.code_editor = bag.value
+        update()
+        alert('code_editor')
     }
 }
 function parse_cmd(cmd_text: string) {
@@ -271,6 +289,9 @@ let app = {
     isConnected: false,
     isLoaded: false,
     isConsole: false,
+    avantar_editor: false,
+    map_editor: false,
+    code_editor: false,
     cmd_func: parse_cmd,
     result: '',
     load_text: '',

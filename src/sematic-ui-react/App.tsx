@@ -11,22 +11,20 @@ export default class App extends React.Component<{ data: any }, {}> {
         super(props);
     }
     render() {
-        if (!this.props.data.isLoaded) {
-            if (this.props.data.isConsole) {
-                return <>
-                    <Xcover data={this.props.data} />
-                    <Console data={this.props.data} />
-                </>
-            }
-            return <Xcover data={this.props.data} />
+        var display_item = []
+        if (this.props.data.isConsole) {
+            display_item.push(<Console data={this.props.data} />)
+        } else if (this.props.data.avantar_editor) {
+            display_item.push(<Console data={this.props.data} />)
+        } else if (this.props.data.map_editor) {
+            display_item.push(<Console data={this.props.data} />)
+        } else if (this.props.data.code_editor) {
+            display_item.push(<Code data={this.props.data} />)
+        } else if (!this.props.data.isLoaded) {
+            display_item.push(<Xcover data={this.props.data} />)
         } else {
-            if (this.props.data.isConsole) {
-                return <>
-                    <PageList data={this.props.data} />
-                    <Console data={this.props.data} />
-                </>
-            }
-            return <PageList data={this.props.data} />
+            display_item.push(<PageList data={this.props.data} />)
         }
+        return <>{display_item}</>
     }
 }

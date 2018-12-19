@@ -7,19 +7,10 @@ export default class Code extends React.Component<{ data: any }, {}> {
         super(props);
     }
     componentDidMount() {
-        var toolbox = React.createElement('xml', {
-            id: "toolbox",
-            style: "display: none"
-        },
-            React.createElement('block', { type: "controls_if" }),
-            React.createElement('block', { type: "controls_repeat_ext" }),
-            React.createElement('block', { type: "logic_compare" }),
-            React.createElement('block', { type: "math_number" }),
-            React.createElement('block', { type: "math_arithmetic" }),
-            React.createElement('block', { type: "text" }),
-            React.createElement('block', { type: "text_print" }),
-        )
-        var workspace = Blockly.inject('blocklyDiv', { toolbox: document.getElementById('toolbox') });
+        var workspace = Blockly.inject(
+            'blocklyDiv',
+            { toolbox: document.getElementById('toolbox') }
+        );
     }
     render() {
         return <>
@@ -33,6 +24,19 @@ export default class Code extends React.Component<{ data: any }, {}> {
                     bottom: 0
                 }}>
             </div>
+            <div dangerouslySetInnerHTML={{
+                __html: `
+                <xml id="toolbox" style="display: none">
+                <block type="controls_if"></block>
+                <block type="controls_repeat_ext"></block>
+                <block type="logic_compare"></block>
+                <block type="math_number"></block>
+                <block type="math_arithmetic"></block>
+                <block type="text"></block>
+                <block type="text_print"></block>
+              </xml>
+            `
+            }}></div>
         </>
 
     }

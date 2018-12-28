@@ -224,10 +224,12 @@ function parseBag(bag: any) {
         app.mode = bag.value
         update()
     } else if (bag.type == 'clear') { // 清除所有内容
-        if (bag.value['last']) {
-            app.pages.pop()
-        } else {
+        if (bag.value['num'] == 0) {
             app.pages = []
+        } else {
+            for (let i = 0; i < bag.value['num']; i++) {
+                app.pages.pop()
+            }
         }
         update()
     } else if (bag.type == 'exit') { // 清除所有内容

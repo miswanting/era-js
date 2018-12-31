@@ -18,6 +18,9 @@ export default class EDropdown extends React.Component<{ data: any }> {
             hash: this.props.data.hash,
             value: data['value']
         }
+        if (typeof bag.value == 'string') {
+            bag.value = [bag.value]
+        }
         this.props.data.func(bag)
     }
     render() {

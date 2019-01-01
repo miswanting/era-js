@@ -41,7 +41,7 @@
     "chart.js": "latest",
     "css-loader": "latest",
     "d3": "latest",
-    "electron": "3.0.4",
+    "electron": "4.0.0",
     "electron-builder": "latest",
     "electron-devtools-installer": "latest",
     "electron-packager": "latest",

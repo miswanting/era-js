@@ -259,15 +259,12 @@ function parseBag(bag: any) {
     } else if (bag.type == 'avantar_editor') { // 加载文本
         app.avantar_editor = bag.value
         update()
-        alert('avantar_editor')
     } else if (bag.type == 'map_editor') { // 加载文本
         app.map_editor = bag.value
         update()
-        alert('map_editor')
     } else if (bag.type == 'code_editor') { // 加载文本
         app.code_editor = bag.value
         update()
-        alert('code_editor')
     }
 }
 function parse_cmd(cmd_text: string) {

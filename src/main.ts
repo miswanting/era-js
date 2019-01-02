@@ -214,7 +214,7 @@ const menu_bar: any = [
                 click: function () {
                     let bag: any = {
                         type: 'avantar_editor',
-                        value: Menu.getApplicationMenu().getMenuItemById('code-editor').checked,
+                        value: Menu.getApplicationMenu().getMenuItemById('avantar-editor').checked,
                         from: 'm',
                         to: 'b'
                     }
@@ -227,7 +227,7 @@ const menu_bar: any = [
                 click: function () {
                     let bag: any = {
                         type: 'map_editor',
-                        value: Menu.getApplicationMenu().getMenuItemById('code-editor').checked,
+                        value: Menu.getApplicationMenu().getMenuItemById('map-editor').checked,
                         from: 'm',
                         to: 'b'
                     }

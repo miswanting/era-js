@@ -18,6 +18,7 @@ export default class Map extends React.Component<{ data: any }, {}> {
         const delaunay = Delaunay.from(points);
         const voronoi = delaunay.voronoi([0, 0, 400, 300]);
         ctx.beginPath()
+        delaunay.render(ctx);
         delaunay.renderPoints(ctx);
         ctx.fill()
         ctx.beginPath()

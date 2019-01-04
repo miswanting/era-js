@@ -2,7 +2,6 @@ import * as React from 'react'
 import { Delaunay } from "d3-delaunay"
 import * as d3 from 'd3'
 import * as SimplexNoise from 'simplex-noise'
-import { Z_FIXED } from 'zlib';
 // var SimplexNoise = require('simplex-noise')
 var Noise = require('noisejs')
 
@@ -130,13 +129,18 @@ export default class Map extends React.Component<{ data: any }, {}> {
             var simplex = new SimplexNoise()
             const delaunay = Delaunay.from(points);
             const voronoi = delaunay.voronoi([0, 0, window.innerWidth, window.innerHeight]);
-
+            var zoom = d3.zoom().on('zoom', zoomed)
+            function zoomed() {
+                var transform = d3.zoomTransform(this);
+                d3.selectAll('g').attr("transform", transform.toString())
+            }
             d3.select('#root')
                 .append('svg')
                 .attr('width', window.innerWidth)
                 .attr('height', window.innerHeight)
                 .append('g')
                 .attr('id', 'map')
+                .call(zoom)
             for (let i = 0; i < delaunay.points.length / 2; i++) {
                 var x = delaunay.points[2 * i]
                 var y = delaunay.points[2 * i + 1]

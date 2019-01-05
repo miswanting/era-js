@@ -132,15 +132,15 @@ export default class Map extends React.Component<{ data: any }, {}> {
             var zoom = d3.zoom().on('zoom', zoomed)
             function zoomed() {
                 var transform = d3.zoomTransform(this);
-                d3.selectAll('g').attr("transform", transform.toString())
+                d3.select('#viewport').attr("transform", transform.toString())
             }
             d3.select('#root')
                 .append('svg')
                 .attr('width', window.innerWidth)
                 .attr('height', window.innerHeight)
-                .append('g')
-                .attr('id', 'map')
                 .call(zoom)
+                .append('g')
+                .attr('id', 'viewport')
             for (let i = 0; i < delaunay.points.length / 2; i++) {
                 var x = delaunay.points[2 * i]
                 var y = delaunay.points[2 * i + 1]
@@ -165,7 +165,7 @@ export default class Map extends React.Component<{ data: any }, {}> {
                 } else {
                     r = 25, g = 35, b = 93
                 }
-                d3.select('#map')
+                d3.select('#viewport')
                     .append('path')
                     .attr('d', voronoi.renderCell(i))
                     .attr('fill', `rgb(${r},${g},${b})`)
@@ -191,6 +191,9 @@ export default class Map extends React.Component<{ data: any }, {}> {
         //     voronoi.render(ctx)
         //     ctx.stroke()
         // }
+    }
+    componentWillUnmount() {
+        d3.select('svg').remove()
     }
     render() {
         // return <canvas ref="canvas" width={400} height={300} />

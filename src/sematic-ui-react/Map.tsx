@@ -169,6 +169,7 @@ export default class Map extends React.Component<{ data: any }, {}> {
                     .append('path')
                     .attr('d', voronoi.renderCell(i))
                     .attr('fill', `rgb(${r},${g},${b})`)
+                    // .on('mouseover',)
             }
         }
         // var i = 0

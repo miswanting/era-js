@@ -144,6 +144,7 @@ export default class Map extends React.Component<{ data: any }, {}> {
     }
     componentWillUnmount() {
         d3.select('svg').remove()
+        document.getElementById('root').style.overflow = ''
     }
     render() {
         return <></>

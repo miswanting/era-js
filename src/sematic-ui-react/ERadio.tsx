@@ -31,11 +31,8 @@ export default class ERadio extends React.Component<{ data: any }, { data: any }
     }
     render() {
         var radio_group = this.state.data.list.map((radio: any, index: number) => {
-            if (index == this.state.data.default) {
-                return <Radio label={radio} checked onChange={this.handleClick} style={{ marginRight: 20 + 'px' }} />
-            } else {
-                return <Radio label={radio} onChange={this.handleClick} style={{ marginRight: 20 + 'px' }} />
-            }
+            console.log(index, this.state.data.default);
+            return <Radio label={radio} checked={index == this.state.data.default} onChange={this.handleClick} style={{ marginRight: 20 + 'px' }} />
         })
         return <>{radio_group}</>
     }

@@ -116,7 +116,6 @@ export default class Map extends React.Component<{ data: any }, {}> {
                 var y = delaunay.points[2 * i + 1]
                 var value = simplex.noise2D(x * 0.003, y * 0.003)
                 value = (value + 1) / 2
-                // value = (value + 1) / 2 - (Math.abs(x - window.innerWidth / 2) + Math.abs(y - window.innerHeight / 2)) / 2000
                 value = value * value
                 var r = 100, g = 100, b = 100
                 value = parseInt((value * 256).toString())

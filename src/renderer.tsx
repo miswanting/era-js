@@ -83,7 +83,47 @@ function parseBag(bag: any) {
         update()
     } else if (bag.type == 'title') {
         document.title = bag.value
-    } else if (['connected'].indexOf(bag.type) > -1) { }
+    } else if (['connected'].indexOf(bag.type) != -1) { }
+    else if ([
+        't',
+        'b',
+        'h',
+        'progress',
+        'rate',
+        'radio',
+        'input',
+        'divider',
+        'chart',
+        'dropdown',
+        'chart'
+    ].indexOf(bag.type) != -1) {
+        // 确保pages不为空
+        if (app.pages.length == 0) {
+            app.pages.push({ type: 'page', children: [] })
+        }
+        // 确保page不为空
+        let lastPageIndex = app.pages.length - 1 // 最后一个Page的index
+        if (bag.type == 't' && bag.value.text == '' && app.mode[0] == 'default') { // 最后一个t的值为空：空行
+            app.pages[lastPageIndex].children.push({ type: 'line', children: [] })
+        } else {
+            if (app.pages[lastPageIndex].children.length == 0) {
+                app.pages[lastPageIndex].children.push({ type: 'line', children: [] })
+            }
+            // 在最后一个块的末尾加上控件
+            let lastBlockIndex = app.pages[lastPageIndex].children.length - 1 // 最后一个Line的index
+            if ([
+                'b',
+                'rate',
+                'radio',
+                'input',
+                'dropdown'
+            ].indexOf(bag.type) != -1) {
+                bag.value.func = send // 向虚拟树中装载发射函数
+            }
+            app.pages[lastPageIndex].children[lastBlockIndex].children.push(bag)
+        }
+        update()
+    }
     else if (bag.type == 't') { // 文本
         // page
         if (app.pages.length == 0) { // 确保生成t之前存在Page
@@ -222,6 +262,11 @@ function parseBag(bag: any) {
         update()
     } else if (bag.type == 'mode') { // 改变显示模式
         app.mode = bag.value
+        if (app.pages.length == 0) { // 确保生成dropdown之前存在Page
+            app.pages.push({ type: 'page', children: [] })
+        }
+        let iPage = app.pages.length - 1 // 最后一个Page的index
+        app.pages[iPage].children.push({ type: bag.value[0], value: bag.value, children: [] })
         update()
     } else if (bag.type == 'clear') { // 清除所有内容
         if (bag.value['num'] == 0) {
@@ -269,7 +314,6 @@ function parseBag(bag: any) {
 }
 function parse_cmd(cmd_text: string) {
     let cmd = cmd_text.split(' ')
-    console.log(cmd_text, cmd, cmd[0]);
     if (cmd[0] == 'help') {
         app.result = 'test msg\n123'
         update()
@@ -295,8 +339,56 @@ let app = {
     result: '',
     load_text: '',
     pages: tmp,
-    mode: tmp
+    mode: ['default']
 }
+// var app = {
+//     isConnected: false,
+//     isLoaded: false,
+//     isConsole: false,
+//     avantar_editor: false,
+//     map_editor: false,
+//     code_editor: false,
+//     cmd_func: parse_cmd,
+//     result: '',
+//     load_text: '',
+//     pages: [
+//         {
+//             type: 'page',
+//             data: {
+//                 color: ''
+//             },
+//             children: [
+//                 {
+//                     type: 'line',
+//                     data: {
+//                         color: ''
+//                     },
+//                     children: [
+//                         {
+
+//                         }
+//                     ]
+//                 },
+//                 {
+//                     type: 'mode',
+//                     value: ['grid', 5]
+//                 },
+//                 {
+//                     type: 'grid',
+//                     data: {
+//                         color: ''
+//                     },
+//                     children: [
+//                         {
+
+//                         }
+//                     ]
+//                 }
+//             ]
+//         }
+//     ],
+//     mode: ['default']
+// }
 update()
 function update() {
     ReactDOM.render(

@@ -20,8 +20,9 @@ export default class Page extends React.Component<{ data: any, isDisabled: boole
             }
         }
         var page_style = { width: 100 + '%' }
-        if (this.props.data.data.color != 'default') {
-            page_style['background'] = this.props.data.data.color
+        console.log(this.props);
+        if (this.props.data.color != 'default') {
+            page_style['background'] = this.props.data.color
         }
         return <Segment
             disabled={this.props.isDisabled}

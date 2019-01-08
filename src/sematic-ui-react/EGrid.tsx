@@ -28,7 +28,6 @@ export default class EGrid extends React.Component<{ data: any }, {}> {
             rows[rows.length - 1][rows[rows.length - 1].length - 1].push(item)
         }
         function tab(props) {
-            console.log('tab', JSON.stringify(this));
             if (rows.length == 0) {
                 rows.push([])
             }
@@ -70,8 +69,6 @@ export default class EGrid extends React.Component<{ data: any }, {}> {
                 addItem(<EDropdown key={i} data={item.value} />)
             }
         }
-        console.log('rows', rows);
-
         var rs = rows.map((row, i) => {
             var cs = row.map((column, j) => {
                 var is = column.map((column, j) => {
@@ -81,7 +78,6 @@ export default class EGrid extends React.Component<{ data: any }, {}> {
             })
             return <Grid.Row>{cs}</Grid.Row>
         })
-        console.log('rs', rs);
         return <Grid textAlign='center' columns={this.props.data.value[1]}>
             {rs}
         </Grid>

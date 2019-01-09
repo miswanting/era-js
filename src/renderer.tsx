@@ -262,12 +262,14 @@ function parseBag(bag: any) {
         update()
     } else if (bag.type == 'mode') { // 改变显示模式
         app.mode = bag.value
-        if (app.pages.length == 0) { // 确保生成dropdown之前存在Page
-            app.pages.push({ type: 'page', children: [] })
+        if (app.mode[0] == 'grid') {
+            if (app.pages.length == 0) { // 确保生成dropdown之前存在Page
+                app.pages.push({ type: 'page', children: [] })
+            }
+            let iPage = app.pages.length - 1 // 最后一个Page的index
+            app.pages[iPage].children.push({ type: bag.value[0], value: bag.value, children: [] })
+            update()
         }
-        let iPage = app.pages.length - 1 // 最后一个Page的index
-        app.pages[iPage].children.push({ type: bag.value[0], value: bag.value, children: [] })
-        update()
     } else if (bag.type == 'clear') { // 清除所有内容
         if (bag.value['num'] == 0) {
             app.pages = []

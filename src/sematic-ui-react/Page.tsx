@@ -11,7 +11,6 @@ import EGrid from './EGrid';
 export default class Page extends React.Component<{ data: any, isDisabled: boolean }, {}> {
     render() {
         let lines = []
-
         for (let i = 0; i < this.props.data.children.length; i++) {
             if (this.props.data.children[i].type == 'line') {
                 lines.push(<Line key={i} data={this.props.data.children[i]} mode={this.props.data.mode} />)
@@ -20,9 +19,8 @@ export default class Page extends React.Component<{ data: any, isDisabled: boole
             }
         }
         var page_style = { width: 100 + '%' }
-        console.log(this.props);
-        if (this.props.data.color != 'default') {
-            page_style['background'] = this.props.data.color
+        if (this.props.data.data.color != 'default') { // 的确是两个data
+            page_style['background'] = this.props.data.data.color
         }
         return <Segment
             disabled={this.props.isDisabled}

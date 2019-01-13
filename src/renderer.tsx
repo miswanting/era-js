@@ -6,7 +6,25 @@ import { remote, ipcRenderer } from "electron";
 // import App from "./antd/App";
 // sematic-ui-react
 import App from "./sematic-ui-react/App";
-
+import { Delaunay } from "d3-delaunay"
+import * as d3 from 'd3'
+import * as SimplexNoise from 'simplex-noise'
+// onmessage = function (e) {
+//     function randomPoints(n) {
+//         var points = []
+//         for (let i = 0; i < n; i++) {
+//             var [w, h] = remote.getCurrentWindow().getContentSize()
+//             let x = Math.random() * w
+//             let y = Math.random() * h
+//             points.push([x, y])
+//         }
+//         return points
+//     }
+//     var points = []
+//     points = randomPoints(5000)
+//     // relaxPoints(10)
+//     postMessage(points, '123')
+// }
 
 
 /**
@@ -312,6 +330,111 @@ function parseBag(bag: any) {
     } else if (bag.type == 'code_editor') { // 加载文本
         app.code_editor = bag.value
         update()
+    } else if (bag.type == 'generate_map') { // 加载文本
+        const [w, h] = remote.getCurrentWindow().getContentSize()
+        var points = []
+        function randomPoints(n) {
+            for (let i = 0; i < n; i++) {
+                let x = Math.random() * w
+                let y = Math.random() * h
+                points.push([x, y])
+            }
+        }
+        function relaxPoints(n) {
+            for (let i = 0; i < n; i++) {
+                const delaunay = Delaunay.from(points);
+                const voronoi = delaunay.voronoi([0, 0, w, h])
+                for (let j = 0; j < points.length; j++) {
+                    var cvt: [number, number][] = []
+                    for (let k = 0; k < voronoi.cellPolygon(j).length; k++) {
+                        var [x, y] = voronoi.cellPolygon(j)[k]
+                        cvt.push([x, y])
+                    }
+                    [points[j][0], points[j][1]] = d3.polygonCentroid(cvt);
+                }
+            }
+        }
+        function generateHeight() {
+            var simplex = new SimplexNoise()
+            const delaunay = Delaunay.from(points);
+            var new_points = []
+            for (let i = 0; i < delaunay.points.length / 2; i++) {
+                var x = delaunay.points[2 * i]
+                var y = delaunay.points[2 * i + 1]
+                var rate = simplex.noise2D(x * 0.003, y * 0.003)
+                rate = (rate + 1) / 2
+                rate *= rate
+                var height = rate * 10000 - 2000
+                new_points.push([x, y, height])
+            }
+            return new_points
+        }
+        function generateMap() {
+            var simplex = new SimplexNoise()
+            const delaunay = Delaunay.from(points);
+            var new_points = []
+            var node = delaunay.hull
+            for (let i = 0; i < delaunay.points.length / 2; i++) {
+                var point = {
+                    i: i,
+                    x: delaunay.points[2 * i],
+                    y: delaunay.points[2 * i + 1],
+                    h: 0,
+                    n: [],
+                }
+                var rate = simplex.noise2D(point.x * 0.003, point.y * 0.003)
+                rate = (rate + 1) / 2
+                rate *= rate
+                point.h = rate * 10000 - 2000
+                var tmp = delaunay.neighbors(i)
+                while (true) {
+                    var n = tmp.next()
+                    if (n.done) { break }
+                    point.n.push(n.value)
+                }
+                new_points.push(point)
+                console.log(node.next);
+            }
+            // do {
+            //     var point = {
+            //         i: node.i,
+            //         x: node.x,
+            //         y: node.y,
+            //         h: 0,
+            //         n: [],
+            //     }
+            //     var rate = simplex.noise2D(node.x * 0.003, node.y * 0.003)
+            //     rate = (rate + 1) / 2
+            //     rate *= rate
+            //     point.h = rate * 10000 - 2000
+            //     var tmp = delaunay.neighbors(node.i)
+            //     while (true) {
+            //         var n = tmp.next()
+            //         if (n.done) { break }
+            //         point.n.push(n.value)
+            //     }
+            //     new_points.push(point)
+            //     console.log(node.next);
+
+            // } while ((node = node.next) !== delaunay.hull)
+            return new_points
+        }
+        var generator = new Promise((resolve, reject) => {
+            setTimeout(function () {
+                randomPoints(5000)
+                relaxPoints(10)
+                resolve(generateMap())
+            }, 100);
+        })
+        generator.then(function (value) {
+            let bag = {
+                type: 'MAP_GENERATED',
+                from: 'r',
+                to: 'b',
+                value: value
+            }
+            send(bag)
+        })
     }
 }
 function parse_cmd(cmd_text: string) {

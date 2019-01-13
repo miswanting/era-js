@@ -30,7 +30,12 @@ function startElectron() {
     })
 }
 function createWindow() {
-    win = new BrowserWindow({ width: 1024, height: 768 })
+    win = new BrowserWindow({
+        width: 1024, height: 768,
+        webPreferences: {
+            nodeIntegrationInWorker: true
+        }
+    })
     win.loadFile('src/index.html')
     // win.webContents.openDevTools() // 生产环境下请注释掉
     var menu = Menu.buildFromTemplate(menu_bar)

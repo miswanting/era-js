@@ -94,8 +94,7 @@ function parseBag(bag: any) {
         'input',
         'divider',
         'chart',
-        'dropdown',
-        'chart'
+        'dropdown'
     ].indexOf(bag.type) != -1) {
         // 确保pages不为空
         if (app.pages.length == 0) {
@@ -124,137 +123,138 @@ function parseBag(bag: any) {
         }
         update()
     }
-    else if (bag.type == 't') { // 文本
-        // page
-        if (app.pages.length == 0) { // 确保生成t之前存在Page
-            app.pages.push({ type: 'page', children: [] })
-        }
-        let iPage = app.pages.length - 1 // 最后一个Page的index
-        if (bag.value.text == '') { // 最后一个t的值为空：空行
-            app.pages[iPage].children.push({ type: 'line', children: [] })
-        } else {
-            if (app.pages[iPage].children.length == 0) { // 确保生成t之前存在Line
-                app.pages[iPage].children.push({ type: 'line', children: [] })
-            }
-            // 在最后page的line中加t
-            let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
-            app.pages[iPage].children[iLine].children.push(bag)
-        }
-        update()
-    } else if (bag.type == 'b') { // 按钮
-        if (app.pages.length == 0) { // 确保生成b之前存在Page
-            app.pages.push({ type: 'page', children: [] })
-        }
-        let iPage = app.pages.length - 1 // 最后一个Page的index
-        if (app.pages[iPage].children.length == 0) { // 确保生成b之前存在Line
-            app.pages[iPage].children.push({ type: 'line', children: [] })
-        }
-        // 在最后page的line中加b
-        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
-        bag.value.func = send // 向虚拟树中装载发射函数
-        app.pages[iPage].children[iLine].children.push(bag)
-        update()
-    } else if (bag.type == 'h') { // 标题
-        if (app.pages.length == 0) { // 确保生成h之前存在Page
-            app.pages.push({ type: 'page', children: [] })
-        }
-        let iPage = app.pages.length - 1 // 最后一个Page的index
-        if (app.pages[iPage].children.length == 0) { // 确保生成h之前存在Line
-            app.pages[iPage].children.push({ type: 'line', children: [] })
-        }
-        // 在最后page的line中加h
-        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
-        app.pages[iPage].children[iLine].children.push(bag)
-        update()
-    } else if (bag.type == 'progress') { // 进度条
-        if (app.pages.length == 0) { // 确保生成progress之前存在Page
-            app.pages.push({ type: 'page', children: [] })
-        }
-        let iPage = app.pages.length - 1 // 最后一个Page的index
-        if (app.pages[iPage].children.length == 0) { // 确保生成progress之前存在Line
-            app.pages[iPage].children.push({ type: 'line', children: [] })
-        }
-        // 在最后page的line中加progress
-        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
-        app.pages[iPage].children[iLine].children.push(bag)
-        update()
-    } else if (bag.type == 'rate') { // 评分
-        if (app.pages.length == 0) { // 确保生成rate之前存在Page
-            app.pages.push({ type: 'page', children: [] })
-        }
-        let iPage = app.pages.length - 1 // 最后一个Page的index
-        if (app.pages[iPage].children.length == 0) { // 确保生成rate之前存在Line
-            app.pages[iPage].children.push({ type: 'line', children: [] })
-        }
-        // 在最后page的line中加b
-        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
-        bag.value.func = send // 向虚拟树中装载发射函数
-        app.pages[iPage].children[iLine].children.push(bag)
-        update()
-    } else if (bag.type == 'radio') { // 单项选择
-        if (app.pages.length == 0) { // 确保生成radio之前存在Page
-            app.pages.push({ type: 'page', children: [] })
-        }
-        let iPage = app.pages.length - 1 // 最后一个Page的index
-        if (app.pages[iPage].children.length == 0) { // 确保生成radio之前存在Line
-            app.pages[iPage].children.push({ type: 'line', children: [] })
-        }
-        // 在最后page的line中加b
-        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
-        bag.value.func = send // 向虚拟树中装载发射函数
-        app.pages[iPage].children[iLine].children.push(bag)
-        update()
-    } else if (bag.type == 'input') { // 单项选择
-        if (app.pages.length == 0) { // 确保生成input之前存在Page
-            app.pages.push({ type: 'page', children: [] })
-        }
-        let iPage = app.pages.length - 1 // 最后一个Page的index
-        if (app.pages[iPage].children.length == 0) { // 确保生成input之前存在Line
-            app.pages[iPage].children.push({ type: 'line', children: [] })
-        }
-        // 在最后page的line中加b
-        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
-        bag.value.func = send // 向虚拟树中装载发射函数
-        app.pages[iPage].children[iLine].children.push(bag)
-        update()
-    } else if (bag.type == 'divider') { // 分割线
-        if (app.pages.length == 0) { // 确保生成divider之前存在Page
-            app.pages.push({ type: 'page', children: [] })
-        }
-        let iPage = app.pages.length - 1 // 最后一个Page的index
-        if (app.pages[iPage].children.length == 0) { // 确保生成divider之前存在Line
-            app.pages[iPage].children.push({ type: 'line', children: [] })
-        }
-        // 在最后page的line中加b
-        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
-        app.pages[iPage].children[iLine].children.push(bag)
-        update()
-    } else if (bag.type == 'chart') { // 分割线
-        if (app.pages.length == 0) { // 确保生成chart之前存在Page
-            app.pages.push({ type: 'page', children: [] })
-        }
-        let iPage = app.pages.length - 1 // 最后一个Page的index
-        if (app.pages[iPage].children.length == 0) { // 确保生成chart之前存在Line
-            app.pages[iPage].children.push({ type: 'line', children: [] })
-        }
-        // 在最后page的line中加chart
-        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
-        app.pages[iPage].children[iLine].children.push(bag)
-        update()
-    } else if (bag.type == 'dropdown') { // 下拉列表
-        if (app.pages.length == 0) { // 确保生成dropdown之前存在Page
-            app.pages.push({ type: 'page', children: [] })
-        }
-        let iPage = app.pages.length - 1 // 最后一个Page的index
-        if (app.pages[iPage].children.length == 0) { // 确保生成dropdown之前存在Line
-            app.pages[iPage].children.push({ type: 'line', children: [] })
-        }
-        // 在最后page的line中加dropdown
-        let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
-        bag.value.func = send // 向虚拟树中装载发射函数
-        app.pages[iPage].children[iLine].children.push(bag)
-        update()
-    } else if (bag.type == 'page') { // 页面
+    // else if (bag.type == 't') { // 文本
+    //     // page
+    //     if (app.pages.length == 0) { // 确保生成t之前存在Page
+    //         app.pages.push({ type: 'page', children: [] })
+    //     }
+    //     let iPage = app.pages.length - 1 // 最后一个Page的index
+    //     if (bag.value.text == '') { // 最后一个t的值为空：空行
+    //         app.pages[iPage].children.push({ type: 'line', children: [] })
+    //     } else {
+    //         if (app.pages[iPage].children.length == 0) { // 确保生成t之前存在Line
+    //             app.pages[iPage].children.push({ type: 'line', children: [] })
+    //         }
+    //         // 在最后page的line中加t
+    //         let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+    //         app.pages[iPage].children[iLine].children.push(bag)
+    //     }
+    //     update()
+    // } else if (bag.type == 'b') { // 按钮
+    //     if (app.pages.length == 0) { // 确保生成b之前存在Page
+    //         app.pages.push({ type: 'page', children: [] })
+    //     }
+    //     let iPage = app.pages.length - 1 // 最后一个Page的index
+    //     if (app.pages[iPage].children.length == 0) { // 确保生成b之前存在Line
+    //         app.pages[iPage].children.push({ type: 'line', children: [] })
+    //     }
+    //     // 在最后page的line中加b
+    //     let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+    //     bag.value.func = send // 向虚拟树中装载发射函数
+    //     app.pages[iPage].children[iLine].children.push(bag)
+    //     update()
+    // } else if (bag.type == 'h') { // 标题
+    //     if (app.pages.length == 0) { // 确保生成h之前存在Page
+    //         app.pages.push({ type: 'page', children: [] })
+    //     }
+    //     let iPage = app.pages.length - 1 // 最后一个Page的index
+    //     if (app.pages[iPage].children.length == 0) { // 确保生成h之前存在Line
+    //         app.pages[iPage].children.push({ type: 'line', children: [] })
+    //     }
+    //     // 在最后page的line中加h
+    //     let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+    //     app.pages[iPage].children[iLine].children.push(bag)
+    //     update()
+    // } else if (bag.type == 'progress') { // 进度条
+    //     if (app.pages.length == 0) { // 确保生成progress之前存在Page
+    //         app.pages.push({ type: 'page', children: [] })
+    //     }
+    //     let iPage = app.pages.length - 1 // 最后一个Page的index
+    //     if (app.pages[iPage].children.length == 0) { // 确保生成progress之前存在Line
+    //         app.pages[iPage].children.push({ type: 'line', children: [] })
+    //     }
+    //     // 在最后page的line中加progress
+    //     let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+    //     app.pages[iPage].children[iLine].children.push(bag)
+    //     update()
+    // } else if (bag.type == 'rate') { // 评分
+    //     if (app.pages.length == 0) { // 确保生成rate之前存在Page
+    //         app.pages.push({ type: 'page', children: [] })
+    //     }
+    //     let iPage = app.pages.length - 1 // 最后一个Page的index
+    //     if (app.pages[iPage].children.length == 0) { // 确保生成rate之前存在Line
+    //         app.pages[iPage].children.push({ type: 'line', children: [] })
+    //     }
+    //     // 在最后page的line中加b
+    //     let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+    //     bag.value.func = send // 向虚拟树中装载发射函数
+    //     app.pages[iPage].children[iLine].children.push(bag)
+    //     update()
+    // } else if (bag.type == 'radio') { // 单项选择
+    //     if (app.pages.length == 0) { // 确保生成radio之前存在Page
+    //         app.pages.push({ type: 'page', children: [] })
+    //     }
+    //     let iPage = app.pages.length - 1 // 最后一个Page的index
+    //     if (app.pages[iPage].children.length == 0) { // 确保生成radio之前存在Line
+    //         app.pages[iPage].children.push({ type: 'line', children: [] })
+    //     }
+    //     // 在最后page的line中加b
+    //     let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+    //     bag.value.func = send // 向虚拟树中装载发射函数
+    //     app.pages[iPage].children[iLine].children.push(bag)
+    //     update()
+    // } else if (bag.type == 'input') { // 单项选择
+    //     if (app.pages.length == 0) { // 确保生成input之前存在Page
+    //         app.pages.push({ type: 'page', children: [] })
+    //     }
+    //     let iPage = app.pages.length - 1 // 最后一个Page的index
+    //     if (app.pages[iPage].children.length == 0) { // 确保生成input之前存在Line
+    //         app.pages[iPage].children.push({ type: 'line', children: [] })
+    //     }
+    //     // 在最后page的line中加b
+    //     let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+    //     bag.value.func = send // 向虚拟树中装载发射函数
+    //     app.pages[iPage].children[iLine].children.push(bag)
+    //     update()
+    // } else if (bag.type == 'divider') { // 分割线
+    //     if (app.pages.length == 0) { // 确保生成divider之前存在Page
+    //         app.pages.push({ type: 'page', children: [] })
+    //     }
+    //     let iPage = app.pages.length - 1 // 最后一个Page的index
+    //     if (app.pages[iPage].children.length == 0) { // 确保生成divider之前存在Line
+    //         app.pages[iPage].children.push({ type: 'line', children: [] })
+    //     }
+    //     // 在最后page的line中加b
+    //     let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+    //     app.pages[iPage].children[iLine].children.push(bag)
+    //     update()
+    // } else if (bag.type == 'chart') { // 分割线
+    //     if (app.pages.length == 0) { // 确保生成chart之前存在Page
+    //         app.pages.push({ type: 'page', children: [] })
+    //     }
+    //     let iPage = app.pages.length - 1 // 最后一个Page的index
+    //     if (app.pages[iPage].children.length == 0) { // 确保生成chart之前存在Line
+    //         app.pages[iPage].children.push({ type: 'line', children: [] })
+    //     }
+    //     // 在最后page的line中加chart
+    //     let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+    //     app.pages[iPage].children[iLine].children.push(bag)
+    //     update()
+    // } else if (bag.type == 'dropdown') { // 下拉列表
+    //     if (app.pages.length == 0) { // 确保生成dropdown之前存在Page
+    //         app.pages.push({ type: 'page', children: [] })
+    //     }
+    //     let iPage = app.pages.length - 1 // 最后一个Page的index
+    //     if (app.pages[iPage].children.length == 0) { // 确保生成dropdown之前存在Line
+    //         app.pages[iPage].children.push({ type: 'line', children: [] })
+    //     }
+    //     // 在最后page的line中加dropdown
+    //     let iLine = app.pages[iPage].children.length - 1 // 最后一个Line的index
+    //     bag.value.func = send // 向虚拟树中装载发射函数
+    //     app.pages[iPage].children[iLine].children.push(bag)
+    //     update()
+    // }
+    else if (bag.type == 'page') { // 页面
         app.pages.push({ type: 'page', data: bag.value, children: [] })
         for (let i = 0; i < app.pages.length - 20; i++) { // 超出20页就删除老的
             app.pages.splice(0, 1)

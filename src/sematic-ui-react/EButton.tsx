@@ -1,5 +1,4 @@
 import * as React from 'react'
-import 'semantic-ui-css/semantic.min.css'
 import { Button, Popup } from "semantic-ui-react";
 
 /**
@@ -16,8 +15,15 @@ export default class EButton extends React.Component<{ data: any }, {}> {
         this.props.data.func(bag)
     }
     render() {
-        if (this.props.data.popup == '') {
-            return <Button
+        if (this.props.data.isLink) {
+            var e = <a
+                onClick={this.handleClick}
+                style={{ color: this.props.data.color, cursor: 'pointer' }}
+            >
+                {this.props.data.text}
+            </a>
+        } else {
+            var e = <Button
                 content={this.props.data.text}
                 onClick={this.handleClick}
                 size='tiny'
@@ -25,16 +31,13 @@ export default class EButton extends React.Component<{ data: any }, {}> {
                 compact
                 disabled={this.props.data.disabled}
             />
+        }
+
+        if (this.props.data.popup == '') {
+            return e
         } else {
             return <Popup trigger={
-                <Button
-                    content={this.props.data.text}
-                    onClick={this.handleClick}
-                    size='tiny'
-                    color={this.props.data.color}
-                    compact
-                    disabled={this.props.data.disabled}
-                />
+                e
             }
                 content={this.props.data.popup}
                 position='top center'

@@ -57,7 +57,7 @@ const rendererConfig = {
             },
             {
                 test: /\.(ttf|otf|eot|svg|woff(2)?)$/,
-                use: 'file-loader'
+                use: 'url-loader'
             },
             {
                 test: /\.(png|jpg|gif)$/,

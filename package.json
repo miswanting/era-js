@@ -46,7 +46,7 @@
     "d3": "latest",
     "d3-delaunay": "latest",
     "delaunator": "latest",
-    "electron": "4.0.1",
+    "electron": "4.0.5",
     "electron-builder": "latest",
     "electron-devtools-installer": "latest",
     "electron-packager": "latest",
@@ -63,6 +63,7 @@
     "source-map-loader": "latest",
     "style-loader": "latest",
     "typescript": "latest",
+    "url-loader": "latest",
     "webpack": "latest",
     "webpack-cli": "latest"
   },

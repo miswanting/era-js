@@ -1,4 +1,5 @@
-@echo off
+﻿@echo off
+chcp 65001
 set DEBUG=electron-builder
 call .\node_modules\.bin\electron-builder --dir
 echo 探测是否为amd64架构

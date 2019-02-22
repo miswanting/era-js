@@ -120,7 +120,7 @@ function parseBag(bag: any) {
         }
         // 确保page不为空
         let lastPageIndex = app.pages.length - 1 // 最后一个Page的index
-        if (bag.type == 't' && bag.value.text == '' && app.mode[0] == 'default') { // 最后一个t的值为空：空行
+        if (bag.type == 't' && bag.value.text == '' && app.mode.mode == 'default') { // 最后一个t的值为空：空行
             app.pages[lastPageIndex].children.push({ type: 'line', children: [] })
         } else {
             if (app.pages[lastPageIndex].children.length == 0) {
@@ -280,12 +280,12 @@ function parseBag(bag: any) {
         update()
     } else if (bag.type == 'mode') { // 改变显示模式
         app.mode = bag.value
-        if (app.mode[0] == 'grid') {
+        if (app.mode.mode == 'grid') {
             if (app.pages.length == 0) { // 确保生成dropdown之前存在Page
                 app.pages.push({ type: 'page', children: [] })
             }
             let iPage = app.pages.length - 1 // 最后一个Page的index
-            app.pages[iPage].children.push({ type: bag.value[0], value: bag.value, children: [] })
+            app.pages[iPage].children.push({ type: bag.value.mode, value: bag.value, children: [] })
             update()
         }
     } else if (bag.type == 'clear') { // 清除所有内容
@@ -464,7 +464,7 @@ let app = {
     result: '',
     load_text: '',
     pages: tmp,
-    mode: ['default']
+    mode: { mode: 'default' }
 }
 // var app = {
 //     isConnected: false,

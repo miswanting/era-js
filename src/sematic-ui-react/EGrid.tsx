@@ -27,14 +27,14 @@ export default class EGrid extends React.Component<{ data: any }, {}> {
             }
             rows[rows.length - 1][rows[rows.length - 1].length - 1].push(item)
         }
-        function tab(props) {
+        function tab(props) {  // 换格子
             if (rows.length == 0) {
                 rows.push([])
             }
             if (rows[rows.length - 1].length == 0) {
                 rows[rows.length - 1].push([])
             }
-            if (rows[rows.length - 1].length == props.data.value[1]) {
+            if (rows[rows.length - 1].length == props.data.value.column) {
                 rows.push([])
             } else {
                 rows[rows.length - 1].push([])
@@ -74,11 +74,19 @@ export default class EGrid extends React.Component<{ data: any }, {}> {
                 var is = column.map((column, j) => {
                     return <>{column}</>
                 })
-                return <Grid.Column>{is}</Grid.Column>
+                if (this.props.data.value.compact) {
+                    return <Grid.Column style={{ padding: 0 }}>{is}</Grid.Column>
+                } else {
+                    return <Grid.Column>{is}</Grid.Column>
+                }
             })
-            return <Grid.Row>{cs}</Grid.Row>
+            if (this.props.data.value.compact) {
+                return <Grid.Row style={{ padding: 0 }}>{cs}</Grid.Row>
+            } else {
+                return <Grid.Row>{cs}</Grid.Row>
+            }
         })
-        return <Grid textAlign='center' columns={this.props.data.value[1]}>
+        return <Grid textAlign='center' columns={this.props.data.value.column} celled={this.props.data.value.celled}>
             {rs}
         </Grid>
     }

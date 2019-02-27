@@ -71,9 +71,14 @@ export default class EGrid extends React.Component<{ data: any }, {}> {
         }
         var rs = rows.map((row, i) => {
             var cs = row.map((column, j) => {
-                var is = column.map((column, j) => {
-                    return <>{column}</>
-                })
+                // console.log(column)
+                if (column.length == 0) {
+                    var is: any = <br />
+                } else {
+                    var is: any = column.map((column, j) => {
+                        return <>{column}</>
+                    })
+                }
                 if (this.props.data.value.compact) {
                     return <Grid.Column style={{ padding: 0 }}>{is}</Grid.Column>
                 } else {

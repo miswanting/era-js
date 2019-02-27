@@ -14,7 +14,7 @@ export default class Text extends React.Component<{ data: any }, {}> {
         }
 
         var text = this.props.data.text.split(' ').join('&nbsp;')
-        console.log(this.props.data.text, text);
+        // console.log(this.props.data.text, text);
         return <span style={text_style} dangerouslySetInnerHTML={{ __html: text }}>
             {/* {text} */}
         </span>

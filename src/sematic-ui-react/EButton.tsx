@@ -16,12 +16,20 @@ export default class EButton extends React.Component<{ data: any }, {}> {
     }
     render() {
         if (this.props.data.isLink) {
-            var e = <a
-                onClick={this.handleClick}
-                style={{ color: this.props.data.color, cursor: 'pointer' }}
-            >
-                {this.props.data.text}
-            </a>
+            if (this.props.data.disabled) {
+                var e = <a
+                    style={{ color: this.props.data.color, cursor: 'pointer' }}
+                >
+                    {this.props.data.text}
+                </a>
+            } else {
+                var e = <a
+                    onClick={this.handleClick}
+                    style={{ color: this.props.data.color, cursor: 'pointer' }}
+                >
+                    {this.props.data.text}
+                </a>
+            }
         } else {
             var e = <Button
                 content={this.props.data.text}

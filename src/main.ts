@@ -6,6 +6,7 @@ import * as child_process from 'child_process'
 let win: BrowserWindow = null
 let conn: Net.Socket = null
 var connected = false
+var game_file = 'EraLife.exe'
 // 启动前端
 startElectron()
 // 启动脚本
@@ -56,9 +57,9 @@ function startScript() {
     // if (fs.existsSync('Back.log')) {
     //     fs.unlinkSync('Back.log')
     // }
-    if (fs.existsSync('Game.exe')) {
+    if (fs.existsSync(game_file)) {
 
-        var game = child_process.execFile('Game.exe', { maxBuffer: 512 * 1024 })
+        var game = child_process.execFile(game_file, { maxBuffer: 512 * 1024 })
         // game.stdout.on('data', function (data) {
         //     fs.appendFile('Back.log', data.toString(), (err => { }))
         // })

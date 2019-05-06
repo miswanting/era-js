@@ -1,6 +1,6 @@
 import * as React from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Input } from "semantic-ui-react";
+import { Input, TextArea, Form } from "semantic-ui-react";
 
 /**
  * 行
@@ -21,10 +21,19 @@ export default class EInput extends React.Component<{ data: any }, { data: any }
         this.state.data.func(bag)
     }
     render() {
-        return <Input
-            defaultValue={this.props.data.default}
-            size='tiny'
-            onChange={this.onChange}
-        />
+        if (this.props.data.is_area) {
+            return <Form><TextArea
+                defaultValue={this.props.data.default}
+                placeholder={this.props.data.placeholder}
+                onChange={this.onChange}
+            /></Form>
+        } else {
+            return <Input
+                defaultValue={this.props.data.default}
+                placeholder={this.props.data.placeholder}
+                size='tiny'
+                onChange={this.onChange}
+            />
+        }
     }
 }

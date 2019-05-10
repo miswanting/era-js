@@ -5,6 +5,7 @@ import EButton from "./EButton";
 import EHeader from "./EHeader";
 import EProgress from "./EProgress";
 import ERate from "./ERate";
+import ECheck from './ECheck';
 import ERadio from "./ERadio";
 import EInput from "./EInput";
 import EDivider from "./EDivider";
@@ -57,6 +58,8 @@ export default class EGrid extends React.Component<{ data: any }, {}> {
                 addItem(<EProgress key={i} data={item.value} />)
             } else if (item.type == 'rate') {
                 addItem(<ERate key={i} data={item.value} />)
+            } else if (item.type == 'check') {
+                addItem(<ECheck key={i} data={item.value} />)
             } else if (item.type == 'radio') {
                 addItem(<ERadio key={i} data={item.value} />)
             } else if (item.type == 'input') {

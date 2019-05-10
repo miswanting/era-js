@@ -108,6 +108,7 @@ function parseBag(bag: any) {
         'h',
         'progress',
         'rate',
+        'check',
         'radio',
         'input',
         'divider',
@@ -131,6 +132,7 @@ function parseBag(bag: any) {
             if ([
                 'b',
                 'rate',
+                'check',
                 'radio',
                 'input',
                 'dropdown'

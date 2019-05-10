@@ -4,6 +4,7 @@ import EButton from "./EButton";
 import EHeader from "./EHeader";
 import EProgress from "./EProgress";
 import ERate from "./ERate";
+import ECheck from './ECheck';
 import ERadio from "./ERadio";
 import EInput from "./EInput";
 import EDivider from "./EDivider";
@@ -29,6 +30,8 @@ export default class Line extends React.Component<{ data: any, mode: any }, {}> 
                 return <EProgress key={index} data={item.value} />
             } else if (item.type == 'rate') {
                 return <ERate key={index} data={item.value} />
+            } else if (item.type == 'check') {
+                return <ECheck key={index} data={item.value} />
             } else if (item.type == 'radio') {
                 return <ERadio key={index} data={item.value} />
             } else if (item.type == 'input') {

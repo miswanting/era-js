@@ -9,12 +9,13 @@ export default class NetManager extends EventEmitter {
         up: null
     }
     init() { // 配置侦听器
+        this.data.back = new BackNode()
         this.data.back.on('recv', (bag: any) => {
             this.emit('recv', bag)
         })
     }
     start() { // 激活管理器
-        this.data.back = new BackNode()
+        this.data.back.start()
     }
     sendBack(bag) { // 向后端发送数据
         this.data.back.send(bag)
@@ -34,8 +35,10 @@ class BackNode extends EventEmitter { // 后端
         connection: null,
         connected: false
     }
-    constructor() {
-        super()
+    init() {
+
+    }
+    start() {
         this.data.server = Net.createServer(
             (conn) => {
                 this.data.connection = conn
@@ -44,7 +47,7 @@ class BackNode extends EventEmitter { // 后端
                 var bag = { 'type': 'connected', 'from': 'm', 'to': 'r' }
                 this.emit('recv', bag)
                 // sendToRenderer(bag)
-                this.data.connection.on('data', (data: String) => {
+                this.data.connection.on('data', (data: Buffer) => {
                     // 分离、解析后转发
                     let bags = data2bag(data)
                     for (let i = 0; i < bags.length; i++) {
@@ -75,7 +78,7 @@ class BackNode extends EventEmitter { // 后端
         }
     }
 }
-function data2bag(data: String) {
+function data2bag(data: Buffer) {
     let piece = data.toString().split('}{')
     for (let i = 0; i < piece.length; i++) {
         if (i != piece.length - 1) {

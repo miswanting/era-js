@@ -20,15 +20,16 @@ export default class FrontManager extends EventEmitter {
         this.data.back = new BackManager()
     }
     init() {
-        // this.data.window.on('ready') // 窗口加载完成
-        this.data.window.on('recv', (bag: any) => {
+        this.data.window.init()
+        this.data.net.init()
+        this.data.back.init()
+        this.data.window.on('recv', (bag: any) => { // 前端有数据返回
             if (bag.to == 'b') {
                 console.log('[DEBG]转发(B<=R)：', bag) // 生产环境下请注释掉
-                this.data.net.send(bag)
+                this.data.net.sendBack(bag)
                 return
             }
-        }) // 前端有数据返回
-        // this.data.window.on('send-back') // 窗口关闭
+        })
         // this.data.window.on('closed') // 窗口关闭
         this.data.net.on('recv', (bag: any) => {
             console.log('[DEBG]自后端接收：', bag) // 生产环境下请注释掉
@@ -40,16 +41,18 @@ export default class FrontManager extends EventEmitter {
         // this.data.net.on('send') // 需要发送消息
         // this.data.back.on('closed') // 后端崩溃
     }
-    start() {
-        this.data.window.start()
+    start(t) {
+        this.data.window.start(t)
         this.data.net.start()
         this.data.back.start(this.config.exec_file)
     }
 }
-
 let front: FrontManager = new FrontManager()
+function trick(bag) {
+    front.data.window.send(bag)
+}
 front.init()
-front.start()
+front.start(trick)
 // let win: BrowserWindow = null // 主窗口
 // let conn: Net.Socket = null // 接口
 // var connected = false // 当前连接状态

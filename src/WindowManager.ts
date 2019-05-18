@@ -3,9 +3,15 @@ import { app, Menu, ipcMain, BrowserWindow } from 'electron'
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer'
 export default class WindowManager extends EventEmitter {
     data = {
-        win: null
+        win: null,
+        menu: null
     }
-    start() {
+    constructor() {
+        super()
+    }
+    init() {
+    }
+    start(t) {
         app.on('ready', () => { // 启动程序
             this.data.win = new BrowserWindow({
                 width: 1024, height: 768,
@@ -15,8 +21,9 @@ export default class WindowManager extends EventEmitter {
             })
             this.data.win.loadFile('src/index.html')
             // win.webContents.openDevTools() // 生产环境下请注释掉
-            var menu = Menu.buildFromTemplate(this.get_menu())
-            Menu.setApplicationMenu(menu)
+            // var menu_tmp = this.get_menu.bind(this)
+            this.data.menu = Menu.buildFromTemplate(this.get_menu(this.data, t))
+            Menu.setApplicationMenu(this.data.menu)
             // Menu.setApplicationMenu(null)
             this.data.win.on('closed', () => {
                 this.data.win = null
@@ -35,12 +42,34 @@ export default class WindowManager extends EventEmitter {
             this.emit('recv', bag)
             app.quit()
         })
+        ipcMain.on('bag', (event: any, data: String) => {
+            let piece = data.toString().split('}{')
+            for (let i = 0; i < piece.length; i++) {
+                if (i != piece.length - 1) {
+                    piece[i] += '}'
+                }
+                if (i != 0) {
+                    piece[i] = '{' + piece[i]
+                }
+            }
+            for (let i = 0; i < piece.length; i++) {
+                console.log('[DEBG]自前端接收：', piece[i]); // 生产环境下请注释掉
+                let bag = JSON.parse(piece[i])
+                this.emit('recv', bag)
+            }
+        })
+    }
+    menu_click(bag) {
+        console.log(bag);
+        () => {
+            this.emit('recv', bag)
+        }
     }
     send(bag) {
         this.data.win.webContents.send('bag', JSON.stringify(bag))
     }
-    get_menu(): any {
-        return [
+    get_menu(data, t): any {
+        let tmp = [
             {
                 label: '游戏',
                 submenu: [
@@ -62,40 +91,40 @@ export default class WindowManager extends EventEmitter {
                         label: '头像编辑器',
                         id: 'avantar-editor',
                         type: 'checkbox',
-                        click: function () {
+                        click() {
                             let bag: any = {
                                 type: 'avantar_editor',
                                 value: Menu.getApplicationMenu().getMenuItemById('avantar-editor').checked,
                                 from: 'm',
                                 to: 'b'
                             }
-                            this.emit('send', bag)
+                            t(bag)
                         }
                     }, {
                         label: '地图编辑器',
                         id: 'map-editor',
                         type: 'checkbox',
-                        click: function () {
+                        click() {
                             let bag: any = {
                                 type: 'map_editor',
                                 value: Menu.getApplicationMenu().getMenuItemById('map-editor').checked,
                                 from: 'm',
                                 to: 'b'
                             }
-                            this.emit('send', bag)
+                            t(bag)
                         }
                     }, {
                         label: '图形化代码编辑器',
                         id: 'code-editor',
                         type: 'checkbox',
-                        click: function () {
+                        click() {
                             let bag: any = {
                                 type: 'code_editor',
                                 value: Menu.getApplicationMenu().getMenuItemById('code-editor').checked,
                                 from: 'm',
                                 to: 'b'
                             }
-                            this.emit('send', bag)
+                            t(bag)
                         }
                     }
                 ]
@@ -104,8 +133,9 @@ export default class WindowManager extends EventEmitter {
                 submenu: [
                     {
                         label: '前端调试器',
-                        click: function () {
-                            this.data.win.webContents.openDevTools()
+                        click() {
+                            console.log(this);
+                            data.win.webContents.openDevTools()
                         }
                     }
                 ]
@@ -155,5 +185,6 @@ export default class WindowManager extends EventEmitter {
                 ]
             }
         ]
+        return tmp
     }
 }

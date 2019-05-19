@@ -2,16 +2,13 @@ import { EventEmitter } from 'events'
 import { app, Menu, ipcMain, BrowserWindow } from 'electron'
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer'
 export default class WindowManager extends EventEmitter {
-    data = {
+    private data = {
         win: null,
         menu: null
     }
-    constructor() {
-        super()
+    public init() {
     }
-    init() {
-    }
-    start(t) {
+    public start(t) {
         app.on('ready', () => { // 启动程序
             this.data.win = new BrowserWindow({
                 width: 1024, height: 768,
@@ -65,10 +62,11 @@ export default class WindowManager extends EventEmitter {
             this.emit('recv', bag)
         }
     }
-    send(bag) {
+
+    public send(bag) {
         this.data.win.webContents.send('bag', JSON.stringify(bag))
     }
-    get_menu(data, t): any {
+    private get_menu = (): any => {
         let tmp = [
             {
                 label: '游戏',

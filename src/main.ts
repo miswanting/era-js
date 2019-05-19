@@ -5,10 +5,10 @@ import NetManager from './NetManager'
 import BackManager from './BackManager'
 
 export default class FrontManager extends EventEmitter {
-    config = {
+    private config = {
         exec_file: 'EraLife.exe'
     }
-    data = {
+    private data = {
         window: null, // 窗口管理器
         net: null, // 网络管理器
         back: null, // 进程管理器
@@ -19,7 +19,7 @@ export default class FrontManager extends EventEmitter {
         this.data.net = new NetManager()
         this.data.back = new BackManager()
     }
-    init() {
+    public init() {
         this.data.window.init()
         this.data.net.init()
         this.data.back.init()
@@ -41,7 +41,7 @@ export default class FrontManager extends EventEmitter {
         // this.data.net.on('send') // 需要发送消息
         // this.data.back.on('closed') // 后端崩溃
     }
-    start(t) {
+    public start(t) {
         this.data.window.start(t)
         this.data.net.start()
         this.data.back.start(this.config.exec_file)

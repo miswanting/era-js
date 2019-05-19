@@ -4,23 +4,23 @@ import { ipcMain } from 'electron'
 import { uptime } from "os";
 import { AnyARecord } from "dns";
 export default class NetManager extends EventEmitter {
-    data = {
+    private data = {
         back: null,
         up: null
     }
-    init() { // 配置侦听器
+    public init() { // 配置侦听器
         this.data.back = new BackNode()
         this.data.back.on('recv', (bag: any) => {
             this.emit('recv', bag)
         })
     }
-    start() { // 激活管理器
+    public start() { // 激活管理器
         this.data.back.start()
     }
-    sendBack(bag) { // 向后端发送数据
+    public sendBack(bag) { // 向后端发送数据
         this.data.back.send(bag)
     }
-    sendUp(bag) { // 向服务器发送数据
+    public sendUp(bag) { // 向服务器发送数据
 
     }
 }
@@ -30,15 +30,15 @@ class UpNode extends EventEmitter { // 多人游戏服务器
     }
 }
 class BackNode extends EventEmitter { // 后端
-    data = {
+    private data = {
         server: null,
         connection: null,
         connected: false
     }
-    init() {
+    public init() {
 
     }
-    start() {
+    public start() {
         this.data.server = Net.createServer(
             (conn) => {
                 this.data.connection = conn
@@ -71,7 +71,7 @@ class BackNode extends EventEmitter { // 后端
             console.log('[DEBG]服务器监听11994端口中…');
         });
     }
-    send(bag) { // 向后端发送
+    public send(bag) { // 向后端发送
         if (this.data.connected) {
             console.log('[DEBG]发送至后端：', bag) // 生产环境下请注释掉
             this.data.connection.write(JSON.stringify(bag))

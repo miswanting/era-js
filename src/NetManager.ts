@@ -2,7 +2,6 @@ import * as Net from "net"
 import { EventEmitter } from 'events'
 import { ipcMain } from 'electron'
 import { uptime } from "os";
-import { AnyARecord } from "dns";
 export default class NetManager extends EventEmitter {
     private data = {
         back: null,

@@ -66,7 +66,7 @@ export default class WindowManager extends EventEmitter {
     public send(bag) {
         this.data.win.webContents.send('bag', JSON.stringify(bag))
     }
-    private get_menu = (): any => {
+    private get_menu = (data, t): any => {
         let tmp = [
             {
                 label: '游戏',

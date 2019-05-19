@@ -287,7 +287,10 @@ export default class RendererManager extends EventEmitter {
                         }
                         var rate = simplex.noise2D(point.x * 0.003, point.y * 0.003)
                         rate = (rate + 1) / 2
-                        rate *= rate
+                        let maxDis = (window.innerWidth + window.innerHeight) / 2
+                        let relDis = Math.abs(point.x - window.innerWidth / 2) + Math.abs(point.y - window.innerHeight / 2)
+                        let disRate = 100 - (1 - relDis / maxDis) * 99
+                        rate = Math.pow(rate, 1 / 10 * disRate)
                         point.h = rate * 10000 - 2000
                         var tmp = delaunay.neighbors(i)
                         while (true) {

@@ -115,11 +115,13 @@ export default class RendererManager extends EventEmitter {
             if (bag.type == 'connected') {
                 console.log('[DEBG]后端已连接！')
                 app.isConnected = true
-                this.data.display.update(app)
+                update()
+                // this.data.display.update(app)
             } else if (bag.type == 'loaded') {
                 console.log('[DONE]后端数据加载完成！')
                 app.isLoaded = true
-                this.data.display.update(app)
+                update()
+                // this.data.display.update(app)
             } else if (bag.type == 'title') {
                 document.title = bag.value
             } else if (['connected'].indexOf(bag.type) != -1) { }
@@ -162,14 +164,16 @@ export default class RendererManager extends EventEmitter {
                     }
                     app.pages[lastPageIndex].children[lastBlockIndex].children.push(bag)
                 }
-                this.data.display.update(app)
+                update()
+                // this.data.display.update(app)
             }
             else if (bag.type == 'page') { // 页面
                 app.pages.push({ type: 'page', data: bag.value, children: [] })
                 for (let i = 0; i < app.pages.length - 5; i++) { // 超出5页就删除老的
                     app.pages.splice(0, 1)
                 }
-                this.data.display.update(app)
+                update()
+                // this.data.display.update(app)
             } else if (bag.type == 'mode') { // 改变显示模式
                 app.mode = bag.value
                 if (app.mode.mode == 'grid') {
@@ -178,7 +182,8 @@ export default class RendererManager extends EventEmitter {
                     }
                     let iPage = app.pages.length - 1 // 最后一个Page的index
                     app.pages[iPage].children.push({ type: bag.value.mode, value: bag.value, children: [] })
-                    this.data.display.update(app)
+                    update()
+                    // this.data.display.update(app)
                 }
             } else if (bag.type == 'clear') { // 清除所有内容
                 if (bag.value['num'] == 0) {
@@ -188,7 +193,8 @@ export default class RendererManager extends EventEmitter {
                         app.pages.pop()
                     }
                 }
-                this.data.display.update(app)
+                update()
+                // this.data.display.update(app)
             } else if (bag.type == 'exit') { // 清除所有内容
                 var window = remote.getCurrentWindow();
                 window.close();
@@ -209,19 +215,24 @@ export default class RendererManager extends EventEmitter {
                 var timer: NodeJS.Timer = setInterval(shakeOnce, 1)
             } else if (bag.type == 'result') { // 控制台返回结果
                 app.result = bag.value
-                this.data.display.update(app)
+                update()
+                // this.data.display.update(app)
             } else if (bag.type == 'load_text') { // 加载文本
                 app.load_text = bag.value
-                this.data.display.update(app)
+                update()
+                // this.data.display.update(app)
             } else if (bag.type == 'avantar_editor') { // 加载文本
                 app.avantar_editor = bag.value
-                this.data.display.update(app)
+                update()
+                // this.data.display.update(app)
             } else if (bag.type == 'map_editor') { // 加载文本
                 app.map_editor = bag.value
-                this.data.display.update(app)
+                update()
+                // this.data.display.update(app)
             } else if (bag.type == 'code_editor') { // 加载文本
                 app.code_editor = bag.value
-                this.data.display.update(app)
+                update()
+                // this.data.display.update(app)
             } else if (bag.type == 'generate_map') { // 加载文本
                 const [w, h] = remote.getCurrentWindow().getContentSize()
                 var points = []
@@ -311,6 +322,8 @@ export default class RendererManager extends EventEmitter {
             let cmd = cmd_text.split(' ')
             if (cmd[0] == 'help') {
                 app.result = 'test msg\n123'
+                update()
+                // this.data.display.update(app)
             } else {
                 let bag = {
                     type: 'CMD',
@@ -335,14 +348,16 @@ export default class RendererManager extends EventEmitter {
             pages: tmp,
             mode: { mode: 'default' }
         }
+        // this.data.display.update(app)
+        update()
+        function update() {
+            ReactDOM.render(
+                <App data={app} />,
+                document.getElementById('root')
+            )
+        }
     }
 }
-update()
-function update() {
-    ReactDOM.render(
-        <App data={app} />,
-        document.getElementById('root')
-    )
-}let renderer = new RendererManager()
+let renderer = new RendererManager()
 renderer.init()
 renderer.start()

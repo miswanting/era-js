@@ -8,7 +8,7 @@ export default class FrontManager extends EventEmitter {
     private config = {
         exec_file: 'EraLife.exe'
     }
-    private data = {
+    public data = {
         window: null, // 窗口管理器
         net: null, // 网络管理器
         back: null, // 进程管理器

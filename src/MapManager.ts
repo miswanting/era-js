@@ -14,7 +14,7 @@ export default class MapManager extends EventEmitter {
     }
     public genNewMap() {
         this.data.map.randomPoints()
-        this.data.map.relaxPoints()
+        this.data.map.relaxPoints(10)
     }
     public getRenderedMap() {
     }

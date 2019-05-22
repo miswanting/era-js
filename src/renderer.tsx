@@ -287,8 +287,8 @@ export default class RendererManager extends EventEmitter {
                         }
                         var rate = simplex.noise2D(point.x * 0.003, point.y * 0.003)
                         rate = (rate + 1) / 2
-                        let maxDis = (window.innerWidth + window.innerHeight) / 2
-                        let relDis = Math.abs(point.x - window.innerWidth / 2) + Math.abs(point.y - window.innerHeight / 2)
+                        let maxDis = (w + h) / 2
+                        let relDis = Math.abs(point.x - w / 2) + Math.abs(point.y - h / 2)
                         let disRate = 100 - (1 - relDis / maxDis) * 99
                         rate = Math.pow(rate, 1 / 10 * disRate)
                         point.h = rate * 10000 - 2000
@@ -303,6 +303,18 @@ export default class RendererManager extends EventEmitter {
                     }
                     return new_points
                 }
+                // randomPoints(5000)
+                // relaxPoints(10)
+                // var value = generateMap()
+                // let bag = {
+                //     type: 'MAP_GENERATED',
+                //     from: 'r',
+                //     to: 'b',
+                //     value: value
+                // }
+                // send(bag)
+                // // resolve(generateMap())
+
                 var generator = new Promise((resolve, reject) => {
                     setTimeout(function () {
                         randomPoints(5000)

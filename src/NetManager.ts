@@ -22,6 +22,9 @@ export default class NetManager extends EventEmitter {
     public sendUp(bag) { // 向服务器发送数据
 
     }
+    public close() {
+        this.data.back.close()
+    }
 }
 class UpNode extends EventEmitter { // 多人游戏服务器
     constructor() {
@@ -75,6 +78,9 @@ class BackNode extends EventEmitter { // 后端
             console.log('[DEBG]发送至后端：', bag) // 生产环境下请注释掉
             this.data.connection.write(JSON.stringify(bag))
         }
+    }
+    public close() {
+
     }
 }
 function data2bag(data: Buffer) {

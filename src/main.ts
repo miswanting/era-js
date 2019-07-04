@@ -41,6 +41,9 @@ export default class FrontManager extends EventEmitter {
         // this.data.net.on('send') // 需要发送消息
         // this.data.back.on('closed') // 后端崩溃
     }
+    public exe() {
+        this.data.back.start(this.config.exec_file)
+    }
     public start(t) {
         this.data.window.start(t)
         this.data.net.start()

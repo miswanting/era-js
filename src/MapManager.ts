@@ -111,7 +111,7 @@ class MapComp extends React.Component<{ data: any }, {}> {
         d3.select('svg').remove()
         document.getElementById('root').style.overflow = ''
     }
-    render() {
-        return <></>
-    }
+    // render() {
+    //     return <></>
+    // }
 }

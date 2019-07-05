@@ -27,6 +27,7 @@ export default class WindowManager extends EventEmitter {
                 console.log('[DEBG]检测到窗口关闭');
                 app.quit()
             })
+            this.emit('window-ready')
         })
         app.on('window-all-closed', () => { // 窗口已全关闭
             // 退出程序

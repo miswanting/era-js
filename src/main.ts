@@ -41,20 +41,28 @@ export default class FrontManager extends EventEmitter {
         // this.data.net.on('send') // 需要发送消息
         // this.data.back.on('closed') // 后端崩溃
     }
-    public exe() {
-        this.data.back.start(this.config.exec_file)
+    public startBack(t) {
+        console.log(t);
+        t.data.back.start(t.config.exec_file)
     }
     public start(t) {
+        // function delayStart() {
+        // setTimeout(this.startBack, 3000)
+        // }
+        this.data.window.on('window-ready', () => {
+            console.log(1);
+            setTimeout(this.startBack, 3000, this)
+        })
         this.data.window.start(t)
         this.data.net.start()
-        this.data.back.start(this.config.exec_file)
+        // this.data.back.start(this.config.exec_file)
     }
 }
 let front: FrontManager = new FrontManager()
 function trick(bag) {
     front.data.window.send(bag)
 }
-front.init()
+front.init() //
 front.start(trick)
 // let win: BrowserWindow = null // 主窗口
 // let conn: Net.Socket = null // 接口

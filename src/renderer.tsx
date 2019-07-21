@@ -5,7 +5,8 @@ import { remote, ipcRenderer } from "electron";
 // antd
 // import App from "./antd/App";
 // sematic-ui-react
-import App from "./sematic-ui-react/App";
+// import App from "./sematic-ui-react/App";
+import App from "./span-charm-react/App";
 import { Delaunay } from "d3-delaunay"
 import * as d3 from 'd3'
 import * as SimplexNoise from 'simplex-noise'

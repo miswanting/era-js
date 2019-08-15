@@ -13,11 +13,12 @@ export default class WindowManager extends EventEmitter {
             this.data.win = new BrowserWindow({
                 width: 1024, height: 768,
                 webPreferences: {
+                    nodeIntegration: true,
                     nodeIntegrationInWorker: true
                 }
             })
-            this.data.win.loadFile('src/index.html')
-            // win.webContents.openDevTools() // 生产环境下请注释掉
+            this.data.win.loadFile('./dist/index.html')
+            this.data.win.webContents.openDevTools() // 生产环境下请注释掉
             // var menu_tmp = this.get_menu.bind(this)
             this.data.menu = Menu.buildFromTemplate(this.get_menu(this.data, t))
             Menu.setApplicationMenu(this.data.menu)
@@ -58,7 +59,6 @@ export default class WindowManager extends EventEmitter {
         })
     }
     menu_click(bag) {
-        console.log(bag);
         () => {
             this.emit('recv', bag)
         }
@@ -133,7 +133,6 @@ export default class WindowManager extends EventEmitter {
                     {
                         label: '前端调试器',
                         click() {
-                            console.log(this);
                             data.win.webContents.openDevTools()
                         }
                     }

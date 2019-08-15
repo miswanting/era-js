@@ -31,7 +31,7 @@ export default class EInput extends React.Component<{ data: any }, { data: any }
             return <Input
                 defaultValue={this.props.data.default}
                 placeholder={this.props.data.placeholder}
-                size='tiny'
+                size='mini'
                 onChange={this.onChange}
             />
         }

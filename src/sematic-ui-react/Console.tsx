@@ -23,7 +23,7 @@ export default class Console extends React.Component<{ data: any }, { cmd: strin
         return <Modal open={true} size='tiny' centered={false}>
             <Modal.Content>
                 <Form onSubmit={this.handleSubmit}>
-                    <Input focus transparent fluid label='>' size='tiny' value={cmd} onChange={this.handleChange} />
+                    <Input focus transparent fluid label='>' size='mini' value={cmd} onChange={this.handleChange} />
                     <Divider />
                     <TextArea autoHeight value={this.props.data.result} />
                 </Form>

@@ -42,7 +42,6 @@ export default class FrontManager extends EventEmitter {
         // this.data.back.on('closed') // 后端崩溃
     }
     public startBack(t) {
-        console.log(t);
         t.data.back.start(t.config.exec_file)
     }
     public start(t) {
@@ -50,7 +49,6 @@ export default class FrontManager extends EventEmitter {
         // setTimeout(this.startBack, 3000)
         // }
         this.data.window.on('window-ready', () => {
-            console.log(1);
             setTimeout(this.startBack, 3000, this)
         })
         this.data.window.start(t)

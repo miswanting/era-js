@@ -1,11 +1,12 @@
 const path = require('path');
 const webpack = require('webpack')
+const CopyPlugin = require('copy-webpack-plugin');
 const mainConfig = {
     mode: "production",
     target: 'electron-main',
     entry: "./src/main.ts",
     output: {
-        path: path.resolve(__dirname, 'src/dist'),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'main.js'
     },
     resolve: {
@@ -14,13 +15,12 @@ const mainConfig = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
+                test: /\.ts$/,
                 use: "awesome-typescript-loader",
-                // include: path.resolve(__dirname, 'src')
             },
             {
                 enforce: "pre",
-                test: /\.jsx?$/,
+                test: /\.js$/,
                 loader: "source-map-loader"
             }
         ]
@@ -32,7 +32,7 @@ const rendererConfig = {
     target: 'electron-renderer',
     entry: "./src/renderer.tsx",
     output: {
-        path: path.resolve(__dirname, 'src/dist'),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'renderer.js'
     },
     resolve: {
@@ -69,6 +69,9 @@ const rendererConfig = {
         ]
     },
     plugins: [
+        new CopyPlugin([
+            'src/index.html'
+        ]),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'

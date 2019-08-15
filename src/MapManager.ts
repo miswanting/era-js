@@ -61,7 +61,7 @@ class MapComp extends React.Component<{ data: any }, {}> {
             }
         }
         function svgRender() {
-            var simplex = new SimplexNoise()
+            var simplex: any = new SimplexNoise()
             const delaunay = Delaunay.from(points);
             const voronoi = delaunay.voronoi([0, 0, window.innerWidth, window.innerHeight]);
             var zoom = d3.zoom().on('zoom', zoomed)

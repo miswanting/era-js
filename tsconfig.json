@@ -4,8 +4,10 @@
         "sourceMap": true,
         "noImplicitAny": false,
         "module": "commonjs",
-        "target": "es6",
-        "jsx": "react"
+        "target": "ESNext",
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        // "esModuleInterop": true
     },
     "include": [
         "./src/**/*"

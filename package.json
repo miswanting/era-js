@@ -48,7 +48,7 @@
     "d3": "latest",
     "d3-delaunay": "latest",
     "delaunator": "latest",
-    "electron": "5.0.8",
+    "electron": "6.0.2",
     "electron-builder": "latest",
     "electron-devtools-installer": "latest",
     "electron-packager": "latest",

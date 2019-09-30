@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Delaunay } from "d3-delaunay"
 import * as d3 from 'd3'
-import * as SimplexNoise from 'simplex-noise'
+import SimplexNoise from 'simplex-noise'
 // function generateMap(size: [number, number], n: number) {
 //     var points: [number, number][] = randomPoints(size, n) // 随机点
 //     points = relaxPoints(points, 10, size) // 分散点

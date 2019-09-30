@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events'
 
-import WindowManager from './WindowManager'
-import NetManager from './NetManager'
-import BackManager from './BackManager'
+import WindowManager from './managers/WindowManager'
+import NetManager from './managers/NetManager'
+import BackManager from './managers/BackManager'
 
 export default class FrontManager extends EventEmitter {
     private config = {

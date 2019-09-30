@@ -2,7 +2,7 @@ import { EventEmitter } from 'events'
 
 import { Delaunay } from "d3-delaunay"
 import * as d3 from 'd3'
-import * as SimplexNoise from 'simplex-noise'
+import SimplexNoise from 'simplex-noise';
 import * as React from 'react'
 
 export default class MapManager extends EventEmitter {

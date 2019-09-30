@@ -9,7 +9,7 @@ import ECheck from './ECheck';
 import ERadio from "./ERadio";
 import EInput from "./EInput";
 import EDivider from "./EDivider";
-import EChart from "./EChart";
+// import EChart from "./EChart";
 import EDropdown from './EDropdown';
 
 /**
@@ -67,7 +67,7 @@ export default class EGrid extends React.Component<{ data: any }, {}> {
             } else if (item.type == 'divider') {
                 addItem(<EDivider key={i} data={item.value} />)
             } else if (item.type == 'chart') {
-                addItem(<EChart key={i} data={item.value} />)
+                // addItem(<EChart key={i} data={item.value} />)
             } else if (item.type == 'dropdown') {
                 addItem(<EDropdown key={i} data={item.value} />)
             }

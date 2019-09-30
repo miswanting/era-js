@@ -3,7 +3,7 @@ import 'semantic-ui-css/semantic.min.css'
 import Xcover from './Xcover'
 import Console from './Console'
 import PageList from './PageList'
-import Code from './Code';
+// import Code from './Code';
 import Map from './Map'
 /**
  * 窗口
@@ -21,7 +21,7 @@ export default class App extends React.Component<{ data: any }, {}> {
         } else if (this.props.data.map_editor) {
             display_item.push(<Map data={this.props.data} />)
         } else if (this.props.data.code_editor) {
-            display_item.push(<Code data={this.props.data} />)
+            // display_item.push(<Code data={this.props.data} />)
         } else if (!this.props.data.isLoaded) {
             display_item.push(<Xcover data={this.props.data} />)
         } else {

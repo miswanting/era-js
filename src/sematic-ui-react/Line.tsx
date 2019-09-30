@@ -8,7 +8,7 @@ import ECheck from './ECheck';
 import ERadio from "./ERadio";
 import EInput from "./EInput";
 import EDivider from "./EDivider";
-import EChart from "./EChart";
+// import EChart from "./EChart";
 import EDropdown from './EDropdown';
 
 /**
@@ -39,7 +39,7 @@ export default class Line extends React.Component<{ data: any, mode: any }, {}> 
             } else if (item.type == 'divider') {
                 return <EDivider key={index} data={item.value} />
             } else if (item.type == 'chart') {
-                return <EChart key={index} data={item.value} />
+                // return <EChart key={index} data={item.value} />
             } else if (item.type == 'dropdown') {
                 return <EDropdown key={index} data={item.value} />
             }

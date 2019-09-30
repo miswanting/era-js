@@ -4,7 +4,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { EventEmitter } from 'events'
-import App from "./sematic-ui-react/App";
+import App from "../sematic-ui-react/App";
 import * as d3 from 'd3'
 import * as SimplexNoise from 'simplex-noise'
 

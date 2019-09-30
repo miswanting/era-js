@@ -15,10 +15,11 @@ export default class WindowManager extends EventEmitter {
     }
     public init() { }
     public start() {
-        installExtension(REACT_DEVELOPER_TOOLS)
-            .then((name) => console.log(`Added Extension:  ${name}`))
-            .catch((err) => console.log('An error occurred: ', err));
         app.on('ready', () => { // 启动程序
+            // BrowserWindow.addDevToolsExtension('C:\\Users\\HYH\\AppData\\Local\\Vivaldi\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\4.0.6_0')
+            installExtension(REACT_DEVELOPER_TOOLS)
+                .then((name) => console.log(`添加扩展：${name}`))
+                .catch((err) => console.log('添加扩展错误：', err));
             this.data.win = new BrowserWindow({
                 width: 1024, height: 768,
                 webPreferences: {

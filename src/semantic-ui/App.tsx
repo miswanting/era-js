@@ -1,4 +1,5 @@
 import 'semantic-ui-css/semantic.min.css'
+import '../normal.sass'
 
 import React, { useState } from 'react';
 import { Splash } from "./Splash"
@@ -15,8 +16,12 @@ export default function App(props: any) {
         document.body.style.backgroundColor = "#1b1c1d"
         return (
             <>
-                <Header data={data} style={style} />
-                <Console data={data} style={style} />
+                <div>
+                    <Header data={data} style={style} />
+                </div>
+                <div style={{ flexGrow: 1, overflowX: "hidden" }}>
+                    <Console data={data} style={style} />
+                </div>
             </>
         );
     } else if (!data.isLoaded) { // 加载界面
@@ -28,8 +33,12 @@ export default function App(props: any) {
         document.body.style.backgroundColor = "#fff"
         return (
             <>
-                <Header data={data} style={style} />
-                <Game data={data} style={style} />
+                <div>
+                    <Header data={data} style={style} />
+                </div>
+                <div style={{ flexGrow: 1, overflowX: "hidden" }}>
+                    <Game data={data} style={style} />
+                </div>
             </>
         );
     }

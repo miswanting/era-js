@@ -10,3 +10,10 @@ export function Game(props: any) {
         </>
     );
 }
+function Segment(props: any) {
+    const [data, setData] = useState(props.data);
+    const [style, setStyle] = useState(props.style);
+    return (
+        <div></div>
+    )
+}

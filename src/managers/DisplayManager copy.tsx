@@ -2,8 +2,6 @@ import { EventEmitter } from 'events'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import App from "../semantic-ui-react/App";
-import * as d3 from 'd3'
-import SimplexNoise from 'simplex-noise'
 
 /**
  * 显示管理器

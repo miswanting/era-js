@@ -1,6 +1,38 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { Item } from './Inline'
+
+export function Main(props: any) {
+    const [data, setData] = useState(props.data);
+    const [style, setStyle] = useState(props.style);
+    useEffect(() => {
+        let e = document.getElementsByClassName('container')[0]
+        e.scrollTop = e.scrollHeight;
+    });
+    let pages = []
+    for (let i = 0; i < data.pages.children.length; i++) {
+        const page = data.pages.children[i];
+        pages.push(<Section data={page} key={Math.random()}></Section>)
+    }
+    return (
+        <main className="container">
+            {pages}
+        </main>
+    );
+}
+function Section(props: any) {
+    const [data, setData] = useState(props.data);
+    const [style, setStyle] = useState(props.style);
+    let blocks = []
+    for (let i = 0; i < data.children.length; i++) {
+        const block = data.children[i];
+        blocks.push(<Block data={block} key={i}></Block>)
+    }
+    return (
+        <section className="page">
+            {blocks}
+        </section>
+    )
+}
 
 function Block(props: any) {
     const [data, setData] = useState(props.data);

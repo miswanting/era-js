@@ -5,7 +5,7 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "npx webpack",
-    "debug": "npx electron ."
+    "debug": "chcp 65001 && npx electron ."
   },
   "repository": {
     "type": "git",

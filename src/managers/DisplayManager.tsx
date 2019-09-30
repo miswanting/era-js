@@ -3,10 +3,11 @@ import { remote, ipcRenderer } from 'electron';
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as d3 from 'd3'
-import SimplexNoise from 'simplex-noise'
 import { Delaunay } from "d3-delaunay"
+import SimplexNoise from 'simplex-noise'
 // 前端选择
-import App from "../sematic-ui-react/App"; // sematic-ui-react
+import App from "../semantic-ui/App"; // sematic-ui-react
+// import App from "../semantic-ui-react/App"; // sematic-ui-react
 // import App from "../span-charm-react/App"; // span-charm-react
 
 /**
@@ -19,6 +20,7 @@ export default class DisplayManager extends EventEmitter {
         title: 'Era.js',
         isConnected: false,
         isLoaded: false,
+        isConsole: false,
         mode: { mode: 'default' },
         pages: { // 游戏界面
             children: []
@@ -265,6 +267,10 @@ export default class DisplayManager extends EventEmitter {
         })
         window.addEventListener("keyup", (e) => {
             console.log('[DEBG]键盘抬起：', e.key);
+            if (e.key == '`') {
+                this.data.isConsole = !this.data.isConsole
+                this.update()
+            }
         })
         this.update()
     }

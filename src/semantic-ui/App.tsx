@@ -1,14 +1,25 @@
 import 'semantic-ui-css/semantic.min.css'
-import '../normal.sass'
+import './bias.sass'
 
 import React, { useState } from 'react';
 import { Splash } from "./Splash"
 import { Header } from "./Header";
 import { Console } from "./Console"
 import { Game } from "./Game";
+
 // 初始模式：Splash
 // 游戏模式：Header + Game
 // 终端模式：Header + Console
+// 头像模式：Header + Avantar
+// 地图模式：Header + Map
+// 代码模式：Header + Code
+
+/**
+ * 解析抽象组件树(ACT, Abstrac Component Tree)
+ * 
+ * 根据不同的应用状态管理界面
+ * @param props data, style
+ */
 export default function App(props: any) {
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
@@ -24,12 +35,12 @@ export default function App(props: any) {
                 </div>
             </>
         );
-    } else if (!data.isLoaded) { // 加载界面
+    } else if (!data.isLoaded) { // 加载Loading界面
         document.body.style.backgroundColor = "#fff"
         return (
             <Splash data={data} style={style} />
         );
-    } else { // 加载界面
+    } else { // 加载游戏主界面
         document.body.style.backgroundColor = "#fff"
         return (
             <>

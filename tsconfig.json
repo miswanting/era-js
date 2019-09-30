@@ -6,8 +6,8 @@
         "module": "commonjs",
         "target": "ESNext",
         "jsx": "react",
-        "allowSyntheticDefaultImports": true,
-        // "esModuleInterop": true
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true
     },
     "include": [
         "./src/**/*"

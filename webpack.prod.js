@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack')
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 const mainConfig = {
     mode: "production",
     target: 'electron-main',
@@ -15,12 +17,12 @@ const mainConfig = {
     module: {
         rules: [
             {
-                test: /\.ts$/,
-                use: "awesome-typescript-loader",
+                test: /\.tsx?$/,
+                use: "ts-loader",
             },
             {
                 enforce: "pre",
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 loader: "source-map-loader"
             }
         ]
@@ -42,12 +44,20 @@ const rendererConfig = {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: "awesome-typescript-loader"
+                use: "ts-loader"
             },
             {
                 enforce: "pre",
                 test: /\.jsx?$/,
                 use: "source-map-loader"
+            },
+            {
+                test: /\.sass$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    "sass-loader"
+                ]
             },
             {
                 test: /\.css$/,
@@ -59,12 +69,10 @@ const rendererConfig = {
             },
             {
                 test: /\.(png|jpg|gif)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {}
-                    }
-                ]
+                use: [{
+                    loader: 'file-loader',
+                    options: {}
+                }]
             }
         ]
     },
@@ -72,9 +80,11 @@ const rendererConfig = {
         new CopyPlugin([
             'src/index.html'
         ]),
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery'
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: "[name].css",
+            chunkFilename: "[id].css"
         })
     ]
 };

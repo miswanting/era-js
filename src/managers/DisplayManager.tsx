@@ -100,7 +100,7 @@ export default class DisplayManager extends EventEmitter {
         else if (bag.type == 'page') { // 页面
             this.data.pages.children.push({ type: 'page', data: bag.value, children: [] })
             console.log(1, this.data.pages.children);
-            for (let i = 0; i < this.data.pages.children.length - 10; i++) { // 超出5页就删除老的
+            for (let i = 0; i < this.data.pages.children.length - 5; i++) { // 超出5页就删除老的
                 this.data.pages.children.splice(0, 1)
             }
             console.log(1, this.data.pages.children);

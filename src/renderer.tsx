@@ -41,7 +41,7 @@ export default class RendererManager extends EventEmitter {
     public push() {
     }
     public send(bag: Object) {
-        console.log('[DEBG]发送：', JSON.stringify(bag)); // 生产环境下请注释掉
+        // console.log('[DEBG]发送：', JSON.stringify(bag)); // 生产环境下请注释掉
         ipcRenderer.send('bag', JSON.stringify(bag))
     }
     private parseBag(bag: any) {

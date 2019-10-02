@@ -78,7 +78,7 @@ class BackNode extends EventEmitter { // 后端
     }
     public send(bag) { // 向后端发送
         if (this.data.connected) {
-            console.log('[DEBG]发送至后端：', bag) // 生产环境下请注释掉
+            // console.log('[DEBG]发送至后端：', bag) // 生产环境下请注释掉
             this.data.connection.write(JSON.stringify(bag))
         }
     }

@@ -59,7 +59,7 @@ export default class WindowManager extends EventEmitter {
                 }
             }
             for (let i = 0; i < piece.length; i++) {
-                console.log('[DEBG]自前端接收：', piece[i]); // 生产环境下请注释掉
+                // console.log('[DEBG]自前端接收：', piece[i]); // 生产环境下请注释掉
                 let bag = JSON.parse(piece[i])
                 this.emit('RECV_FROM_RENDERER', bag)
             }

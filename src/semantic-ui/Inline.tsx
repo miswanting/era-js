@@ -78,7 +78,6 @@ export function Text(props: any) {
 export function EHeader(props: any) {
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
-    console.log(data);
 
     let header_style = { display: 'inline-grid' }
     if (data.value.color != 'default') {
@@ -96,7 +95,13 @@ export function Link(props: any) {
     const [style, setStyle] = useState(props.style);
     // 事件处理
     function click() {
-        console.log("Clicked!");
+        let bag = {
+            type: 'BUTTON_CLICK',
+            from: 'r',
+            to: 'b',
+            hash: data.value.hash
+        }
+        data.value.func(bag)
     }
     // 输出
     return (
@@ -127,7 +132,7 @@ export function EButton(props: any) {
             </a>
         } else {
             var e = <a
-                onClick={this.handleClick}
+                onClick={click}
                 style={{ color: data.value.color, cursor: 'pointer' }}
             >
                 {data.value.text}

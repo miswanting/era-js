@@ -39,7 +39,7 @@ export default class DisplayManager extends EventEmitter {
     }
     public init() { }
     public push(bag: any) {
-        console.log(bag);
+        // console.log(bag);
         if (bag.type == 'connected') {
             console.log('[DEBG]后端已连接！')
             this.data.isConnected = true
@@ -99,11 +99,9 @@ export default class DisplayManager extends EventEmitter {
         }
         else if (bag.type == 'page') { // 页面
             this.data.pages.children.push({ type: 'page', data: bag.value, children: [] })
-            console.log(1, this.data.pages.children);
             for (let i = 0; i < this.data.pages.children.length - 5; i++) { // 超出5页就删除老的
                 this.data.pages.children.splice(0, 1)
             }
-            console.log(1, this.data.pages.children);
             this.update()
         } else if (bag.type == 'mode') { // 改变显示模式
             this.data.mode = bag.value
@@ -286,7 +284,7 @@ export default class DisplayManager extends EventEmitter {
     }
     public send(bag: any) {
         let msg = JSON.stringify(bag)
-        console.log('[DEBG]发送：', msg); // 生产环境下请注释掉
+        // console.log('[DEBG]发送：', msg); // 生产环境下请注释掉
         ipcRenderer.send('bag', msg)
     }
 }

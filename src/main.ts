@@ -29,16 +29,16 @@ export default class FrontManager extends EventEmitter {
         this.data.window.start()
         this.data.window.on('RECV_FROM_RENDERER', (bag: any) => { // 前端有数据返回
             if (bag.to == 'b') {
-                console.log('[DEBG]转发(B<=R)：', bag) // 生产环境下请注释掉
+                // console.log('[DEBG]转发(B<=R)：', bag) // 生产环境下请注释掉
                 this.data.net.sendBack(bag)
                 return
             }
         })
         this.data.net.connect('back')
         this.data.net.on('RECV_FROM_BACK', (bag: any) => { // 收到后端消息
-            console.log('[DEBG]自后端接收：', bag) // 生产环境下请注释掉
+            // console.log('[DEBG]自后端接收：', bag) // 生产环境下请注释掉
             if (bag.to == 'r') {
-                console.log('[DEBG]转发(B=>R)：', bag) // 生产环境下请注释掉
+                // console.log('[DEBG]转发(B=>R)：', bag) // 生产环境下请注释掉
                 this.data.window.send(bag)
             }
         })

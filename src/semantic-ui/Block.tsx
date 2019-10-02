@@ -76,19 +76,19 @@ function EGrid(props: any) {
                 is = <br />
             } else {
                 is = column.map((item, k) => {
-                    return <Inline data={item}></Inline>
+                    return <Inline key={k} data={item}></Inline>
                 })
             }
             if (data.value.compact) {
-                return <Grid.Column style={{ padding: 0 }}>{is}</Grid.Column>
+                return <Grid.Column key={j} style={{ padding: 0 }}>{is}</Grid.Column>
             } else {
-                return <Grid.Column>{is}</Grid.Column>
+                return <Grid.Column key={j}>{is}</Grid.Column>
             }
         })
         if (data.value.compact) {
-            return <Grid.Row style={{ padding: 0 }}>{cs}</Grid.Row>
+            return <Grid.Row key={i} style={{ padding: 0 }}>{cs}</Grid.Row>
         } else {
-            return <Grid.Row>{cs}</Grid.Row>
+            return <Grid.Row key={i}>{cs}</Grid.Row>
         }
     })
     return (

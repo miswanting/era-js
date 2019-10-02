@@ -21,6 +21,7 @@ export default class DisplayManager extends EventEmitter {
         isConnected: false,
         isLoaded: false,
         isConsole: false,
+        displayMode: 'game',
         mode: { mode: 'default' },
         pages: { // 游戏界面
             children: []
@@ -267,8 +268,11 @@ export default class DisplayManager extends EventEmitter {
         })
         window.addEventListener("keyup", (e) => {
             console.log('[DEBG]键盘抬起：', e.key);
-            if (e.key == '`') {
-                this.data.isConsole = !this.data.isConsole
+            if (!this.data.isConsole && e.key == '`') {
+                this.data.isConsole = true
+                this.update()
+            } else if (this.data.isConsole && e.keyCode == 27) {
+                this.data.isConsole = false
                 this.update()
             }
         })

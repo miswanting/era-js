@@ -35,7 +35,7 @@ export default function App(props: any) {
                 </div>
             </>
         );
-    } else if (!data.isLoaded) { // 加载Loading界面
+    } else if (!data.isLoaded) { // Splash界面
         document.body.style.backgroundColor = "#fff"
         return (
             <Splash data={data} style={style} />
@@ -47,8 +47,10 @@ export default function App(props: any) {
                 <div>
                     <Header data={data} style={style} />
                 </div>
-                <div style={{ flexGrow: 1, overflowX: "hidden" }}>
-                    <Game data={data} style={style} />
+                <div id={'pagelist'} style={{ flexGrow: 1, overflowX: "hidden" }}>
+                    <div className={'ui bottom aligned row padded grid'} style={{ height: 100 + '%', display: 'grid' }}>
+                        <Game data={data} style={style} />
+                    </div>
                 </div>
             </>
         );

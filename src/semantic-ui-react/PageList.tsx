@@ -1,10 +1,10 @@
 import * as React from 'react'
 import Page from "./Page";
 import { Grid, GridRow } from 'semantic-ui-react'
+
 /**
  * 页面列表（较长）
  */
-
 export default class PageList extends React.Component<{ data: any }, {}> {
     constructor(props: any) {
         super(props);

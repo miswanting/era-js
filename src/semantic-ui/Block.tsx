@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Grid } from "semantic-ui-react";
 
-import { Item } from './Inline'
+import { Inline } from './Inline'
 
-function Block(props: any) {
+export function Block(props: any) {
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
     if (data.type == 'line') {
@@ -11,7 +12,7 @@ function Block(props: any) {
         )
     } else if (data.type == 'grid') {
         return (
-            <Grid data={data}></Grid>
+            <EGrid data={data}></EGrid>
         )
     }
 }
@@ -24,14 +25,14 @@ function Line(props: any) {
         )
     }
     let items = data.children.map((item: any, i: number) => {
-        return <Item data={item} keys={i}></Item>
+        return <Inline data={item} keys={i}></Inline>
     })
     return (
         <div className="line">{items}</div>
     )
 }
 
-function Grid(props: any) {
+function EGrid(props: any) {
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
     let rows = []
@@ -75,15 +76,25 @@ function Grid(props: any) {
                 is = <br />
             } else {
                 is = column.map((item, k) => {
-                    return <Item data={item}></Item>
+                    return <Inline data={item}></Inline>
                 })
             }
-            return <span className="column">{is}</span>
+            if (data.value.compact) {
+                return <Grid.Column style={{ padding: 0 }}>{is}</Grid.Column>
+            } else {
+                return <Grid.Column>{is}</Grid.Column>
+            }
         })
-        return <div className="row">{cs}</div>
+        if (data.value.compact) {
+            return <Grid.Row style={{ padding: 0 }}>{cs}</Grid.Row>
+        } else {
+            return <Grid.Row>{cs}</Grid.Row>
+        }
     })
     return (
-        <div className="grid">{rs}</div>
+        <Grid textAlign='center' columns={data.value.column} celled={data.value.celled}>
+            {rs}
+        </Grid>
     )
 }
 function LCR(props: any) {
@@ -130,7 +141,7 @@ function LCR(props: any) {
                 is = <br />
             } else {
                 is = column.map((item, k) => {
-                    return <Item data={item}></Item>
+                    return <Inline data={item}></Inline>
                 })
             }
             return <span className="column">{is}</span>

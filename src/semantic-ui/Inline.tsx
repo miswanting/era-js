@@ -215,7 +215,7 @@ export function ERadio(props: any) {
     // 初始化
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
-    let click = (e: any, d: any) => {
+    function click(e: any, d: any) {
         let bag = {
             type: 'RADIO_CLICK',
             from: 'r',
@@ -225,19 +225,37 @@ export function ERadio(props: any) {
         }
         data.value.func(bag)
         for (let i = 0; i < data.value.list.length; i++) {
-            if (data.label == data.value.list[i]) {
-                var tmp = data
+            console.log(JSON.stringify([d.label, data.value.list[i], data.value]));
+            if (d.label == data.value.list[i]) {
+                let tmp = data
                 tmp.value.default = i
                 setData(tmp)
+                console.log(JSON.stringify(data.value));
             }
         }
     }
-    let radio_group = data.value.list.map((radio: any, index: number) => {
-        return <Radio label={radio} checked={index == data.default} onChange={click} style={{ marginRight: 20 + 'px' }} />
+    let seed = Math.random().toString()
+    let radio_group = data.value.list.map((radio: any, i: number) => {
+        return <Radio
+            key={i}
+            label={radio}
+            // name={seed}
+            checked={i == data.value.default}
+            onChange={click}
+            style={{ marginRight: 20 + 'px' }} />
     })
+    console.log(JSON.stringify(radio_group));
     return (
-        <>{radio_group}</>
+        <>
+            {radio_group}
+        </>
     )
+    // let radio_group = data.value.list.map((radio: any, index: number) => {
+    //     return <Radio label={radio} checked={index == data.default} onChange={click} style={{ marginRight: 20 + 'px' }} />
+    // })
+    // return (
+    //     <>{radio_group}</>
+    // )
 }
 export function Rate(props: any) {
     // 初始化

@@ -4,11 +4,25 @@ export function Header(props: any) {
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
 
-    return (
-        <header>
-            <Navbar data={data} />
-        </header>
-    );
+    if (data.isConsole) {
+        return (
+            <header>
+                <Navbar data={data} />
+            </header>
+        )
+    } else if (!data.isLoaded) { // Splash界面
+        return (
+            <header>
+                <Navbar data={data} />
+            </header>
+        );
+    } else {
+        return (
+            <header>
+                <Navbar data={data} />
+            </header>
+        );
+    }
 }
 function Navbar(props: any) {
     const [data, setData] = useState(props.data);
@@ -53,7 +67,7 @@ function TitleBar(props: any) {
     const [style, setStyle] = useState(props.style);
 
     return (
-        <span className="title">{data}</span>
+        <span className="title">{data.title}</span>
     );
 }
 function SystemBar(props: any) {
@@ -77,7 +91,7 @@ function MenuBar(props: any) {
             <span className="menu">系统</span>
             <span className="menu">编辑</span>
             <span className="menu">显示</span>
-            <span className="menu">关于</span>
+            <span className="menu">帮助</span>
         </div>
     );
 }

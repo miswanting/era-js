@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Header, Popup, Button, Checkbox, Radio, Rating, Form, TextArea, Input, Dropdown } from "semantic-ui-react";
 
 export function Inline(props: any) {
@@ -225,26 +225,26 @@ export function ERadio(props: any) {
         }
         data.value.func(bag)
         for (let i = 0; i < data.value.list.length; i++) {
-            console.log(JSON.stringify([d.label, data.value.list[i], data.value]));
+            console.log(JSON.stringify(data.value.default));
             if (d.label == data.value.list[i]) {
                 let tmp = data
                 tmp.value.default = i
                 setData(tmp)
-                console.log(JSON.stringify(data.value));
+                console.log(JSON.stringify(data.value.default));
             }
         }
     }
     let seed = Math.random().toString()
     let radio_group = data.value.list.map((radio: any, i: number) => {
+        let seed = Math.random().toString()
         return <Radio
-            key={i}
+            key={seed}
             label={radio}
             // name={seed}
             checked={i == data.value.default}
             onChange={click}
             style={{ marginRight: 20 + 'px' }} />
     })
-    console.log(JSON.stringify(radio_group));
     return (
         <>
             {radio_group}

@@ -6,16 +6,10 @@ export default class WindowManager extends EventEmitter {
         win: null,
         menu: null
     }
-    constructor() {
-        super()
-        this.data = {
-            win: null,
-            menu: null
-        }
+    public init() {
     }
-    public init() { }
     public start() {
-        app.on('ready', () => { // 启动程序
+        app.on('ready', () => {
             // BrowserWindow.addDevToolsExtension('C:\\Users\\HYH\\AppData\\Local\\Vivaldi\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\4.0.6_0')
             installExtension(REACT_DEVELOPER_TOOLS)
                 .then((name) => console.log(`添加扩展：${name}`))
@@ -35,7 +29,7 @@ export default class WindowManager extends EventEmitter {
                 console.log('[DEBG]检测到窗口关闭');
                 app.quit()
             })
-            this.emit('window-ready')
+            // this.emit('window-ready')
         })
         app.on('window-all-closed', () => { // 窗口已全关闭
             // 退出程序
@@ -64,6 +58,7 @@ export default class WindowManager extends EventEmitter {
                 this.emit('RECV_FROM_RENDERER', bag)
             }
         })
+        return
     }
     public send(bag) {
         this.data.win.webContents.send('bag', JSON.stringify(bag))

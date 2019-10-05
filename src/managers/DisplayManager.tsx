@@ -6,9 +6,9 @@ import * as d3 from 'd3'
 import { Delaunay } from "d3-delaunay"
 import SimplexNoise from 'simplex-noise'
 // 前端选择
-import App from "../semantic-ui/App"; // sematic-ui-react
+// import App from "../semantic-ui/App"; // sematic-ui-react
 // import App from "../semantic-ui-react/App"; // sematic-ui-react
-// import App from "../span-charm-react/App"; // span-charm-react
+import App from "../span-charm-react/App"; // span-charm-react
 
 /**
  * 显示管理器

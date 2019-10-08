@@ -8,7 +8,8 @@ import SimplexNoise from 'simplex-noise'
 // 前端选择
 // import App from "../semantic-ui/App"; // sematic-ui-react
 // import App from "../semantic-ui-react/App"; // sematic-ui-react
-import App from "../span-charm-react/App"; // span-charm-react
+// import App from "../span-charm-react/App"; // span-charm-react
+import App from "../editor-react/App"
 
 /**
  * 显示管理器
@@ -35,7 +36,7 @@ export default class DisplayManager extends EventEmitter {
         load_text: '',
         avantar_editor: '',
         map_editor: '',
-        code_editor: ''
+        code_editor: {}
     }
     public init() { }
     public push(bag: any) {

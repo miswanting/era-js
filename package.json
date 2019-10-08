@@ -29,6 +29,7 @@
     "@types/jquery": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "blockly": "latest",
     "copy-webpack-plugin": "latest",
     "css-loader": "latest",
     "d3": "latest",

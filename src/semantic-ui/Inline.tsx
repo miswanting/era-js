@@ -225,12 +225,8 @@ export function ERadio(props: any) {
         }
         data.value.func(bag)
         for (let i = 0; i < data.value.list.length; i++) {
-            console.log(JSON.stringify(data.value.default));
             if (d.label == data.value.list[i]) {
-                let tmp = data
-                tmp.value.default = i
-                setData(tmp)
-                console.log(JSON.stringify(data.value.default));
+                setData({ ...data, value: { ...data.value, default: i } })
             }
         }
     }

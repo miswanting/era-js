@@ -26,6 +26,10 @@ export function Item(props: any) {
         return (
             <Radio data={data} />
         )
+    } else if (['rate'].indexOf(data.type) != -1) {
+        return (
+            <Rate data={data} />
+        )
     } else {
         return (
             <div>{JSON.stringify(data)}</div>
@@ -104,13 +108,20 @@ export function Rate(props: any) {
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
     let itemList = []
-    for (let i = 0; i < data.item.length; i++) {
-        const element = data.item[i];
-        itemList.push(<span key={i} onClick={() => { click(element) }}>{element}</span>)
+    for (let i = 0; i < data.value.max; i++) {
+        if (i < data.value.now) {
+            itemList.push(<span key={i} onClick={() => { click(i) }}>★</span>)
+        } else {
+            itemList.push(<span key={i} onClick={() => { click(i) }}>☆</span>)
+        }
     }
     // 事件处理
-    function click(value: string) {
-        console.log(value);
+    function click(v: number) {
+        if (v + 1 == data.value.now) {
+            setData({ ...data, value: { ...data.value, now: 0 } })
+        } else {
+            setData({ ...data, value: { ...data.value, now: v + 1 } })
+        }
     }
     // 输出
     return (

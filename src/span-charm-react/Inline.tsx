@@ -78,13 +78,19 @@ export function Radio(props: any) {
     // 初始化
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
-    function click(e: any) {
-        console.log(e);
+    function click(v: any) {
+        setData({ ...data, value: { ...data.value, default: v } })
     }
     let itemList = data.value.list.map((item: any, i: number) => {
-        return <span className="item" onClick={click}>
-            {item}
-        </span>
+        if (data.value.default == i) {
+            return <span className="item active" onClick={() => click(i)}>
+                {item}
+            </span>
+        } else {
+            return <span className="item" onClick={() => click(i)}>
+                {item}
+            </span>
+        }
     })
     // 输出
     return (

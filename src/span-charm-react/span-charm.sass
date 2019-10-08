@@ -171,145 +171,145 @@ nav // 窗口头
         font-size: 0
     span
         font-size: $font-size
-        &.text
-            position: relative
-            div.popup
-                font-size: $font-size
-                position: absolute
-                visibility: hidden
-                text-align: center
-                display: inline-block
-                width: 120px
-                bottom: 100%
-                left: 50%
-                margin-left: -60px
-                background-color: dimgray
-            &:hover
-                div.popup
-                    visibility: visible
-        &.button
-            padding: 0
-            cursor: pointer
-            background-color: dimgray
-            border: none
-            color: white
-            text-align: center
-            position: relative
-            div.popup
-                font-size: $font-size
-                position: absolute
-                visibility: hidden
-                text-align: center
-                display: inline-block
-                width: 120px
-                bottom: 100%
-                left: 50%
-                margin-left: -60px
-                background-color: dimgray
-            &:hover
-                color: black
-                background-color: gainsboro
-                div.popup
-                    visibility: visible
-            &:active
-                color: black
-                background-color: white
+.text
+    position: relative
+    div.popup
+        font-size: $font-size
+        position: absolute
+        visibility: hidden
+        text-align: center
+        display: inline-block
+        width: 120px
+        bottom: 100%
+        left: 50%
+        margin-left: -60px
+        background-color: dimgray
+    &:hover
+        div.popup
+            visibility: visible
+.button
+    padding: 0
+    cursor: pointer
+    background-color: dimgray
+    border: none
+    color: white
+    text-align: center
+    position: relative
+    div.popup
+        font-size: $font-size
+        position: absolute
+        visibility: hidden
+        text-align: center
+        display: inline-block
+        width: 120px
+        bottom: 100%
+        left: 50%
+        margin-left: -60px
+        background-color: dimgray
+    &:hover
+        color: black
+        background-color: gainsboro
+        div.popup
+            visibility: visible
+    &:active
+        color: black
+        background-color: white
 
-        &.link
-            color: white
-            cursor: pointer
-            text-decoration: underline
-            position: relative
-            div.popup
-                font-size: $font-size
-                position: absolute
-                visibility: hidden
-                text-align: center
-                display: inline-block
-                width: 120px
-                bottom: 100%
-                left: 50%
-                margin-left: -60px
-                background-color: dimgray
+.link
+    color: white
+    cursor: pointer
+    text-decoration: underline
+    position: relative
+    div.popup
+        font-size: $font-size
+        position: absolute
+        visibility: hidden
+        text-align: center
+        display: inline-block
+        width: 120px
+        bottom: 100%
+        left: 50%
+        margin-left: -60px
+        background-color: dimgray
+    &:hover
+        color: black
+        text-decoration: none
+        background-color: gainsboro
+        div.popup
+            visibility: visible
+    &:active
+        color: black
+        background-color: white
+.check
+    cursor: pointer
+    // color: red
+    background-color: dimgray
+    &:hover
+        background-color: gray
+    &:active
+        background-color: darkgray
+    &.active
+        // color: green
+        color: black
+        background-color: lightgray
+        &:hover
+            background-color: gainsboro
+        &:active
+            background-color: white
+.progress
+    font-size: 0
+    background-color: dimgray
+    display: inline-block
+    width: 100px
+    position: relative
+    // top: 3px
+    // height: $line-height - 1
+    .bar
+        display: inline-block
+        width: 50%
+        height: 100%
+        background-color: silver
+        &:before
+            content: "\200b"
+
+.rate
+    cursor: pointer
+    background-color: dimgray // 基色
+    &:hover
+        .item
+            background-color: gray
             &:hover
-                color: black
-                text-decoration: none
-                background-color: gainsboro
-                div.popup
-                    visibility: visible
-            &:active
-                color: black
-                background-color: white
-        &.check
-            cursor: pointer
-            // color: red
-            background-color: dimgray
-            &:hover
-                background-color: gray
-            &:active
                 background-color: darkgray
             &.active
-                // color: green
                 color: black
                 background-color: lightgray
                 &:hover
                     background-color: gainsboro
+    &:active
+        .item
+            background-color: darkgray
+            &:active
+                background-color: silver
+            &.active
+                color: black
+                background-color: gainsboro
                 &:active
                     background-color: white
-        &.progress
-            font-size: 0
-            background-color: dimgray
-            display: inline-block
-            width: 100px
-            position: relative
-            // top: 3px
-            // height: $line-height - 1
-            .bar
-                display: inline-block
-                width: 50%
-                height: 100%
-                background-color: silver
-                &:before
-                    content: "\200b"
-
-        &.rate
-            cursor: pointer
-            background-color: dimgray // 基色
+    .active
+        color: black
+        background-color: silver // 基色
+.radio
+    cursor: pointer
+    background-color: dimgray
+    &:hover
+        background-color: gray
+    &:active
+        background-color: darkgray
+    .item
+        &.active
+            color: black
+            background-color: lightgray
             &:hover
-                .item
-                    background-color: gray
-                    &:hover
-                        background-color: darkgray
-                    &.active
-                        color: black
-                        background-color: lightgray
-                        &:hover
-                            background-color: gainsboro
+                background-color: gainsboro
             &:active
-                .item
-                    background-color: darkgray
-                    &:active
-                        background-color: silver
-                    &.active
-                        color: black
-                        background-color: gainsboro
-                        &:active
-                            background-color: white
-            .active
-                color: black
-                background-color: silver // 基色
-        &.radio
-            cursor: pointer
-            background-color: dimgray
-            &:hover
-                background-color: gray
-            &:active
-                background-color: darkgray
-            .item
-                &.active
-                    color: black
-                    background-color: lightgray
-                    &:hover
-                        background-color: gainsboro
-                    &:active
-                        background-color: white
+                background-color: white

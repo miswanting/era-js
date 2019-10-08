@@ -5,6 +5,7 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "npx webpack",
+    "release": "npx webpack --config webpack.prod.js",
     "debug-win": "chcp 65001 && npx electron .",
     "debug-linux": "npx electron ."
   },

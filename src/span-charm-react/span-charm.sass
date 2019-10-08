@@ -8,7 +8,7 @@ $gray_scale: [black,dimgray,gray,darkgray,silver,lightgray,gainsboro,white]
 // 激活（控件：我被按着，最小元素：我被指着）：gainsboro
 // 激活（最小元素：我被按着）：white
 $font-size: medium
-$line-height: 18px
+$line-height: 21px
 $show-border: false
 $hide-border: false
 
@@ -262,6 +262,8 @@ nav // 窗口头
     display: inline-block
     width: 100px
     position: relative
+    height: $line-height - 6
+    line-height: $line-height + 4
     // top: 3px
     // height: $line-height - 1
     .bar
@@ -300,16 +302,22 @@ nav // 窗口头
         background-color: silver // 基色
 .radio
     cursor: pointer
-    background-color: dimgray
     &:hover
-        background-color: gray
+        background-color: nth($gray_scale,4)
     &:active
-        background-color: darkgray
+        background-color: nth($gray_scale,5)
     .item
+        background-color: nth($gray_scale,3)
+        &:hover
+            color: black
+            background-color: nth($gray_scale,5)
+        &:active
+            color: black
+            background-color: nth($gray_scale,7)
         &.active
             color: black
-            background-color: lightgray
+            background-color: nth($gray_scale,5)
             &:hover
-                background-color: gainsboro
+                background-color: nth($gray_scale,6)
             &:active
-                background-color: white
+                background-color: nth($gray_scale,7)

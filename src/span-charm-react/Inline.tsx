@@ -22,6 +22,10 @@ export function Item(props: any) {
         return (
             <Input data={data}></Input>
         )
+    } else if (['radio'].indexOf(data.type) != -1) {
+        return (
+            <Radio data={data} />
+        )
     } else {
         return (
             <div>{JSON.stringify(data)}</div>
@@ -68,6 +72,25 @@ export function Button(props: any) {
     // 输出
     return (
         <span className="button" style={style} onClick={click}>{data.value.text}</span >
+    );
+}
+export function Radio(props: any) {
+    // 初始化
+    const [data, setData] = useState(props.data);
+    const [style, setStyle] = useState(props.style);
+    function click(e: any) {
+        console.log(e);
+    }
+    let itemList = data.value.list.map((item: any, i: number) => {
+        return <span className="item" onClick={click}>
+            {item}
+        </span>
+    })
+    // 输出
+    return (
+        <span className="radio" style={style}>
+            {itemList}
+        </span>
     );
 }
 export function Rate(props: any) {
@@ -133,7 +156,7 @@ export function Input(props: any) {
     return (
         <input type="text"
             onChange={change}>
-                {data.value.default}
-            </input>
+            {data.value.default}
+        </input>
     );
 }

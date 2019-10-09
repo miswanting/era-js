@@ -30,6 +30,10 @@ export function Item(props: any) {
         return (
             <Rate data={data} />
         )
+    } else if (['check'].indexOf(data.type) != -1) {
+        return (
+            <Check data={data} />
+        )
     } else {
         return (
             <div>{JSON.stringify(data)}</div>
@@ -185,14 +189,25 @@ export function Check(props: any) {
     // 初始化
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
-    let itemList = []
-    for (let i = 0; i < data.value.max; i++) {
-        if (i < data.value.now) {
-            itemList.push(<span key={i} onClick={() => { click(i) }}>★</span>)
-        } else {
-            itemList.push(<span key={i} onClick={() => { click(i) }}>☆</span>)
+
+    // 事件处理
+    function click() {
+        let bag = {
+            type: 'CHECK_CHANGE',
+            from: 'r',
+            to: 'b',
+            hash: data.value.hash,
+            value: !data.value.default
         }
+        data.value.func(bag)
+        setData({ ...data, value: { ...data.value, default: bag.value } })
     }
+    // 输出
+    return (
+        <span className={data.value.default ? "check active" : "check"} onClick={click} >{data.value.text}</span>
+    )
+}
+
     // 事件处理
     function click(v: number) {
         if (v + 1 == data.value.now) {

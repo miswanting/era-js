@@ -45,6 +45,10 @@ function Block(props: any) {
         return (
             <Grid data={data}></Grid>
         )
+    } else if (data.type == 'divider') {
+        return (
+            <Divider data={data} />
+        )
     }
 }
 function Line(props: any) {
@@ -171,5 +175,18 @@ function LCR(props: any) {
     })
     return (
         <div className="lcr">{rs}</div>
+    )
+}
+function Divider(props: any) {
+    const [data, setData] = useState(props.data);
+    const [style, setStyle] = useState(props.style);
+    console.log(data);
+
+    return (
+        <div className="divider">
+            <span className="breaker"><span></span></span>
+            <span className="text" >{data.value}</span>
+            <span className="breaker"><span></span></span>
+        </div >
     )
 }

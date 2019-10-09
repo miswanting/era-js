@@ -34,6 +34,10 @@ export function Item(props: any) {
         return (
             <Check data={data} />
         )
+    } else if (['dropdown'].indexOf(data.type) != -1) {
+        return (
+            <Dropdown data={data} />
+        )
     } else {
         return (
             <div>{JSON.stringify(data)}</div>
@@ -174,7 +178,7 @@ export function Input(props: any) {
             hash: data.value.hash,
             value: data['value']
         }
-        data.func(bag)
+        data.value.func(bag)
     }
     // 输出
     return (
@@ -208,16 +212,58 @@ export function Check(props: any) {
     )
 }
 
+/**
+ * 
+ * 单例：初始显示默认
+ * 点击显示列表
+ * 点击列表更换数据
+ * 多例：初始显示默认
+ * 点击显示列表
+ * 点击列表更换数据
+ * 点击删除按钮删除该项
+ * @param props 
+ */
+export function Dropdown(props: any) {
+    // 初始化
+    const [show, setShow] = useState(false)
+    const [data, setData] = useState(props.data);
+    const [style, setStyle] = useState(props.style);
+
     // 事件处理
-    function click(v: number) {
-        if (v + 1 == data.value.now) {
-            setData({ ...data, value: { ...data.value, now: 0 } })
-        } else {
-            setData({ ...data, value: { ...data.value, now: v + 1 } })
+    function clickList(i: number) {
+        let bag = {
+            type: 'DROPDOWN_CHANGE',
+            from: 'r',
+            to: 'b',
+            hash: data.value.hash,
+            value: null
         }
+        if (data.value.multiple) {
+
+        } else {
+            bag.value = i
+        }
+        data.value.func(bag)
+        setData({ ...data, value: { ...data.value, default: bag.value } })
+        setShow(!show)
     }
-    // 输出
-    return (
-        <span className="rate" style={style}>{itemList}</span>
-    );
+    function clickItem() {
+        setShow(!show)
+    }
+    if (data.value.multiple) {
+        console.log("该功能还没做！");
+    } else {
+        let items = data.value.options.map((item, i) => {
+            return <div onClick={() => { clickList(i) }} className="item">{item.text}</div>
+        })
+        let showText = data.value.options[data.value.default].text
+        return (
+            <span className="dropdown" >
+                <span onClick={() => { clickItem() }} className="item">{showText}↑</span>
+                <div className={show ? "list show" : "list"}>
+                    {items}
+                </div>
+            </span>
+        )
+    }
 }

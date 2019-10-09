@@ -66,7 +66,6 @@ export default class DisplayManager extends EventEmitter {
             'check',
             'radio',
             'input',
-            'divider',
             'chart',
             'dropdown'
         ].indexOf(bag.type) != -1) {
@@ -116,6 +115,14 @@ export default class DisplayManager extends EventEmitter {
                 this.update()
                 // this.data.display.update(app)
             }
+        } else if (bag.type == 'divider') { // 改变显示模式
+            this.data.mode = { mode: 'default' }
+            if (this.data.pages.children.length == 0) { // 确保生成dropdown之前存在Page
+                this.data.pages.children.push({ type: 'page', children: [] })
+            }
+            let iPage = this.data.pages.children.length - 1 // 最后一个Page的index
+            this.data.pages.children[iPage].children.push({ type: 'divider', value: bag.value, children: [] })
+            this.update()
         } else if (bag.type == 'clear') { // 清除所有内容
             if (bag.value['num'] == 0) {
                 this.data.pages.children = []

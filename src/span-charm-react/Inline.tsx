@@ -134,9 +134,12 @@ export function Progress(props: any) {
     const [style, setStyle] = useState(props.style);
     // 事件处理
     // 输出
+    let barWidth = data.value.length * data.value.now / data.value.max
+    let innerStyle = { width: barWidth }
+    let OuterStyle = { width: data.value.length + 'px' }
     return (
-        <span className="progress" style={style}>
-            <span className="bar" style={style}></span>
+        <span className="progress" style={OuterStyle}>
+            <span className="bar" style={innerStyle}></span>
         </span>
     );
 }
@@ -175,5 +178,31 @@ export function Input(props: any) {
             onChange={change}>
             {data.value.default}
         </input>
+    );
+}
+
+export function Check(props: any) {
+    // 初始化
+    const [data, setData] = useState(props.data);
+    const [style, setStyle] = useState(props.style);
+    let itemList = []
+    for (let i = 0; i < data.value.max; i++) {
+        if (i < data.value.now) {
+            itemList.push(<span key={i} onClick={() => { click(i) }}>★</span>)
+        } else {
+            itemList.push(<span key={i} onClick={() => { click(i) }}>☆</span>)
+        }
+    }
+    // 事件处理
+    function click(v: number) {
+        if (v + 1 == data.value.now) {
+            setData({ ...data, value: { ...data.value, now: 0 } })
+        } else {
+            setData({ ...data, value: { ...data.value, now: v + 1 } })
+        }
+    }
+    // 输出
+    return (
+        <span className="rate" style={style}>{itemList}</span>
     );
 }

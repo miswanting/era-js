@@ -237,19 +237,18 @@ nav // 窗口头
 .check
     cursor: pointer
     // color: red
-    background-color: dimgray
+    background-color: nth($gray_scale,2)
     &:hover
-        background-color: gray
+        background-color: nth($gray_scale,3)
     &:active
-        background-color: darkgray
+        background-color: nth($gray_scale,8)
     &.active
         // color: green
-        color: black
-        background-color: lightgray
+        background-color: nth($gray_scale,6)
         &:hover
-            background-color: gainsboro
+            background-color: nth($gray_scale,7)
         &:active
-            background-color: white
+            background-color: nth($gray_scale,8)
 .progress
     font-size: 0
     background-color: dimgray
@@ -290,15 +289,31 @@ nav // 窗口头
                 color: black
                 background-color: gainsboro
                 &:active
-                    background-color: white
+                    background-color: nth($gray_scale,8)
     .active
         color: black
         background-color: silver // 基色
 .radio
     cursor: pointer
     &:hover
-        background-color: nth($gray_scale,4)
+        background-color: nth($gray_scale,5)
     &:active
+        background-color: nth($gray_scale,6)
+    .item
+        background-color: nth($gray_scale,4)
+        &:hover
+            color: black
+            background-color: nth($gray_scale,6)
+        &:active
+            color: black
+            background-color: nth($gray_scale,8)
+        &.active
+            color: black
+            background-color: nth($gray_scale,6)
+            &:hover
+                background-color: nth($gray_scale,7)
+            &:active
+                background-color: nth($gray_scale,8)
         background-color: nth($gray_scale,5)
     .item
         background-color: nth($gray_scale,4)

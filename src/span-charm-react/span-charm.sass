@@ -314,7 +314,25 @@ nav // 窗口头
                 background-color: nth($gray_scale,7)
             &:active
                 background-color: nth($gray_scale,8)
+.dropdown
+    cursor: pointer
+    position: relative
+    &:hover
         background-color: nth($gray_scale,5)
+    &:active
+        background-color: nth($gray_scale,6)
+    .list
+        position: absolute
+        // visibility: hidden
+        text-align: center
+        display: none
+        width: 120px
+        bottom: 100%
+        left: 50%
+        z-index: 1
+        margin-left: -60px
+        &.show
+            display: block
     .item
         background-color: nth($gray_scale,4)
         &:hover

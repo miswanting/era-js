@@ -241,7 +241,7 @@ export function Dropdown(props: any) {
             value: null
         }
         if (data.value.multiple) {
-
+            // bag.value = data.value.default
         } else {
             bag.value = i
         }
@@ -253,7 +253,9 @@ export function Dropdown(props: any) {
         setShow(!show)
     }
     if (data.value.multiple) {
-        console.log("该功能还没做！");
+        let items = data.value.default.map((item, i) => {
+            return <div onClick={() => { clickList(i) }} className="item">{item.text}</div>
+        })
     } else {
         let items = data.value.options.map((item, i) => {
             return <div onClick={() => { clickList(i) }} className="item">{item.text}</div>

@@ -158,13 +158,19 @@ nav // 窗口头
     &:active
         color: black
         background-color: white
-.section
-    border-width: 1px
-    border-color: grey
-    div
-        font-size: 0
-    span
-        font-size: $font-size
+section
+    margin: 10px 0px
+    border: 1px solid nth($gray_scale,8)
+    padding: 1em
+    border-radius: 0.5em
+    // border-width: 1px
+    // border-color: grey
+    // div
+    //     font-size: 0
+    // span
+    //     font-size: $font-size
+    &.disabled
+        border: 1px solid nth($gray_scale,1)
 .text
     position: relative
     div.popup

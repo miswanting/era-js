@@ -176,16 +176,18 @@ export function Input(props: any) {
             from: 'r',
             to: 'b',
             hash: data.value.hash,
-            value: data['value']
+            value: e.target.value
         }
         data.value.func(bag)
     }
     // 输出
     return (
-        <input type="text"
-            onChange={change}>
-            {data.value.default}
-        </input>
+        // <input type="text"
+        //     onChange={change}>
+        //     {data.value.default}
+        // </input>
+        // <span className="input" onInput={change} contentEditable></span>
+        <input type="text" className="input" onInput={change} />
     );
 }
 

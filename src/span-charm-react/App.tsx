@@ -36,4 +36,16 @@ export default function App(props: any) {
     }
     return (<>{tmp}</>)
 }
+export function Toast(props: any) {
+    let l = [" "]
+    let items = l.map((text) => {
+        return <div className="item">{text}<span>×</span></div>
+    })
+    return (<>
+        <div className="toast">
+            <div style={{ position: "absolute" }}>
+                {items}
+            </div>
+        </div>
+    </>)
 }

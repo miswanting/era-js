@@ -6,9 +6,6 @@ import BackManager from './managers/BackManager'
 
 // 前端管理器
 export default class FrontManager extends EventEmitter {
-    private config = { // 静态设置
-        exec_file: 'Game.exe' // 后端程序文件名
-    }
     public data = {
         window: null, // 窗口管理器
         net: null, // 网络管理器
@@ -43,6 +40,7 @@ export default class FrontManager extends EventEmitter {
             }
         })
         this.data.net.start()
+        this.data.back.start()
     }
 }
 let front: FrontManager = new FrontManager()

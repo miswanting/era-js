@@ -8,7 +8,7 @@
     "build": "npx webpack --config webpack.prod.js",
     "run-win": "chcp 65001 && npx electron .",
     "run-linux": "npx electron .",
-    "pack": "npx electron-builder --dir",
+    "pack": "!PACKAGE.bat",
     "dist": "npx electron-builder"
   },
   "repository": {

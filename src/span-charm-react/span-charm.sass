@@ -382,3 +382,19 @@ section
         border: 1px solid nth($gray_scale,8)
         outline: none
         
+.toast
+    cursor: default
+    .item
+        z-index: 1
+        border: 1px solid nth($gray_scale, 3)
+        color: nth($gray_scale, 8)
+        background: nth($gray_scale, 2)
+        padding: 0px 0.5em
+        border-radius: 0.2em
+        span
+            margin-left: 0.5em
+            cursor: pointer
+            &:hover
+                color: nth($gray_scale, 1)
+                background: nth($gray_scale, 8)
+                

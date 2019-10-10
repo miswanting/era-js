@@ -7,7 +7,9 @@
     "debug": "npx webpack",
     "build": "npx webpack --config webpack.prod.js",
     "run-win": "chcp 65001 && npx electron .",
-    "run-linux": "npx electron ."
+    "run-linux": "npx electron .",
+    "pack": "npx electron-builder --dir",
+    "dist": "npx electron-builder"
   },
   "repository": {
     "type": "git",
@@ -60,9 +62,21 @@
     "webpack-cli": "latest"
   },
   "build": {
-    "appId": "your.id",
-    "mac": {
-      "category": "your.app.category.type"
+    "appId": "era-js",
+    "extraMetadata": "dist/main.js",
+    "files": [
+      "./dist/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
     }
   }
 }

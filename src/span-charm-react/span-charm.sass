@@ -19,60 +19,67 @@ $hide-border: false
 html
     overflow: hidden
     height: 100%
-    background: rgba(0,0,0,0)
-    // font-family: Monomono
+    background: #0000
 body
     margin: 0
     color: #fff
-    background-color: #000
-    overflow-y: auto
+    background-color: #0000
+    // overflow-y: auto
     font-family: Monomono
     height: 100%
-    border-top-left-radius: 10px
-    border-top-right-radius: 10px
-nav // 窗口头
+#root
+    display: flex
+    flex-direction: column
+    height: 100%
+
+/////////////////////////////////////
+
+header
+    -webkit-user-select: none
     color: gray
     background-color: #000
-    -webkit-user-select: none
-    .nav
-        display: flex
-        justify-content: space-between
-    .app-icon
-        padding-left: .5em
-        padding-right: .5em
-        cursor: default
+    border-top-left-radius: 10px
+    border-top-right-radius: 10px
+main
+    flex-grow: 1
+    overflow-y: auto
+    color: nth($gray-scale, 8)
+    background-color: nth($gray-scale, 1)
+footer
+    border-top: 1px solid nth($gray-scale, 2)
+    color: gray
+    background-color: nth($gray-scale, 1)
+
+///////////////////////////
+
+nav
+    display: flex
+    .quick
+        padding: 0em 0.5em
+        cursor: pointer
+        border-right: 1px solid gray
+        svg
+            font-size: 14px
         &:hover
             color: black
             background-color: grey
-    .menu
-        padding-left: .5em
-        padding-right: .5em
-        cursor: pointer
-        &:hover
-            color: #000
-            background-color: grey
     .title
-        cursor: default
         flex-grow: 1
         text-align: center
         -webkit-app-region: drag
-        &.active
-            color: grey
-            background-color: #222
-        .close
-            cursor: pointer
-            color: #000
-            &:hover
-                color: #f00
-                background-color: grey
+        cursor: grab
         &:hover
             color: black
             background-color: grey
+        &:active
+            cursor: grabbing
     .min // 最小化按钮
         padding-left: .5em
         padding-right: .5em
         cursor: pointer
         border-left: 1px solid gray
+        svg
+            font-size: 14px
         &:hover
             color: #0f0
             background-color: grey
@@ -81,6 +88,8 @@ nav // 窗口头
         padding-right: .5em
         cursor: pointer
         border-left: 1px solid gray
+        svg
+            font-size: 14px
         &:hover
             color: #ff0
             background-color: grey
@@ -89,18 +98,46 @@ nav // 窗口头
         padding-right: .5em
         cursor: pointer
         border-left: 1px solid gray
+        svg
+            font-size: 14px
         &:hover
             color: #f00
             background-color: grey
-#root
+    .menu
+        cursor: pointer
+        position: relative
+        .name
+            padding-left: .5em
+            padding-right: .5em
+            &:hover
+                color: #000
+                background-color: grey
+        .list
+            position: absolute
+            z-index: 2
+            border: 1px solid nth($gray_scale, 2)
+            background: nth($gray_scale, 2)
+            .item
+                &:hover
+                    border: 1px solid nth($gray_scale, 3)
+                    background: nth($gray_scale, 2)
+
+.splash
     display: flex
-    flex-direction: column
-    height: 100%
-.container
-    padding-left: .5em
-    padding-right: .5em
-    overflow-x: hidden
-    flex-grow: 1
+    align-items: center
+    div
+        width: 100%
+        text-align: center
+        color: nth($gray_scale,8)
+.game
+
+section
+    margin: 0.5em
+    border: 1px solid nth($gray_scale,8)
+    padding: 1em
+    border-radius: 0.5em
+    &.disabled
+        border: 1px solid nth($gray_scale,1)
 .row
     display: flex
     .column
@@ -158,19 +195,6 @@ nav // 窗口头
     &:active
         color: black
         background-color: white
-section
-    margin: 10px 0px
-    border: 1px solid nth($gray_scale,8)
-    padding: 1em
-    border-radius: 0.5em
-    // border-width: 1px
-    // border-color: grey
-    // div
-    //     font-size: 0
-    // span
-    //     font-size: $font-size
-    &.disabled
-        border: 1px solid nth($gray_scale,1)
 .text
     position: relative
     div.popup
@@ -364,13 +388,6 @@ section
         span
             height: 1px
             background-color: white
-
-// .divider
-//     width: 100%
-//     height: 1px
-//     margin-top: 10px
-//     margin-bottom: 10px
-//     background-color: white
 .input
     border: 1px solid nth($gray_scale,7)
     height: $line-height - 2
@@ -381,7 +398,7 @@ section
     &:focus
         border: 1px solid nth($gray_scale,8)
         outline: none
-        
+
 .toast
     cursor: default
     .item
@@ -397,4 +414,3 @@ section
             &:hover
                 color: nth($gray_scale, 1)
                 background: nth($gray_scale, 8)
-                

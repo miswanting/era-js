@@ -31,18 +31,12 @@ export default function App(props: any) {
         <Toast data={data} style={{}} />,
     ]
     if (data.isConsole) {
-        // tmp.push(<Header data={data} style={{}} />)
-        // tmp.push(<Toast data={data} style={{}} />)
         tmp.push(<Console data={data} style={{}} />)
     } else if (data.isMenu) { // Splash界面
-        // tmp.push(<Header data={data} style={{}} />)
         tmp.push(<System data={data} style={{}} />)
     } else if (!data.isLoaded) { // Splash界面
-        // tmp.push(<Toast data={data} style={{}} />)
         tmp.push(<Splash data={data} style={{}} />)
     } else {
-        // tmp.push(<Header data={data} style={{}} />)
-        // tmp.push(<Toast data={data} style={{}} />)
         tmp.push(<Game data={data} style={{}} />)
     }
     return (<>{tmp}</>)

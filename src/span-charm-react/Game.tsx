@@ -5,7 +5,7 @@ export function Game(props: any) {
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
     useEffect(() => {
-        let e = document.getElementsByClassName('container')[0]
+        let e = document.getElementsByClassName('game')[0]
         e.scrollTop = e.scrollHeight;
     });
     let pages = []
@@ -14,7 +14,7 @@ export function Game(props: any) {
         pages.push(<Section data={page} key={Math.random()}></Section>)
     }
     return (
-        <main className="container">
+        <main className="game">
             {pages}
         </main>
     );

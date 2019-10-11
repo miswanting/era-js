@@ -106,9 +106,9 @@ export function Header(props: any) {
                             Era.js Console
                         </Menu.Item>
                         <Menu.Menu position='right'>
-                            <Menu.Item>-</Menu.Item>
-                            <Menu.Item>+</Menu.Item>
-                            <Menu.Item>×</Menu.Item>
+                            <Menu.Item onClick={minWindow}>-</Menu.Item>
+                            <Menu.Item onClick={maxWindow}>+</Menu.Item>
+                            <Menu.Item onClick={closeWindow}>×</Menu.Item>
                         </Menu.Menu>
                     </Menu>
                 </nav>
@@ -123,9 +123,9 @@ export function Header(props: any) {
                             Era.js
                         </Menu.Item>
                         <Menu.Menu position='right'>
-                            <Menu.Item>-</Menu.Item>
-                            <Menu.Item>+</Menu.Item>
-                            <Menu.Item>×</Menu.Item>
+                            <Menu.Item onClick={minWindow}>-</Menu.Item>
+                            <Menu.Item onClick={maxWindow}>+</Menu.Item>
+                            <Menu.Item onClick={closeWindow}>×</Menu.Item>
                         </Menu.Menu>
                     </Menu>
                 </nav>
@@ -140,9 +140,9 @@ export function Header(props: any) {
                             Era.js
                         </Menu.Item>
                         <Menu.Menu position='right'>
-                            <Menu.Item>-</Menu.Item>
-                            <Menu.Item>+</Menu.Item>
-                            <Menu.Item>×</Menu.Item>
+                            <Menu.Item onClick={minWindow}>-</Menu.Item>
+                            <Menu.Item onClick={maxWindow}>+</Menu.Item>
+                            <Menu.Item onClick={closeWindow}>×</Menu.Item>
                         </Menu.Menu>
                     </Menu>
                 </nav>
@@ -189,9 +189,9 @@ export function Header(props: any) {
                             </Dropdown.Menu>
                         </Dropdown>
                         <Menu.Menu position='right'>
-                            <Menu.Item>-</Menu.Item>
-                            <Menu.Item>+</Menu.Item>
-                            <Menu.Item>×</Menu.Item>
+                            <Menu.Item onClick={minWindow}>-</Menu.Item>
+                            <Menu.Item onClick={maxWindow}>+</Menu.Item>
+                            <Menu.Item onClick={closeWindow}>×</Menu.Item>
                         </Menu.Menu>
                     </Menu>
                 </nav>

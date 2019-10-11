@@ -16,6 +16,9 @@ export default class WindowManager extends EventEmitter {
                 .catch((err) => console.log('添加扩展错误：', err));
             this.data.win = new BrowserWindow({
                 width: 1024, height: 768,
+                transparent: true,  // 透明
+                frame: false, // 无边框
+                backgroundColor: '#00000000',
                 webPreferences: {
                     nodeIntegration: true,
                     nodeIntegrationInWorker: true

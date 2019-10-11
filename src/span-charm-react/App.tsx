@@ -2,6 +2,9 @@ import "./span-charm.sass"
 import { remote } from 'electron'
 import React, { useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTransgenderAlt, faTools, faPlus, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons'
+// import { Header } from "./Header";
 import { Console } from "./Console"
 import { System } from "./System"
 import { Splash } from "./Splash"
@@ -32,6 +35,7 @@ export default function App(props: any) {
     } else {
         tmp.push(<Game data={data} style={{}} />)
     }
+    tmp.push(<Footer />)
     return (<>{tmp}</>)
 }
 
@@ -158,4 +162,12 @@ export function Toast(props: any) {
             </div>
         </div>
     </>)
+}
+
+export function Footer(props: any) {
+    return (
+        <footer>
+            <span>状态栏</span>
+        </footer>
+    )
 }

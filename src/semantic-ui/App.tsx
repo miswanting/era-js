@@ -1,9 +1,12 @@
 import 'semantic-ui-css/semantic.min.css'
 import './bias.sass'
 
+import { remote } from 'electron'
+import { Dropdown, Menu } from 'semantic-ui-react'
 import React, { useState } from 'react';
 import { Splash } from "./Splash"
-import { Header } from "./Header";
+// import { Header } from "./Header";
+import { System } from "./System";
 import { Console } from "./Console"
 import { Game } from "./Game";
 
@@ -23,6 +26,26 @@ import { Game } from "./Game";
 export default function App(props: any) {
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
+    let tmp = [
+        <Header data={data} style={{}} />,
+        <Toast data={data} style={{}} />,
+    ]
+    if (data.isConsole) {
+        // tmp.push(<Header data={data} style={{}} />)
+        // tmp.push(<Toast data={data} style={{}} />)
+        tmp.push(<Console data={data} style={{}} />)
+    } else if (data.isMenu) { // Splash界面
+        // tmp.push(<Header data={data} style={{}} />)
+        tmp.push(<System data={data} style={{}} />)
+    } else if (!data.isLoaded) { // Splash界面
+        // tmp.push(<Toast data={data} style={{}} />)
+        tmp.push(<Splash data={data} style={{}} />)
+    } else {
+        // tmp.push(<Header data={data} style={{}} />)
+        // tmp.push(<Toast data={data} style={{}} />)
+        tmp.push(<Game data={data} style={{}} />)
+    }
+    return (<>{tmp}</>)
     if (data.isConsole) { // 终端优先级压倒一切
         document.body.style.backgroundColor = "#1b1c1d"
         return (

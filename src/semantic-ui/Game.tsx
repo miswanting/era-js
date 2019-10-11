@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Segment } from 'semantic-ui-react'
 
 import { Block } from "./Block"
+// import { Footer } from '../span-charm-react/App';
 
 export function Game(props: any) {
     const [data, setData] = useState(props.data);
@@ -19,9 +20,12 @@ export function Game(props: any) {
         }
     })
     return (
+        <>
             <div className={'column'}>
                 {pages}
             </div>
+            <Footer />
+        </>
     );
 }
 function Page(props: any) {
@@ -37,4 +41,8 @@ function Page(props: any) {
             {blocks}
         </Segment>
     )
+}
+
+export function Footer(props: any) {
+    return (<></>)
 }

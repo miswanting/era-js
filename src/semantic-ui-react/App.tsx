@@ -1,5 +1,7 @@
 import * as React from 'react'
 import 'semantic-ui-css/semantic.min.css'
+// import 'font-awesome'
+// import 'font-awesome/css/font-awesome.min.css'
 import Xcover from './Xcover'
 import Console from './Console'
 import PageList from './PageList'

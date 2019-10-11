@@ -26,6 +26,9 @@
   },
   "homepage": "https://github.com/miswanting/Era.js#readme",
   "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "latest",
+    "@fortawesome/free-solid-svg-icons": "latest",
+    "@fortawesome/react-fontawesome": "latest",
     "@types/d3": "latest",
     "@types/d3-delaunay": "latest",
     "@types/electron-devtools-installer": "latest",
@@ -42,7 +45,6 @@
     "electron-devtools-installer": "latest",
     "fibers": "latest",
     "file-loader": "latest",
-    "font-awesome": "latest",
     "jquery": "latest",
     "mini-css-extract-plugin": "latest",
     "node-sass": "latest",

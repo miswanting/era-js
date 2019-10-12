@@ -8,8 +8,7 @@ export function Game(props: any) {
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
     useEffect(() => {
-        let e = document.getElementById('pagelist')
-        // let e = document.getElementsByClassName('column')[0]
+        let e = document.getElementsByTagName('main')[0]
         e.scrollTop = e.scrollHeight;
     });
     let pages = data.pages.children.map((page: any, i: number) => {
@@ -21,9 +20,9 @@ export function Game(props: any) {
     })
     return (
         <>
-            <div className={'column'}>
+            <main className={'ui container column'}>
                 {pages}
-            </div>
+            </main>
             <Footer />
         </>
     );

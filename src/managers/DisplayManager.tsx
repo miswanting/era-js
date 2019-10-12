@@ -6,11 +6,14 @@ import * as d3 from 'd3'
 import { Delaunay } from "d3-delaunay"
 import SimplexNoise from 'simplex-noise'
 // 前端选择
-import App from "../semantic-ui/App"; // sematic-ui-react
+// import App from "../semantic-ui/App"; // sematic-ui-react
 // import App from "../semantic-ui-react/App"; // sematic-ui-react
-// import App from "../span-charm-react/App"; // span-charm-react
+import App from "../span-charm-react/App"; // span-charm-react
 // import App from "../editor-react/App"
-
+export enum Event {
+    ConsoleInput,
+    ConsoleOutput
+}
 /**
  * 显示管理器
  * 
@@ -29,6 +32,7 @@ export default class DisplayManager extends EventEmitter {
             children: []
         },
         console: { // 终端界面
+            CMD: null,
             children: []
         },
         map: { // 地图界面
@@ -37,9 +41,13 @@ export default class DisplayManager extends EventEmitter {
         load_text: '',
         avantar_editor: '',
         map_editor: '',
-        code_editor: {}
+        code_editor: {
+            childron: []
+        }
     }
-    public init() { }
+    public init() {
+        this.data.console.CMD = this.cmd
+    }
     public push(bag: any) {
         // console.log(bag);
         if (bag.type == 'connected') {
@@ -281,9 +289,24 @@ export default class DisplayManager extends EventEmitter {
             } else if (this.data.isConsole && e.keyCode == 27) {
                 this.data.isConsole = false
                 this.update()
+            } else if (e.keyCode == 27) {
+                this.data.isMenu = !this.data.isMenu
+                this.update()
             }
         })
         this.update()
+    }
+    public cmd = (bag: any) => {
+        if (bag.type == Event.ConsoleInput) {
+            this.data.console.children.push({
+                in: bag.data,
+                out: []
+            })
+            if (bag.data == 'cls') {
+                this.data.console.children = []
+            }
+            this.update()
+        }
     }
     public update() { // 刷新前端
         ReactDOM.render(

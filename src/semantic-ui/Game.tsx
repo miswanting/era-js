@@ -43,5 +43,11 @@ function Page(props: any) {
 }
 
 export function Footer(props: any) {
-    return (<></>)
+    return (
+        <footer>
+            <span>
+                状态栏
+            </span>
+        </footer>
+    )
 }

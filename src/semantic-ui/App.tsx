@@ -9,7 +9,9 @@ import { Splash } from "./Splash"
 import { System } from "./System";
 import { Console } from "./Console"
 import { Game } from "./Game";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { faTools, faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 // 初始模式：Splash
 // 游戏模式：Header + Game
 // 终端模式：Header + Console
@@ -77,11 +79,12 @@ export function Header(props: any) {
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
     function toggleDevTools() {
-        if (remote.getCurrentWindow().webContents.isDevToolsOpened) {
-            remote.getCurrentWindow().webContents.closeDevTools()
-        } else {
-            remote.getCurrentWindow().webContents.openDevTools();
-        }
+        remote.getCurrentWindow().webContents.openDevTools();
+        // if (remote.getCurrentWindow().webContents.isDevToolsOpened) {
+        //     remote.getCurrentWindow().webContents.closeDevTools()
+        // } else {
+        //     remote.getCurrentWindow().webContents.openDevTools();
+        // }
     }
     function minWindow() {
         remote.getCurrentWindow().minimize();
@@ -103,12 +106,21 @@ export function Header(props: any) {
                 <nav>
                     <Menu inverted size='mini'>
                         <Menu.Item header>
-                            Era.js Console
+                            {data.title} Console
                         </Menu.Item>
                         <Menu.Menu position='right'>
-                            <Menu.Item onClick={minWindow}>-</Menu.Item>
-                            <Menu.Item onClick={maxWindow}>+</Menu.Item>
-                            <Menu.Item onClick={closeWindow}>×</Menu.Item>
+                            <Menu.Item onClick={toggleDevTools}>
+                                <FontAwesomeIcon icon={faTools} />
+                            </Menu.Item>
+                            <Menu.Item onClick={minWindow}>
+                                <FontAwesomeIcon icon={faMinus} />
+                            </Menu.Item>
+                            <Menu.Item onClick={maxWindow}>
+                                <FontAwesomeIcon icon={faPlus} />
+                            </Menu.Item>
+                            <Menu.Item onClick={closeWindow}>
+                                <FontAwesomeIcon icon={faTimes} />
+                            </Menu.Item>
                         </Menu.Menu>
                     </Menu>
                 </nav>
@@ -120,12 +132,21 @@ export function Header(props: any) {
                 <nav>
                     <Menu inverted size='mini'>
                         <Menu.Item header>
-                            Era.js
+                            {data.title}
                         </Menu.Item>
                         <Menu.Menu position='right'>
-                            <Menu.Item onClick={minWindow}>-</Menu.Item>
-                            <Menu.Item onClick={maxWindow}>+</Menu.Item>
-                            <Menu.Item onClick={closeWindow}>×</Menu.Item>
+                            <Menu.Item onClick={toggleDevTools}>
+                                <FontAwesomeIcon icon={faTools} />
+                            </Menu.Item>
+                            <Menu.Item onClick={minWindow}>
+                                <FontAwesomeIcon icon={faMinus} />
+                            </Menu.Item>
+                            <Menu.Item onClick={maxWindow}>
+                                <FontAwesomeIcon icon={faPlus} />
+                            </Menu.Item>
+                            <Menu.Item onClick={closeWindow}>
+                                <FontAwesomeIcon icon={faTimes} />
+                            </Menu.Item>
                         </Menu.Menu>
                     </Menu>
                 </nav>
@@ -137,12 +158,21 @@ export function Header(props: any) {
                 <nav>
                     <Menu inverted size='mini'>
                         <Menu.Item header>
-                            Era.js
+                            {data.title}
                         </Menu.Item>
                         <Menu.Menu position='right'>
-                            <Menu.Item onClick={minWindow}>-</Menu.Item>
-                            <Menu.Item onClick={maxWindow}>+</Menu.Item>
-                            <Menu.Item onClick={closeWindow}>×</Menu.Item>
+                            <Menu.Item onClick={toggleDevTools}>
+                                <FontAwesomeIcon icon={faTools} />
+                            </Menu.Item>
+                            <Menu.Item onClick={minWindow}>
+                                <FontAwesomeIcon icon={faMinus} />
+                            </Menu.Item>
+                            <Menu.Item onClick={maxWindow}>
+                                <FontAwesomeIcon icon={faPlus} />
+                            </Menu.Item>
+                            <Menu.Item onClick={closeWindow}>
+                                <FontAwesomeIcon icon={faTimes} />
+                            </Menu.Item>
                         </Menu.Menu>
                     </Menu>
                 </nav>
@@ -152,10 +182,10 @@ export function Header(props: any) {
         return (
             <header>
                 <nav>
-                    <Menu inverted size='mini'>
+                    <Menu size='mini'>
                         <Menu.Item header>
-                            Era.js
-                            </Menu.Item>
+                            {data.title}
+                        </Menu.Item>
                         <Dropdown item text='游戏'>
                             <Dropdown.Menu>
                                 <Dropdown.Item>新建</Dropdown.Item>
@@ -189,9 +219,18 @@ export function Header(props: any) {
                             </Dropdown.Menu>
                         </Dropdown>
                         <Menu.Menu position='right'>
-                            <Menu.Item onClick={minWindow}>-</Menu.Item>
-                            <Menu.Item onClick={maxWindow}>+</Menu.Item>
-                            <Menu.Item onClick={closeWindow}>×</Menu.Item>
+                            <Menu.Item onClick={toggleDevTools}>
+                                <FontAwesomeIcon icon={faTools} />
+                            </Menu.Item>
+                            <Menu.Item onClick={minWindow}>
+                                <FontAwesomeIcon icon={faMinus} />
+                            </Menu.Item>
+                            <Menu.Item onClick={maxWindow}>
+                                <FontAwesomeIcon icon={faPlus} />
+                            </Menu.Item>
+                            <Menu.Item onClick={closeWindow}>
+                                <FontAwesomeIcon icon={faTimes} />
+                            </Menu.Item>
                         </Menu.Menu>
                     </Menu>
                 </nav>

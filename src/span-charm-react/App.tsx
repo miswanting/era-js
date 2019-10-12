@@ -27,7 +27,7 @@ export default function App(props: any) {
         <Toast data={data} style={{}} />,
     ]
     if (data.isConsole) {
-        tmp.push(<Console data={data} style={{}} />)
+        tmp.push(<Console data={data.console} style={{}} />)
     } else if (data.isMenu) { // Splash界面
         tmp.push(<System data={data} style={{}} />)
     } else if (!data.isLoaded) { // Splash界面
@@ -43,7 +43,7 @@ export function Header(props: any) {
     const [data, setData] = useState(props.data);
     const [style, setStyle] = useState(props.style);
     function toggleDevTools() {
-        if (remote.getCurrentWindow().webContents.isDevToolsOpened) {
+        if (remote.getCurrentWindow().webContents.isDevToolsOpened()) {
             remote.getCurrentWindow().webContents.closeDevTools()
         } else {
             remote.getCurrentWindow().webContents.openDevTools();
@@ -62,14 +62,16 @@ export function Header(props: any) {
     function closeWindow() {
         remote.getCurrentWindow().close();
     }
-    if (data.isConsole || data.isMenu || !data.isLoaded) {
+    if (data.isConsole) {
         return (
             <header>
                 <nav>
-                    <span className="quick" onMouseUp={toggleDevTools}>
+                    <span className="title" >
+                        {data.title} Console
+                    </span>
+                    <span className="tool" onMouseUp={toggleDevTools}>
                         <FontAwesomeIcon icon={faTools} />
                     </span>
-                    <span className="title" />
                     <span className="min" onMouseUp={minWindow}>
                         <FontAwesomeIcon icon={faMinus} />
                     </span>
@@ -82,6 +84,50 @@ export function Header(props: any) {
                 </nav>
             </header>
         )
+    } else if (data.isMenu) {
+        return (
+            <header>
+                <nav>
+                    <span className="title" >
+                    </span>
+                    <span className="tool" onMouseUp={toggleDevTools}>
+                        <FontAwesomeIcon icon={faTools} />
+                    </span>
+                    <span className="min" onMouseUp={minWindow}>
+                        <FontAwesomeIcon icon={faMinus} />
+                    </span>
+                    <span className="max" onMouseUp={maxWindow}>
+                        <FontAwesomeIcon icon={faPlus} />
+                    </span>
+                    <span className="close" onMouseUp={closeWindow}>
+                        <FontAwesomeIcon icon={faTimes} />
+                    </span>
+                </nav>
+            </header>
+        )
+
+    } else if (!data.isLoaded) {
+        return (
+            <header>
+                <nav>
+                    <span className="title" >
+                    </span>
+                    <span className="tool" onMouseUp={toggleDevTools}>
+                        <FontAwesomeIcon icon={faTools} />
+                    </span>
+                    <span className="min" onMouseUp={minWindow}>
+                        <FontAwesomeIcon icon={faMinus} />
+                    </span>
+                    <span className="max" onMouseUp={maxWindow}>
+                        <FontAwesomeIcon icon={faPlus} />
+                    </span>
+                    <span className="close" onMouseUp={closeWindow}>
+                        <FontAwesomeIcon icon={faTimes} />
+                    </span>
+                </nav>
+            </header>
+        )
+
     } else {
         let menus = [
             {
@@ -123,14 +169,14 @@ export function Header(props: any) {
                     <span className="quick">
                         <FontAwesomeIcon icon={faTransgenderAlt} />
                     </span>
-                    <span className="quick" onMouseUp={toggleDevTools}>
-                        <FontAwesomeIcon icon={faTools} />
-                    </span>
                     <span className="quick">
                         <FontAwesomeIcon icon={faPlus} />
                     </span>
                     <span className="title">
                         {data.title}
+                    </span>
+                    <span className="tool" onMouseUp={toggleDevTools}>
+                        <FontAwesomeIcon icon={faTools} />
                     </span>
                     <span className="min" onMouseUp={minWindow}>
                         <FontAwesomeIcon icon={faMinus} />
@@ -151,7 +197,7 @@ export function Header(props: any) {
 }
 
 export function Toast(props: any) {
-    let l = [" "]
+    let l = []
     let items = l.map((text) => {
         return <div className="item">{text}<span>×</span></div>
     })

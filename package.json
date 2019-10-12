@@ -52,6 +52,7 @@
     "react-dom": "latest",
     "sass": "latest",
     "sass-loader": "latest",
+    "scratch-blocks": "latest",
     "semantic-ui-css": "latest",
     "semantic-ui-react": "latest",
     "simplex-noise": "latest",

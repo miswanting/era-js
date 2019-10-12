@@ -128,14 +128,32 @@ nav
                     border: 1px solid nth($gray_scale, 3)
                     background: nth($gray_scale, 2)
 
-.splash
+main.splash
     display: flex
     align-items: center
     div
         width: 100%
         text-align: center
         color: nth($gray_scale,8)
-.game
+main.game
+main.console
+    .indicator
+        margin-right: .2em
+        color: cyan
+    .in:focus
+        outline: none
+main.pause
+    display: flex
+    align-items: center
+    > div
+        width: 100%
+        cursor: default
+        text-align: center
+        > div
+            margin: 0em 3em
+            cursor: pointer
+            &:hover
+                background: gray
 
 section
     margin: 0.5em

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 export function System(props: any) {
     return (
-        <div style={{ height: 100 + '%', display: 'flex', alignItems: 'center' }}>
+        <main className="pause" style={{ height: 100 + '%', display: 'flex', alignItems: 'center' }}>
             <div style={{ width: 100 + '%', textAlign: 'center' }}>
                 <h1>{props.data.title} 系统菜单</h1>
                 <div>回到游戏</div>
@@ -10,6 +10,6 @@ export function System(props: any) {
                 <div>可视化代码编辑器</div>
                 <div>退出游戏</div>
             </div>
-        </div>
+        </main>
     )
 }

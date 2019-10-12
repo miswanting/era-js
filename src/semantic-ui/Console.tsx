@@ -36,8 +36,8 @@ function Input(props: any) {
     });
     return (
         <div style={{ display: "flex" }}>
-            <div> > </div>
-            <div ref={inputRef} onKeyDown={keyDown} contentEditable style={{ flexGrow: 1 }}></div>
+            <div className="indicator">></div>
+            <div className="in" ref={inputRef} onKeyDown={keyDown} contentEditable style={{ flexGrow: 1 }}></div>
         </div>
     )
 }

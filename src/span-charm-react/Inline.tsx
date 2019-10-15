@@ -248,9 +248,19 @@ export function Check(props: any) {
         data.value.func(bag)
         setData({ ...data, value: { ...data.value, default: bag.value } })
     }
+    let cls = ['check']
+    if (data.value.default) {
+        cls.push('active')
+    }
+    if ('disabled' in data.value && data.value.disabled) {
+        cls.push('disabled')
+    }
+    if ('read_only' in data.value && data.value.read_only) {
+        cls.push('read-only')
+    }
     // 输出
     return (
-        <span className={data.value.default ? "check active" : "check"} onClick={click} >{data.value.text}</span>
+        <span className={cls.join(' ')} onClick={click} >{data.value.text}</span>
     )
 }
 

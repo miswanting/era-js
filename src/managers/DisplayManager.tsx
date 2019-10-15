@@ -9,10 +9,18 @@ import SimplexNoise from 'simplex-noise'
 // import App from "../semantic-ui/App"; // sematic-ui-react
 // import App from "../semantic-ui-react/App"; // sematic-ui-react
 import App from "../span-charm-react/App"; // span-charm-react
+import { isNullOrUndefined } from 'util';
 // import App from "../editor-react/App"
 export enum Event {
     ConsoleInput,
-    ConsoleOutput
+    ConsoleOutput,
+    MenuItemClick
+}
+export enum Window {
+    Game,
+    AvantarEditor,
+    CodeEditor,
+    MapEditor,
 }
 /**
  * 显示管理器
@@ -22,11 +30,11 @@ export enum Event {
 export default class DisplayManager extends EventEmitter {
     private data = {
         title: 'Era.js',
+        displayMode: Window.Game,
         isConnected: false,
         isLoaded: false,
         isConsole: false,
         isMenu: false,
-        displayMode: 'game',
         mode: { mode: 'default' },
         pages: { // 游戏界面
             children: []
@@ -43,9 +51,14 @@ export default class DisplayManager extends EventEmitter {
         map_editor: '',
         code_editor: {
             childron: []
-        }
+        },
+        header: {
+
+        },
+        CMD: null
     }
     public init() {
+        this.data.CMD = this.cmd
         this.data.console.CMD = this.cmd
     }
     public push(bag: any) {
@@ -306,6 +319,10 @@ export default class DisplayManager extends EventEmitter {
                 this.data.console.children = []
             }
             this.update()
+        } else if (bag.type == Event.MenuItemClick) {
+            if (bag.data == "可视化代码") {
+                this.data.displayMode = Window.CodeEditor
+            }
         }
     }
     public update() { // 刷新前端

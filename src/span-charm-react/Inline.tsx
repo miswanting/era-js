@@ -74,7 +74,11 @@ export function Link(props: any) {
 export function Button(props: any) {
     // 初始化
     const [data, setData] = useState(props.data);
-    const [style, setStyle] = useState(props.style);
+    // const [style, setStyle] = useState(props.style);
+    let style = {
+        color: data.value.color,
+        background: data.value.bcolor
+    }
     // 事件处理
     function click() {
         let bag = {
@@ -86,8 +90,16 @@ export function Button(props: any) {
         data.value.func(bag)
     }
     // 输出
+    if ("isLink" in data.value && data.value.isLink) {
+        return <span className="link" style={style} onClick={click}>{data.text}</span>
+    }
     return (
-        <span className="button" style={style} onClick={click}>{data.value.text}</span >
+        <span
+            className={data.value.disabled ? "button disabled" : "button"}
+            style={style}
+            onClick={click}>
+            {data.value.text}
+        </span>
     );
 }
 export function Radio(props: any) {

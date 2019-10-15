@@ -11,9 +11,9 @@ export function Item(props: any) {
             <Button data={data}></Button>
         )
     } else if (['divider'].indexOf(data.type) != -1) {
-        return (
-            <Divider data={data}></Divider>
-        )
+        // return (
+        // <Divider data={data}></Divider>
+        // )
     } else if (['progress'].indexOf(data.type) != -1) {
         return (
             <Progress data={data}></Progress>
@@ -168,14 +168,14 @@ export function Progress(props: any) {
     );
 }
 
-export function Divider(props: any) {
-    // 初始化
-    const [data, setData] = useState(props.data);
-    const [style, setStyle] = useState(props.style);
-    // 事件处理
-    // 输出
-    return (
-        <div className="divider">
+// export function Divider(props: any) {
+//     // 初始化
+//     const [data, setData] = useState(props.data);
+//     const [style, setStyle] = useState(props.style);
+//     // 事件处理
+//     // 输出
+//     return (
+//         <div className="divider">
 
         </div>
     );

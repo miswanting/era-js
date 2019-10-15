@@ -168,6 +168,7 @@ export function Header(props: any) {
                     <span className="quick">
                         <FontAwesomeIcon icon={faPlus} />
                     </span>
+                    {d_menus}
                     <span className="title">
                         {data.title}
                     </span>
@@ -185,7 +186,6 @@ export function Header(props: any) {
                     </span>
                 </nav>
                 <nav>
-                    {d_menus}
                 </nav>
             </header>
         );

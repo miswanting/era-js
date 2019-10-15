@@ -9,7 +9,9 @@ import { Console } from "./Console"
 import { System } from "./System"
 import { Splash } from "./Splash"
 import { Game } from "./Game";
+// import { Code } from "./Code";
 
+import { Event, Window } from "../managers/DisplayManager";
 /**
  * 应用根类
  * 
@@ -30,10 +32,14 @@ export default function App(props: any) {
         tmp.push(<Console data={data.console} style={{}} />)
     } else if (data.isMenu) { // Splash界面
         tmp.push(<System data={data} style={{}} />)
-    } else if (!data.isLoaded) { // Splash界面
-        tmp.push(<Splash data={data} style={{}} />)
-    } else {
-        tmp.push(<Game data={data} style={{}} />)
+    } else if (data.displayMode == Window.Game) {
+        if (!data.isLoaded) { // Splash界面
+            tmp.push(<Splash data={data} style={{}} />)
+        } else {
+            tmp.push(<Game data={data} style={{}} />)
+        }
+    } else if (data.displayMode == Window.CodeEditor) {
+        // tmp.push(<Code data={data} style={{}} />)
     }
     tmp.push(<Footer />)
     return (<>{tmp}</>)
@@ -137,7 +143,10 @@ export function Header(props: any) {
                 }]
             },
             {
-                name: "编辑"
+                name: "编辑",
+                children: [{
+                    name: "可视化代码"
+                }]
             },
             {
                 name: "显示"
@@ -147,21 +156,8 @@ export function Header(props: any) {
             }
         ]
         let d_menus = menus.map((menu) => {
-            if ('children' in menu) {
-                let d_submenus = menu.children.map((submenu) => {
-                    return <span className="item">{submenu.name}</span>
-                })
-                return <div className="menu">
-                    <span className="name">{menu.name}</span>
-                    <div className="list">
-                        {d_submenus}
-                    </div>
-                </div>
-            } else {
-                return <div className="menu">
-                    <span className="name">{menu.name}</span>
-                </div>
-            }
+            return <MenuItem data={menu} cmd={data.CMD} />
+
         })
         return (
             <header>
@@ -195,7 +191,36 @@ export function Header(props: any) {
         );
     }
 }
-
+export function MenuItem(props: any) {
+    const [show, setShow] = useState(false);
+    function click() {
+        setShow(!show)
+    }
+    function clickItem(name: string) {
+        if (name == "可视化代码") {
+            let bag = {
+                type: Event.MenuItemClick,
+                data: name
+            }
+            props.cmd(bag)
+        }
+    }
+    if ('children' in props.data) {
+        let d_submenus = props.data.children.map((submenu) => {
+            return <div className="item" onClick={() => { clickItem(submenu.name) }}>{submenu.name}</div>
+        })
+        return <div className="menu" onClick={click}>
+            <span className="name">{props.data.name}</span>
+            <div className={show ? "list show" : "list"}>
+                {d_submenus}
+            </div>
+        </div>
+    } else {
+        return <div className="menu">
+            <span className="name">{props.data.name}</span>
+        </div>
+    }
+}
 export function Toast(props: any) {
     let l = []
     let items = l.map((text) => {

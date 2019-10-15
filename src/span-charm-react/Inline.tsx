@@ -220,14 +220,15 @@ export function Input(props: any) {
         data.value.func(bag)
     }
     // 输出
-    return (
-        // <input type="text"
-        //     onChange={change}>
-        //     {data.value.default}
-        // </input>
-        // <span className="input" onInput={change} contentEditable></span>
-        <input type="text" className="input" onInput={change} />
-    );
+    if (data.value.is_area) {
+        return (
+            <textarea className="input" cols={3} rows={3} onInput={change}></textarea>
+        )
+    } else {
+        return (
+            <input type="text" className="input" onInput={change} />
+        );
+    }
 }
 
 export function Check(props: any) {

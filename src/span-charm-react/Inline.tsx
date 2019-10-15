@@ -302,6 +302,11 @@ export function Dropdown(props: any) {
     function clickItem() {
         setShow(!show)
     }
+    // TODO: 参数兼容还没做完
+    // 1. multiple
+    // 2. search
+    // 3. allowAddition
+    // 4. placeholder
     if (data.value.multiple) {
         let items = data.value.default.map((item, i) => {
             return <div onClick={() => { clickList(i) }} className="item">{item.text}</div>

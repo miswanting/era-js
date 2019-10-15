@@ -80,7 +80,7 @@ nav
         svg
             font-size: 14px
         &:hover
-            color: blue
+            color: cyan
             background-color: grey
     .min // 最小化按钮
         padding: 0em 0.5em
@@ -119,10 +119,14 @@ nav
                 color: #000
                 background-color: grey
         .list
+            min-width: 100px
             position: absolute
             z-index: 2
             border: 1px solid nth($gray_scale, 2)
-            background: nth($gray_scale, 2)
+            background: nth($gray_scale, 1)
+            display: none
+            &.show
+                display: block
             .item
                 &:hover
                     border: 1px solid nth($gray_scale, 3)

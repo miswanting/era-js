@@ -40,6 +40,7 @@
     "css-loader": "latest",
     "d3": "latest",
     "d3-delaunay": "latest",
+    "droplet-editor": "0.0.2",
     "electron": "5.0.1",
     "electron-builder": "latest",
     "electron-devtools-installer": "latest",

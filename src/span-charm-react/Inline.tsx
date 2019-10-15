@@ -148,10 +148,18 @@ export function Rate(props: any) {
     const [style, setStyle] = useState(props.style);
     let itemList = []
     for (let i = 0; i < data.value.max; i++) {
-        if (i < data.value.now) {
-            itemList.push(<span key={i} onClick={() => { click(i) }}>★</span>)
+        if (data.value.disabled) {
+            if (i < data.value.now) {
+                itemList.push(<span key={i}>★</span>)
+            } else {
+                itemList.push(<span key={i}>☆</span>)
+            }
         } else {
-            itemList.push(<span key={i} onClick={() => { click(i) }}>☆</span>)
+            if (i < data.value.now) {
+                itemList.push(<span key={i} onClick={() => { click(i) }}>★</span>)
+            } else {
+                itemList.push(<span key={i} onClick={() => { click(i) }}>☆</span>)
+            }
         }
     }
     // 事件处理

@@ -76,8 +76,7 @@ export function Button(props: any) {
     const [data, setData] = useState(props.data);
     // const [style, setStyle] = useState(props.style);
     let style = {
-        color: data.value.color,
-        background: data.value.bcolor
+        color: data.value.color
     }
     // 事件处理
     function click() {
@@ -93,12 +92,28 @@ export function Button(props: any) {
     if ("isLink" in data.value && data.value.isLink) {
         return <span className="link" style={style} onClick={click}>{data.text}</span>
     }
+    let cls = []
+    if ("isLink" in data.value && data.value.isLink) {
+        cls.push("link")
+    } else {
+        cls.push("button")
+    }
+    if (data.value.disabled) {
+        cls.push("disabled")
+    }
+    let p = <></>
+    if (data.value.popup != '') {
+        p = <div className="popup">
+            {data.value.popup}
+        </div>
+    }
     return (
         <span
-            className={data.value.disabled ? "button disabled" : "button"}
+            className={cls.join(" ")}
             style={style}
             onClick={click}>
             {data.value.text}
+            {p}
         </span>
     );
 }

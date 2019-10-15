@@ -172,7 +172,7 @@ export function Rate(props: any) {
     }
     // 输出
     return (
-        <span className="rate" style={style}>{itemList}</span>
+        <span className={data.value.disabled ? "rate" : "rate disabled"} style={style}>{itemList}</span>
     );
 }
 export function Progress(props: any) {

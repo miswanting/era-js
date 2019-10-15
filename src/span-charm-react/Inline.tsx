@@ -47,7 +47,11 @@ export function Item(props: any) {
 export function Text(props: any) {
     // 初始化
     const [data, setData] = useState(props.data);
-    const [style, setStyle] = useState(props.style);
+    let style = {
+        color: data.value.color,
+        background: data.value.bcolor
+    }
+    // const [style, setStyle] = useState(props.style);
     // 事件处理
     // 输出
     return (

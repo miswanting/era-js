@@ -4,10 +4,10 @@
   "description": "A Era-like Game Engine.",
   "main": "dist/main.js",
   "scripts": {
-    "打包(调试)": "npx webpack",
-    "打包(发布)": "npx webpack --config webpack.prod.js",
-    "运行(Win)": "chcp 65001 && npx electron .",
-    "运行(Linux)": "npx electron .",
+    "打包-调试": "npx webpack",
+    "打包-发布": "npx webpack --config webpack.prod.js",
+    "运行-Win": "chcp 65001 && npx electron .",
+    "运行-Linux": "npx electron .",
     "初始化": "npm i",
     "发布": "!PACKAGE.bat",
     "强制清除NPM包缓存": "npm cache clean --force"

@@ -6,6 +6,10 @@ export function Item(props: any) {
         return (
             <Text data={data}></Text>
         )
+    } else if (['link', 'l'].indexOf(data.type) != -1) {
+        return (
+            <Link data={data}></Link>
+        )
     } else if (['button', 'b'].indexOf(data.type) != -1) {
         return (
             <Button data={data}></Button>
@@ -61,14 +65,45 @@ export function Text(props: any) {
 export function Link(props: any) {
     // 初始化
     const [data, setData] = useState(props.data);
-    const [style, setStyle] = useState(props.style);
+    let style = {
+        color: data.value.color
+    }
     // 事件处理
     function click() {
-        console.log("Clicked!");
+        let bag = {
+            type: 'LINK_CLICK',
+            from: 'r',
+            to: 'b',
+            hash: data.value.hash
+        }
+        data.value.func(bag)
     }
     // 输出
+    // if ("isLink" in data.value && data.value.isLink) {
+    //     return <span className="link" style={style} onClick={click}>{data.text}</span>
+    // }
+    let cls = []
+    if ("isLink" in data.value && data.value.isLink) {
+        cls.push("link")
+    } else {
+        cls.push("button")
+    }
+    if (data.value.disabled) {
+        cls.push("disabled")
+    }
+    let p = <></>
+    if (data.value.popup != '') {
+        p = <div className="popup">
+            {data.value.popup}
+        </div>
+    }
     return (
-        <span className="link" style={style} onClick={click}>{data.text}</span>
+        <span
+            className="link"
+            style={style}
+            onClick={click}>
+            {data.text}
+        </span>
     );
 }
 export function Button(props: any) {
@@ -89,9 +124,9 @@ export function Button(props: any) {
         data.value.func(bag)
     }
     // 输出
-    if ("isLink" in data.value && data.value.isLink) {
-        return <span className="link" style={style} onClick={click}>{data.text}</span>
-    }
+    // if ("isLink" in data.value && data.value.isLink) {
+    //     return <span className="link" style={style} onClick={click}>{data.text}</span>
+    // }
     let cls = []
     if ("isLink" in data.value && data.value.isLink) {
         cls.push("link")

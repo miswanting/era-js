@@ -81,6 +81,7 @@ export default class DisplayManager extends EventEmitter {
         else if ([
             't',
             'b',
+            'l',
             'h',
             'progress',
             'rate',
@@ -106,6 +107,7 @@ export default class DisplayManager extends EventEmitter {
                 let lastBlockIndex = this.data.pages.children[lastPageIndex].children.length - 1 // 最后一个Line的index
                 if ([
                     'b',
+                    'l',
                     'rate',
                     'check',
                     'radio',

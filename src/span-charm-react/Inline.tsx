@@ -68,6 +68,7 @@ export function Link(props: any) {
     let style = {
         color: data.value.color
     }
+
     // 事件处理
     function click() {
         let bag = {
@@ -82,27 +83,28 @@ export function Link(props: any) {
     // if ("isLink" in data.value && data.value.isLink) {
     //     return <span className="link" style={style} onClick={click}>{data.text}</span>
     // }
-    let cls = []
-    if ("isLink" in data.value && data.value.isLink) {
-        cls.push("link")
-    } else {
-        cls.push("button")
-    }
-    if (data.value.disabled) {
-        cls.push("disabled")
-    }
-    let p = <></>
-    if (data.value.popup != '') {
-        p = <div className="popup">
-            {data.value.popup}
-        </div>
-    }
+    // let cls = []
+    // if ("isLink" in data.value && data.value.isLink) {
+    //     cls.push("link")
+    // } else {
+    //     cls.push("button")
+    // }
+    // if (data.value.disabled) {
+    //     cls.push("disabled")
+    // }
+    // let p = <></>
+    // if (data.value.popup != '') {
+    //     p = <div className="popup">
+    //         {data.value.popup}
+    //     </div>
+    // }
+    console.log(data.text);
     return (
         <span
             className="link"
             style={style}
             onClick={click}>
-            {data.text}
+            {data.value.text}
         </span>
     );
 }

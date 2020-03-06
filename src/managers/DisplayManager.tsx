@@ -85,7 +85,7 @@ export default class DisplayManager extends EventEmitter {
             'h',
             'progress',
             'rate',
-            'check',
+            'checkbox',
             'radio',
             'input',
             'chart',
@@ -109,7 +109,7 @@ export default class DisplayManager extends EventEmitter {
                     'b',
                     'l',
                     'rate',
-                    'check',
+                    'checkbox',
                     'radio',
                     'input',
                     'dropdown'

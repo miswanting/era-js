@@ -34,7 +34,7 @@ export function Item(props: any) {
         return (
             <Rate data={data} />
         )
-    } else if (['check'].indexOf(data.type) != -1) {
+    } else if (['checkbox'].indexOf(data.type) != -1) {
         return (
             <Check data={data} />
         )
